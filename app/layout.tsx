@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { DM_Sans, Outfit } from "next/font/google";
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoScript,
+} from "@/components/GoogleTagManager";
 import { site } from "@/lib/site";
 import "./globals.css";
 import "./ui.css";
@@ -43,7 +47,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="cs" className={`${outfit.variable} ${dmSans.variable}`}>
-      <body>{children}</body>
+      <head>
+        <GoogleTagManager />
+      </head>
+      <body>
+        <GoogleTagManagerNoScript />
+        {children}
+      </body>
     </html>
   );
 }

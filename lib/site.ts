@@ -43,3 +43,21 @@ export const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
 export const web3formsKey =
   process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "0704ad42-9561-46ee-b379-c581b45ed4e6";
+
+/**
+ * Google Tag Manager — ID kontejneru.
+ *
+ * Jde přebít proměnnou `NEXT_PUBLIC_GTM_ID` (Workers & Pages → peakflow-web →
+ * Settings → Variables and Secrets). Prázdná hodnota měření úplně vypne.
+ * Protože je to `NEXT_PUBLIC_*` proměnná, zapeče se do buildu — po změně je
+ * vždy potřeba nový deploy.
+ *
+ * V `npm run dev` se GTM záměrně nenačítá, ať lokální klikání nešpiní data.
+ * Preview/debug režim GTM se dělá na nasazeném webu.
+ */
+const gtmIdFromEnv = process.env.NEXT_PUBLIC_GTM_ID;
+
+export const gtmId =
+  process.env.NODE_ENV === "production"
+    ? (gtmIdFromEnv === undefined ? "GTM-T4RFMPPX" : gtmIdFromEnv).trim()
+    : "";

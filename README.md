@@ -90,6 +90,39 @@ Kontaktní e-mail a telefon už doplněné jsou (`info@peakflow.cz`,
 jsou **návrhové placeholdery** z designu. Před spuštěním je nahraďte reálnými
 hodnotami — jsou pohromadě v polích `CASES` a `QUOTES` v `app/page.tsx`.
 
+## Měření — Google Tag Manager
+
+Kontejner **GTM-T4RFMPPX** je nasazený na všech stránkách. ID je v `lib/site.ts`,
+jde přebít proměnnou `NEXT_PUBLIC_GTM_ID`; prázdná hodnota měření vypne.
+
+Implementace je v `components/GoogleTagManager.tsx` — oficiální GTM snippet jako
+inline `<script>` v `<head>` plus `<noscript>` iframe na začátku `<body>`.
+
+Dvě věci, které se u GTM dělají snadno špatně:
+
+- **Nestačí načíst `gtm.js`.** GTM spouští triggery „Initialization", „Consent
+  Initialization" a „All Pages" podle eventu `gtm.js` v `dataLayer`. Bez
+  `dataLayer.push({'gtm.start': ..., event: 'gtm.js'})` se kontejner načte, ale
+  nic nespustí.
+- **`gtag()` do stránky nepatří.** To je snippet pro přímou instalaci GA4
+  *místo* GTM. Když jde měření přes kontejner, GA4 se konfiguruje tagem v GTM.
+  Dva zdroje měření na jedné stránce = duplicitní hity.
+
+`next/script` se tady **nepoužívá záměrně**. U statického exportu se `<Script>`
+se `strategy="afterInteractive"` nedostane do HTML jako `<script>` tag — skončí
+jen v React payloadu a spustí se až po hydrataci. Inline tag v `<head>` naběhne
+nejdřív, jak může.
+
+V `npm run dev` se GTM nenačítá, ať lokální klikání nešpiní data. Debug se dělá
+Preview režimem GTM na nasazeném webu.
+
+### ⚠️ Souhlas s měřením (GDPR) není vyřešený
+
+Na webu **není cookie lišta ani Consent Mode v2**. Kontejner dnes spustí GA4
+hned při načtení stránky, bez souhlasu návštěvníka. Pro provoz mířený na EU je
+to potřeba dořešit — buď Consent Mode v2 s výchozím `denied` a CMP lištou, nebo
+omezit měření na to, co souhlas nevyžaduje.
+
 ## Nasazení na Cloudflare
 
 Projekt běží jako **Cloudflare Worker se statickými assety** (Workers & Pages →
