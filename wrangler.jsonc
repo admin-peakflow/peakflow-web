@@ -5,6 +5,14 @@
   // Static-assets-only Worker: no server code, just the pre-rendered export.
   // `npx wrangler deploy` (the project's deploy command) needs this file to
   // know what to upload — without it the deploy step fails with no entrypoint.
+  // `custom_domain: true` lets Cloudflare create and own the DNS records in the
+  // peakflow.cz zone. Never add A/AAAA records for these hostnames by hand: a
+  // hand-made proxied record is read as "the origin lives at this IP", Cloudflare
+  // recognises its own address and refuses to proxy to itself -> Error 1000.
+  "routes": [
+    { "pattern": "peakflow.cz", "custom_domain": true },
+    { "pattern": "www.peakflow.cz", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./out",
     // Serves out/404.html for unknown paths instead of a bare Cloudflare error.
