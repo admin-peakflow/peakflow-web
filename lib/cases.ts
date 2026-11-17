@@ -32,122 +32,106 @@ export type CaseStudy = {
 
 export const CASES: CaseStudy[] = [
   {
-    slug: "foller",
-    name: "Foller",
-    field: "Výroba pultruzních strojů",
-    domains: ["foller.eu"],
-    shot: { src: "/weby/foller-full.webp", width: 960, height: 3200 },
-    metaTitle: "Foller — web v 5 jazycích a poptávky rovnou do CRM",
+    slug: "dreamy",
+    name: "Dreamy",
+    field: "E-shop s matracemi a postelemi",
+    domains: ["dreamy.cz"],
+    shot: { src: "/weby/dreamy-full.webp", width: 960, height: 3200 },
+    metaTitle: "Dreamy — poradce výběru matrace a AI vyhledávání",
     metaDescription:
-      "Case study: web pro brněnského výrobce pultruzních strojů. Pět jazyků, technický poptávkový dotazník s přílohami, napojení na CRM, strukturovaná data a Search Console.",
-    headline:
-      "Web v pěti jazycích, technický poptávkový dotazník a každá poptávka rovnou v CRM.",
+      "Case study: poradce výběru matrace a polštáře, příprava e-shopu na AI vyhledávání (llms.txt, strukturovaná data, FAQ) a SEO pro e-shop se čtyřmi prodejnami.",
+    headline: "Poradce výběru matrace, e-shop připravený na AI vyhledávání a SEO, které se dá opakovat každý týden.",
     situation: [
-      "Foller od roku 1998 vyrábí v Brně servoelektrické pultruzní stroje a průmyslové míchačky a prodává je výrobcům kompozitů po celém světě.",
-      "Zákazník je technolog nebo nákupčí v zahraničí. Potřebuje rychle najít správný model, porovnat parametry a poslat poptávku s výkresem. A Google o webu skoro nevěděl: v září měl v indexu 4 stránky z 56.",
+      "Dreamy prodává matrace, postele, polštáře a křesla La-Z-Boy na e-shopu a ve čtyřech kamenných prodejnách.",
+      "Matrace za desítky tisíc se online kupuje těžko: zákazník neví, jakou tuhost a materiál chce. A čím dál víc lidí se místo Googlu ptá ChatGPT.",
     ],
     work: [
       {
-        area: "Web",
+        area: "Poradce výběru",
         items: [
-          "Nový web ve vlastní „strojírenské“ identitě: tmavý technický vzhled, stroje na čistém pozadí.",
-          "Pět jazykových verzí (čeština, angličtina, francouzština, španělština, němčina) včetně přeložených adres stránek.",
-          "Stránka pro každý stroj (řada R 40 až R 240) a míchačky, srovnávací tabulka všech modelů a stránka výzkumu s publikacemi zakladatele.",
-        ],
-      },
-      {
-        area: "Poptávkový dotazník",
-        items: [
-          "Krátká poptávka pro rychlý dotaz a přepínač „komplexní poptávka“, který otevře technický dotazník: výztuž, pryskyřice, typ a rozměr profilu, výkon, rozpočet.",
-          "Přílohy až 10 souborů včetně výkresů DWG, DXF a STEP. Soubory se po 90 dnech samy smažou.",
-          "Každá poptávka přijde e-mailem a zároveň se založí jako lead v CRM (Raynet), s přílohami jako odkazy.",
-        ],
-      },
-      {
-        area: "SEO a Search Console",
-        items: [
-          "Technický audit a opravy: canonical, hreflang pro všech 5 jazyků, skutečné stránky 404, přesměrování www.",
-          "Sitemapa odeslaná do Google Search Console a žádosti o indexaci klíčových stránek.",
-          "V listopadu se objevila první zobrazení z neznačkových dotazů ve francouzštině a španělštině.",
+          "Interaktivní poradce na dreamy.cz/poradce: pár otázek a doporučení jedné matrace nebo polštáře plus dvou alternativ, s odkazem přímo na správnou variantu.",
+          "Pokrývá 34 matrací a 21 řad polštářů. Před spuštěním automaticky otestovaný na všech 545 112 kombinacích odpovědí.",
+          "Neukládá osobní údaje, do měření posílá jen anonymní události.",
         ],
       },
       {
         area: "AI vyhledávání",
         items: [
-          "Strukturovaná data Organization, Product a BreadcrumbList, aby vyhledávače i AI asistenti věděli, co je výrobce a co produkt.",
-          "Deset častých otázek v každém jazyce jako FAQPage. Odpovědi tak můžou přebírat AI odpovědi Googlu i chatboti.",
+          "Soubor llms.txt, který AI asistentům stručně popisuje e-shop.",
+          "Strukturovaná data na stránkách prodejen včetně otevírací doby o svátcích a sekce častých otázek jako FAQPage.",
+          "Úprava článků pro AI odpovědi (GEO) a pravidelné měření, jestli Dreamy zmiňuje ChatGPT a Google AI Mode.",
+        ],
+      },
+      {
+        area: "SEO a Search Console",
+        items: [
+          "SEO audit e-shopu a mapa přesměrování pro adresy, které vracely chybu 404.",
+          "Opakovatelný postup pro obsah: návrh článku, kontrola, fact-check, publikace a žádost o indexaci v Search Console.",
+          "Nové texty kategorií matrací podle tuhosti.",
+        ],
+      },
+      {
+        area: "Web",
+        items: [
+          "Vlastní úpravy nad šablonou e-shopu: výpis kategorií, štítky produktů, stránky prodejen, akční landing pages a patička.",
         ],
       },
     ],
     numbers: [
-      { value: "5", label: "jazykových verzí" },
-      { value: "65", label: "URL v sitemapě" },
-      { value: "4 → 21", label: "stránek v indexu Google (září → listopad)" },
-      { value: "100", label: "Lighthouse SEO (mobil)" },
+      { value: "545 112", label: "otestovaných kombinací odpovědí poradce" },
+      { value: "55", label: "matrací a řad polštářů v poradci" },
     ],
-    stack: ["Astro", "Tailwind", "Cloudflare Workers", "Workers KV", "Web3Forms", "Raynet API", "Search Console"],
+    stack: ["Shoptet", "vlastní JavaScript a CSS", "Google Tag Manager", "Search Console", "llms.txt", "Schema.org"],
   },
   {
-    slug: "fs-composites",
-    name: "FS Composites",
-    field: "Sklolaminátové profily a rošty",
-    domains: ["fscomposites.com"],
-    shot: { src: "/weby/fscomposites-full.webp", width: 960, height: 1947 },
-    metaTitle: "FS Composites — z 4 na 209 indexovaných stránek",
+    slug: "tereza-nosskova",
+    name: "Tereza Nossková",
+    field: "Svatební a portrétní fotografka",
+    domains: ["terezasdiary.cz"],
+    shot: { src: "/weby/tereza-full.webp", width: 960, height: 3200 },
+    metaTitle: "Tereza Nossková — portfolio fotografky s lokálním SEO",
     metaDescription:
-      "Case study: web výrobce pultrudovaných GFRP profilů a roštů. Pět jazyků, 220 URL, blog s fact-checkem, poptávky rovnou do CRM a technické SEO.",
-    headline: "Web v pěti jazycích, blog o reálných aplikacích a z 4 na 209 stránek v indexu Googlu.",
+      "Case study: web brněnské fotografky. Fotky přes celou obrazovku, čtyři stránky pro lokální vyhledávání, deník s příběhy z focení, strukturovaná data a poptávkový formulář.",
+    headline: "Portfolio, které nechá mluvit fotky, a čtyři stránky, které ji najdou v Googlu podle typu focení.",
     situation: [
-      "FS Composites vyrábí pultrudované sklolaminátové profily, rošty a kabelové žlaby pro stavby a průmysl.",
-      "Web běžel jako aplikace, kterou Google špatně četl. V září byly v indexu 4 stránky. Zákazníci přitom hledají konkrétní řešení podle oboru a norem, často německy.",
+      "Tereza je fotografka z Brna. Fotí svatby, páry, portréty, módu a testshooty pro modelky a agentury.",
+      "Fotograf potřebuje dvě věci: aby fotky vypadaly co nejlíp a aby ho lidé našli, když hledají „svatební fotograf Brno“. Instagram stačí na to první, na to druhé ne.",
     ],
     work: [
       {
         area: "Web",
         items: [
-          "Web postavený kolem oborů, ne kolem katalogu. Hlavní tlačítko vede rovnou k inženýrovi.",
-          "Pět jazykových verzí: čeština, angličtina, němčina, francouzština, španělština.",
-          "Staré adresy z předchozího webu přesměrované na nové stránky, aby se neztratily odkazy ani pozice.",
+          "Fotka přes celou obrazovku, jemné serifové písmo a portfolio rozdělené na svatby, portréty, páry a módu.",
+          "Stránky O mně, Ceník a Kontakt. Obrázky ve formátu WebP, aby se fotky načítaly rychle.",
         ],
       },
       {
-        area: "SEO a Search Console",
+        area: "Lokální SEO",
         items: [
-          "Každá stránka a jazyk má vlastní předgenerované HTML s titulkem, popisem, canonical a hreflang. Dřív Google viděl jednu prázdnou stránku.",
-          "Vyřešená duplicita domény s www a bez www, sitemapa odeslaná do Search Console, žádosti o indexaci.",
-          "Automatická SEO kontrola a test před každým nasazením.",
-        ],
-      },
-      {
-        area: "Obsah",
-        items: [
-          "Blog „Reálné aplikace GFRP“: 16 článků v pěti jazycích, provázaných s produkty a obory.",
-          "Na web projde jen článek, který prošel fact-checkem. Importní skript to hlídá sám.",
-          "Nejvíc neznačkových zobrazení přichází z německých dotazů na normy a pultruzi.",
+          "Čtyři stránky na konkrétní hledání: svatební, portrétní, párový a těhotenský, módní a produktový fotograf v Brně.",
+          "Deník s osmi příběhy z focení (svatba na Pálavě, ve stodole v Rudici, párové focení u moře…). Každý je samostatná stránka, kterou Google může najít.",
+          "Web ověřený v Google Search Console, sitemapa s 18 adresami.",
         ],
       },
       {
         area: "AI vyhledávání",
         items: [
-          "Strukturovaná data Organization, Article, BreadcrumbList a FAQPage na všech stránkách s otázkami.",
-          "Statické HTML, které umí přečíst i AI crawlery bez spouštění JavaScriptu.",
+          "Strukturovaná data LocalBusiness a Person: kdo je Tereza, co fotí, kde působí a jak ji kontaktovat. Z toho čerpají Google i AI asistenti.",
         ],
       },
       {
-        area: "Automatizace poptávek",
+        area: "Poptávkový formulář",
         items: [
-          "Poptávka z webu přijde e-mailem obchodníkovi a zároveň se založí jako lead v CRM (Raynet), označený podle zdroje.",
-          "Ochrana proti botům a záchranný zápis: když CRM odmítne celý záznam, uloží se aspoň základní údaje.",
+          "Krátký formulář s výběrem typu focení. Poptávka přijde rovnou e-mailem.",
         ],
       },
     ],
     numbers: [
-      { value: "4 → 209", label: "stránek v indexu Google (září → listopad)" },
-      { value: "220", label: "URL v sitemapě" },
-      { value: "5", label: "jazykových verzí" },
-      { value: "16", label: "článků v každém jazyce" },
+      { value: "18", label: "stránek v sitemapě" },
+      { value: "4", label: "lokální SEO stránky" },
+      { value: "8", label: "příběhů v deníku" },
     ],
-    stack: ["React", "Vite", "vlastní prerender", "Cloudflare Workers", "Web3Forms", "Raynet API", "Search Console"],
+    stack: ["statický web", "Cloudflare", "Web3Forms", "Schema.org", "Search Console"],
   },
   {
     slug: "packlabs",
@@ -216,56 +200,122 @@ export const CASES: CaseStudy[] = [
     stack: ["Astro", "Tailwind", "Cloudflare Pages", "Cloudflare Workers + D1", "Web3Forms", "Google Apps Script", "MCP"],
   },
   {
-    slug: "dreamy",
-    name: "Dreamy",
-    field: "E-shop s matracemi a postelemi",
-    domains: ["dreamy.cz"],
-    shot: { src: "/weby/dreamy-full.webp", width: 960, height: 3200 },
-    metaTitle: "Dreamy — poradce výběru matrace a AI vyhledávání",
+    slug: "fs-composites",
+    name: "FS Composites",
+    field: "Sklolaminátové profily a rošty",
+    domains: ["fscomposites.com"],
+    shot: { src: "/weby/fscomposites-full.webp", width: 960, height: 1947 },
+    metaTitle: "FS Composites — z 4 na 209 indexovaných stránek",
     metaDescription:
-      "Case study: poradce výběru matrace a polštáře, příprava e-shopu na AI vyhledávání (llms.txt, strukturovaná data, FAQ) a SEO pro e-shop se čtyřmi prodejnami.",
-    headline: "Poradce výběru matrace, e-shop připravený na AI vyhledávání a SEO, které se dá opakovat každý týden.",
+      "Case study: web výrobce pultrudovaných GFRP profilů a roštů. Pět jazyků, 220 URL, blog s fact-checkem, poptávky rovnou do CRM a technické SEO.",
+    headline: "Web v pěti jazycích, blog o reálných aplikacích a z 4 na 209 stránek v indexu Googlu.",
     situation: [
-      "Dreamy prodává matrace, postele, polštáře a křesla La-Z-Boy na e-shopu a ve čtyřech kamenných prodejnách.",
-      "Matrace za desítky tisíc se online kupuje těžko: zákazník neví, jakou tuhost a materiál chce. A čím dál víc lidí se místo Googlu ptá ChatGPT.",
+      "FS Composites vyrábí pultrudované sklolaminátové profily, rošty a kabelové žlaby pro stavby a průmysl.",
+      "Web běžel jako aplikace, kterou Google špatně četl. V září byly v indexu 4 stránky. Zákazníci přitom hledají konkrétní řešení podle oboru a norem, často německy.",
     ],
     work: [
       {
-        area: "Poradce výběru",
+        area: "Web",
         items: [
-          "Interaktivní poradce na dreamy.cz/poradce: pár otázek a doporučení jedné matrace nebo polštáře plus dvou alternativ, s odkazem přímo na správnou variantu.",
-          "Pokrývá 34 matrací a 21 řad polštářů. Před spuštěním automaticky otestovaný na všech 545 112 kombinacích odpovědí.",
-          "Neukládá osobní údaje, do měření posílá jen anonymní události.",
-        ],
-      },
-      {
-        area: "AI vyhledávání",
-        items: [
-          "Soubor llms.txt, který AI asistentům stručně popisuje e-shop.",
-          "Strukturovaná data na stránkách prodejen včetně otevírací doby o svátcích a sekce častých otázek jako FAQPage.",
-          "Úprava článků pro AI odpovědi (GEO) a pravidelné měření, jestli Dreamy zmiňuje ChatGPT a Google AI Mode.",
+          "Web postavený kolem oborů, ne kolem katalogu. Hlavní tlačítko vede rovnou k inženýrovi.",
+          "Pět jazykových verzí: čeština, angličtina, němčina, francouzština, španělština.",
+          "Staré adresy z předchozího webu přesměrované na nové stránky, aby se neztratily odkazy ani pozice.",
         ],
       },
       {
         area: "SEO a Search Console",
         items: [
-          "SEO audit e-shopu a mapa přesměrování pro adresy, které vracely chybu 404.",
-          "Opakovatelný postup pro obsah: návrh článku, kontrola, fact-check, publikace a žádost o indexaci v Search Console.",
-          "Nové texty kategorií matrací podle tuhosti.",
+          "Každá stránka a jazyk má vlastní předgenerované HTML s titulkem, popisem, canonical a hreflang. Dřív Google viděl jednu prázdnou stránku.",
+          "Vyřešená duplicita domény s www a bez www, sitemapa odeslaná do Search Console, žádosti o indexaci.",
+          "Automatická SEO kontrola a test před každým nasazením.",
         ],
       },
       {
-        area: "Web",
+        area: "Obsah",
         items: [
-          "Vlastní úpravy nad šablonou e-shopu: výpis kategorií, štítky produktů, stránky prodejen, akční landing pages a patička.",
+          "Blog „Reálné aplikace GFRP“: 16 článků v pěti jazycích, provázaných s produkty a obory.",
+          "Na web projde jen článek, který prošel fact-checkem. Importní skript to hlídá sám.",
+          "Nejvíc neznačkových zobrazení přichází z německých dotazů na normy a pultruzi.",
+        ],
+      },
+      {
+        area: "AI vyhledávání",
+        items: [
+          "Strukturovaná data Organization, Article, BreadcrumbList a FAQPage na všech stránkách s otázkami.",
+          "Statické HTML, které umí přečíst i AI crawlery bez spouštění JavaScriptu.",
+        ],
+      },
+      {
+        area: "Automatizace poptávek",
+        items: [
+          "Poptávka z webu přijde e-mailem obchodníkovi a zároveň se založí jako lead v CRM (Raynet), označený podle zdroje.",
+          "Ochrana proti botům a záchranný zápis: když CRM odmítne celý záznam, uloží se aspoň základní údaje.",
         ],
       },
     ],
     numbers: [
-      { value: "545 112", label: "otestovaných kombinací odpovědí poradce" },
-      { value: "55", label: "matrací a řad polštářů v poradci" },
+      { value: "4 → 209", label: "stránek v indexu Google (září → listopad)" },
+      { value: "220", label: "URL v sitemapě" },
+      { value: "5", label: "jazykových verzí" },
+      { value: "16", label: "článků v každém jazyce" },
     ],
-    stack: ["Shoptet", "vlastní JavaScript a CSS", "Google Tag Manager", "Search Console", "llms.txt", "Schema.org"],
+    stack: ["React", "Vite", "vlastní prerender", "Cloudflare Workers", "Web3Forms", "Raynet API", "Search Console"],
+  },
+  {
+    slug: "foller",
+    name: "Foller",
+    field: "Výroba pultruzních strojů",
+    domains: ["foller.eu"],
+    shot: { src: "/weby/foller-full.webp", width: 960, height: 3200 },
+    metaTitle: "Foller — web v 5 jazycích a poptávky rovnou do CRM",
+    metaDescription:
+      "Case study: web pro brněnského výrobce pultruzních strojů. Pět jazyků, technický poptávkový dotazník s přílohami, napojení na CRM, strukturovaná data a Search Console.",
+    headline:
+      "Web v pěti jazycích, technický poptávkový dotazník a každá poptávka rovnou v CRM.",
+    situation: [
+      "Foller od roku 1998 vyrábí v Brně servoelektrické pultruzní stroje a průmyslové míchačky a prodává je výrobcům kompozitů po celém světě.",
+      "Zákazník je technolog nebo nákupčí v zahraničí. Potřebuje rychle najít správný model, porovnat parametry a poslat poptávku s výkresem. A Google o webu skoro nevěděl: v září měl v indexu 4 stránky z 56.",
+    ],
+    work: [
+      {
+        area: "Web",
+        items: [
+          "Nový web ve vlastní „strojírenské“ identitě: tmavý technický vzhled, stroje na čistém pozadí.",
+          "Pět jazykových verzí (čeština, angličtina, francouzština, španělština, němčina) včetně přeložených adres stránek.",
+          "Stránka pro každý stroj (řada R 40 až R 240) a míchačky, srovnávací tabulka všech modelů a stránka výzkumu s publikacemi zakladatele.",
+        ],
+      },
+      {
+        area: "Poptávkový dotazník",
+        items: [
+          "Krátká poptávka pro rychlý dotaz a přepínač „komplexní poptávka“, který otevře technický dotazník: výztuž, pryskyřice, typ a rozměr profilu, výkon, rozpočet.",
+          "Přílohy až 10 souborů včetně výkresů DWG, DXF a STEP. Soubory se po 90 dnech samy smažou.",
+          "Každá poptávka přijde e-mailem a zároveň se založí jako lead v CRM (Raynet), s přílohami jako odkazy.",
+        ],
+      },
+      {
+        area: "SEO a Search Console",
+        items: [
+          "Technický audit a opravy: canonical, hreflang pro všech 5 jazyků, skutečné stránky 404, přesměrování www.",
+          "Sitemapa odeslaná do Google Search Console a žádosti o indexaci klíčových stránek.",
+          "V listopadu se objevila první zobrazení z neznačkových dotazů ve francouzštině a španělštině.",
+        ],
+      },
+      {
+        area: "AI vyhledávání",
+        items: [
+          "Strukturovaná data Organization, Product a BreadcrumbList, aby vyhledávače i AI asistenti věděli, co je výrobce a co produkt.",
+          "Deset častých otázek v každém jazyce jako FAQPage. Odpovědi tak můžou přebírat AI odpovědi Googlu i chatboti.",
+        ],
+      },
+    ],
+    numbers: [
+      { value: "5", label: "jazykových verzí" },
+      { value: "65", label: "URL v sitemapě" },
+      { value: "4 → 21", label: "stránek v indexu Google (září → listopad)" },
+      { value: "100", label: "Lighthouse SEO (mobil)" },
+    ],
+    stack: ["Astro", "Tailwind", "Cloudflare Workers", "Workers KV", "Web3Forms", "Raynet API", "Search Console"],
   },
   {
     slug: "grig",
@@ -313,56 +363,6 @@ export const CASES: CaseStudy[] = [
       { value: "41", label: "opravených přesměrování" },
     ],
     stack: ["Shoptet", "vlastní JavaScript", "Node build skripty", "Leaflet + OpenStreetMap"],
-  },
-  {
-    slug: "tereza-nosskova",
-    name: "Tereza Nossková",
-    field: "Svatební a portrétní fotografka",
-    domains: ["terezasdiary.cz"],
-    shot: { src: "/weby/tereza-full.webp", width: 960, height: 3200 },
-    metaTitle: "Tereza Nossková — portfolio fotografky s lokálním SEO",
-    metaDescription:
-      "Case study: web brněnské fotografky. Fotky přes celou obrazovku, čtyři stránky pro lokální vyhledávání, deník s příběhy z focení, strukturovaná data a poptávkový formulář.",
-    headline: "Portfolio, které nechá mluvit fotky, a čtyři stránky, které ji najdou v Googlu podle typu focení.",
-    situation: [
-      "Tereza je fotografka z Brna. Fotí svatby, páry, portréty, módu a testshooty pro modelky a agentury.",
-      "Fotograf potřebuje dvě věci: aby fotky vypadaly co nejlíp a aby ho lidé našli, když hledají „svatební fotograf Brno“. Instagram stačí na to první, na to druhé ne.",
-    ],
-    work: [
-      {
-        area: "Web",
-        items: [
-          "Fotka přes celou obrazovku, jemné serifové písmo a portfolio rozdělené na svatby, portréty, páry a módu.",
-          "Stránky O mně, Ceník a Kontakt. Obrázky ve formátu WebP, aby se fotky načítaly rychle.",
-        ],
-      },
-      {
-        area: "Lokální SEO",
-        items: [
-          "Čtyři stránky na konkrétní hledání: svatební, portrétní, párový a těhotenský, módní a produktový fotograf v Brně.",
-          "Deník s osmi příběhy z focení (svatba na Pálavě, ve stodole v Rudici, párové focení u moře…). Každý je samostatná stránka, kterou Google může najít.",
-          "Web ověřený v Google Search Console, sitemapa s 18 adresami.",
-        ],
-      },
-      {
-        area: "AI vyhledávání",
-        items: [
-          "Strukturovaná data LocalBusiness a Person: kdo je Tereza, co fotí, kde působí a jak ji kontaktovat. Z toho čerpají Google i AI asistenti.",
-        ],
-      },
-      {
-        area: "Poptávkový formulář",
-        items: [
-          "Krátký formulář s výběrem typu focení. Poptávka přijde rovnou e-mailem.",
-        ],
-      },
-    ],
-    numbers: [
-      { value: "18", label: "stránek v sitemapě" },
-      { value: "4", label: "lokální SEO stránky" },
-      { value: "8", label: "příběhů v deníku" },
-    ],
-    stack: ["statický web", "Cloudflare", "Web3Forms", "Schema.org", "Search Console"],
   },
 ];
 
