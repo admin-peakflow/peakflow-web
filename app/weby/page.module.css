@@ -274,3 +274,19 @@
   .browser:hover .shot,
   .browser:focus-visible .shot { object-position: top; }
 }
+
+.caseLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radius-pill);
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  transition: background .2s;
+}
+.caseLink:hover { background: #000; color: #fff; }
+.links { align-items: center; }
