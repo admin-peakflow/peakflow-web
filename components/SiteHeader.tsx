@@ -2,10 +2,11 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import styles from "./SiteHeader.module.css";
 
-type Page = "home" | "sluzby" | "kontakt";
+type Page = "home" | "sluzby" | "weby" | "kontakt";
 
 const LINKS = [
   { href: "/sluzby/", label: "Služby", page: "sluzby" as Page },
+  { href: "/weby/", label: "Weby", page: "weby" as Page },
   { href: "/#reference", label: "Reference", page: null },
   { href: "/#postup", label: "Postup", page: null },
   { href: "/kontakt/", label: "Kontakt", page: "kontakt" as Page },
