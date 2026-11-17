@@ -7,7 +7,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Weby na míru",
   description:
-    "Weby, které jsme postavili: výrobci kompozitních strojů a profilů, e-shopy, B2B služby i portfolio fotografky. Design podle oboru klienta, ne podle šablony.",
+    "Weby, které najde Google i ChatGPT a poptávky z nich jdou rovnou do CRM. Šest case studies: výrobci strojů a kompozitů, e-shopy, B2B služby i fotografka.",
   alternates: { canonical: "/weby/" },
 };
 
@@ -41,7 +41,7 @@ const PROJECTS: Project[] = [
     facts: [
       ["Pro koho", "Výrobci kompozitů, B2B export"],
       ["Hlavní akce", "Domluvit konzultaci"],
-      ["Jazyky", "Více jazykových verzí"],
+      ["Jazyky", "CZ, EN, DE, FR, ES"],
     ],
     shot: { src: "/weby/foller-full.webp", width: 960, height: 3200 },
   },
@@ -55,7 +55,7 @@ const PROJECTS: Project[] = [
     facts: [
       ["Pro koho", "Projektanti, stavby, průmysl"],
       ["Hlavní akce", "Spojit se s inženýrem"],
-      ["Jazyky", "Více jazykových verzí"],
+      ["Jazyky", "CZ, EN, DE, FR, ES"],
     ],
     shot: { src: "/weby/fscomposites-full.webp", width: 960, height: 1947 },
   },
@@ -102,7 +102,7 @@ const PROJECTS: Project[] = [
     shot: { src: "/weby/grig-sk-full.webp", width: 960, height: 3200 },
   },
   {
-    id: "tereza",
+    id: "tereza-nosskova",
     name: "Tereza Nossková",
     field: "Svatební a portrétní fotografka",
     domains: ["terezasdiary.cz"],
@@ -144,11 +144,11 @@ export default function WebyPage() {
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <div>
-            <h1 className={styles.h1}>Weby, které vypadají jako firma za nimi.</h1>
+            <h1 className={styles.h1}>Weby, které najde Google i ChatGPT.</h1>
             <p className={styles.heroLead}>
-              Výrobce strojů, e-shop s matracemi i svatební fotografka potřebují každý
-              něco jiného. Tady je šest webů, které jsme postavili, a proč vypadají
-              tak, jak vypadají.
+              A poptávky z nich jdou rovnou do e-mailu nebo CRM. Šest webů, které
+              jsme postavili, od výrobce strojů po svatební fotografku. U každého je
+              case study: co jsme udělali a jaká čísla to přineslo.
             </p>
           </div>
           <nav className={styles.jump} aria-label="Přehled webů">
@@ -216,6 +216,9 @@ export default function WebyPage() {
                   ))}
                 </dl>
                 <p className={styles.links}>
+                  <Link href={`/weby/${p.id}/`} className={styles.caseLink}>
+                    Celá case study <span aria-hidden="true">→</span>
+                  </Link>
                   {p.domains.map((d) => (
                     <a
                       key={d}
