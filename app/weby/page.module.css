@@ -290,3 +290,55 @@
 }
 .caseLink:hover { background: #000; color: #fff; }
 .links { align-items: center; }
+
+/* ---------- Inquiry form ---------- */
+.inquiry {
+  scroll-margin-top: 72px;
+}
+
+.inquiryInner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 104px var(--gutter) 112px;
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: 64px;
+  align-items: start;
+}
+
+.inquiryTitle {
+  margin: 0;
+  font-weight: 600;
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+.inquiryLead {
+  margin: 20px 0 0;
+  max-width: 44ch;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.inquiryPoints {
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+.inquiryPoints li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 16px;
+  color: var(--text-slate);
+}
+
+@media (max-width: 900px) {
+  .inquiryInner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding: 72px var(--gutter) 80px;
+  }
+}
