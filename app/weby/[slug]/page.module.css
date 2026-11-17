@@ -114,10 +114,18 @@
   height: 100%;
   object-fit: cover;
   object-position: top;
-  transition: object-position 9s cubic-bezier(.45, 0, .55, 1);
+  animation: shotScroll 20s ease-in-out .6s infinite alternate;
+  animation-play-state: paused;
 }
-.browser:hover .shot,
-.browser:focus-visible .shot { object-position: bottom; }
+/* Rolls through the page while on screen (AutoScrollShots adds .isPlaying);
+   hovering pauses it so the visitor can look closer. */
+.browser:global(.isPlaying) .shot { animation-play-state: running; }
+.browser:hover .shot { animation-play-state: paused; }
+
+@keyframes shotScroll {
+  0%, 10% { object-position: top; }
+  90%, 100% { object-position: bottom; }
+}
 
 /* ---------- Numbers ---------- */
 .numbers {
@@ -272,6 +280,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .browser:hover .shot,
-  .browser:focus-visible .shot { object-position: top; }
+  .shot { animation: none; }
 }
+
+/* ---------- Load-in ---------- */
+.field { animation: rise .7s cubic-bezier(.2, .7, .2, 1) both; }
+.h1 { animation: rise .8s cubic-bezier(.2, .7, .2, 1) .08s both; }
+.heroLinks { animation: rise .7s cubic-bezier(.2, .7, .2, 1) .2s both; }
+.shotWrap { animation: rise .9s cubic-bezier(.2, .7, .2, 1) .28s both; }
