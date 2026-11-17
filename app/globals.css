@@ -130,3 +130,14 @@ input:focus, textarea:focus, select:focus {
   white-space: nowrap;
   border: 0;
 }
+
+/* CountUp "before → after": the "after" part slides in once on screen. */
+.countArrow { white-space: nowrap; }
+.countArrow .countTo {
+  display: inline-block;
+  transition: opacity .6s ease .5s, transform .6s cubic-bezier(.2, .7, .2, 1) .5s;
+}
+.countArrow[data-state="idle"] .countTo {
+  opacity: 0;
+  transform: translateX(-12px);
+}

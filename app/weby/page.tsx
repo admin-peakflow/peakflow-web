@@ -3,6 +3,8 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactForm } from "@/components/ContactForm";
+import { AutoScrollShots } from "@/components/AutoScrollShots";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -175,6 +177,7 @@ export default function WebyPage() {
               <a
                 href={`https://${p.domains[0]}/`}
                 className={styles.browser}
+                data-autoscroll
                 target="_blank"
                 rel="noopener"
                 aria-label={`Otevřít web ${p.domains[0]} v novém okně`}
@@ -200,7 +203,7 @@ export default function WebyPage() {
                 </span>
               </a>
 
-              <div className={styles.copy}>
+              <div className={styles.copy} data-reveal>
                 <p className={styles.field}>{p.field}</p>
                 <h2 id={`${p.id}-title`} className={styles.name}>
                   {p.name}
@@ -238,7 +241,7 @@ export default function WebyPage() {
         ))}
 
         <section className={styles.principles} aria-labelledby="principy">
-          <div className={styles.principlesInner}>
+          <div className={styles.principlesInner} data-reveal>
             <h2 id="principy" className={styles.principlesTitle}>
               Co platí pro každý web, který stavíme
             </h2>
@@ -254,7 +257,7 @@ export default function WebyPage() {
         </section>
 
         <section id="poptavka" className={styles.inquiry} aria-labelledby="poptavka-title">
-          <div className={styles.inquiryInner}>
+          <div className={styles.inquiryInner} data-reveal>
             <div>
               <h2 id="poptavka-title" className={styles.inquiryTitle}>
                 Poptejte web
@@ -286,6 +289,8 @@ export default function WebyPage() {
       </main>
 
       <SiteFooter />
+      <AutoScrollShots />
+      <ScrollReveal />
     </>
   );
 }

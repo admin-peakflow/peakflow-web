@@ -133,11 +133,17 @@
   height: 100%;
   object-fit: cover;
   object-position: top;
-  transition: object-position 7s cubic-bezier(.45, 0, .55, 1);
+  animation: shotScroll 16s ease-in-out .6s infinite alternate;
+  animation-play-state: paused;
 }
-.browser:hover .shot,
-.browser:focus-visible .shot {
-  object-position: bottom;
+/* Rolls through the page while on screen (AutoScrollShots adds .isPlaying);
+   hovering pauses it so the visitor can look closer. */
+.browser:global(.isPlaying) .shot { animation-play-state: running; }
+.browser:hover .shot { animation-play-state: paused; }
+
+@keyframes shotScroll {
+  0%, 10% { object-position: top; }
+  90%, 100% { object-position: bottom; }
 }
 
 /* ---------- Copy ---------- */
@@ -271,8 +277,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .browser:hover .shot,
-  .browser:focus-visible .shot { object-position: top; }
+  .shot { animation: none; }
 }
 
 .caseLink {
@@ -342,3 +347,14 @@
     padding: 72px var(--gutter) 80px;
   }
 }
+
+/* ---------- Load-in: one orchestrated moment ---------- */
+.h1 { animation: rise .8s cubic-bezier(.2, .7, .2, 1) both; }
+.heroLead { animation: rise .8s cubic-bezier(.2, .7, .2, 1) .12s both; }
+.jumpLink { animation: rise .6s cubic-bezier(.2, .7, .2, 1) both; }
+.jumpLink:nth-child(1) { animation-delay: .30s; }
+.jumpLink:nth-child(2) { animation-delay: .37s; }
+.jumpLink:nth-child(3) { animation-delay: .44s; }
+.jumpLink:nth-child(4) { animation-delay: .51s; }
+.jumpLink:nth-child(5) { animation-delay: .58s; }
+.jumpLink:nth-child(6) { animation-delay: .65s; }

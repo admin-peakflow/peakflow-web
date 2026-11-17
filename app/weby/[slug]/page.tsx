@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CASES, getCase } from "@/lib/cases";
+import { AutoScrollShots } from "@/components/AutoScrollShots";
+import { ScrollReveal } from "@/components/ScrollReveal";
+import { CountUp } from "@/components/CountUp";
 import { site } from "@/lib/site";
 import styles from "./page.module.css";
 
@@ -93,6 +96,7 @@ export default async function CasePage({ params }: Props) {
           <a
             href={`https://${c.domains[0]}/`}
             className={styles.browser}
+            data-autoscroll
             target="_blank"
             rel="noopener"
             aria-label={`Otevřít web ${c.domains[0]} v novém okně`}
@@ -124,14 +128,16 @@ export default async function CasePage({ params }: Props) {
               {c.numbers.map((n) => (
                 <div key={n.label} className={styles.number}>
                   <dt>{n.label}</dt>
-                  <dd>{n.value}</dd>
+                  <dd>
+                    <CountUp value={n.value} />
+                  </dd>
                 </div>
               ))}
             </dl>
           </section>
         )}
 
-        <section className={styles.block} aria-labelledby="situace">
+        <section className={styles.block} aria-labelledby="situace" data-reveal>
           <h2 id="situace" className={styles.blockTitle}>
             Výchozí situace
           </h2>
@@ -142,7 +148,7 @@ export default async function CasePage({ params }: Props) {
           </div>
         </section>
 
-        <section className={`${styles.block} ${styles.blockWork}`} aria-labelledby="prace">
+        <section className={`${styles.block} ${styles.blockWork}`} aria-labelledby="prace" data-reveal>
           <h2 id="prace" className={styles.blockTitle}>
             Co jsme udělali
           </h2>
@@ -160,7 +166,7 @@ export default async function CasePage({ params }: Props) {
           </div>
         </section>
 
-        <section className={styles.block} aria-labelledby="stack">
+        <section className={styles.block} aria-labelledby="stack" data-reveal>
           <h2 id="stack" className={styles.blockTitle}>
             Technologie
           </h2>
@@ -200,6 +206,8 @@ export default async function CasePage({ params }: Props) {
       </main>
 
       <SiteFooter />
+      <AutoScrollShots />
+      <ScrollReveal />
     </>
   );
 }
