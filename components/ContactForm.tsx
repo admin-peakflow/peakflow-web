@@ -13,7 +13,21 @@ const TOPICS = [
   "Kombinace / nevím, poradíte",
 ];
 
-export function ContactForm() {
+type Props = {
+  /** Volby v roletce „Co vás zajímá“. */
+  topics?: string[];
+  messageLabel?: string;
+  messagePlaceholder?: string;
+  /** Odkud poptávka přišla — jde do předmětu e-mailu. */
+  source?: string;
+};
+
+export function ContactForm({
+  topics = TOPICS,
+  messageLabel = "Jaké systémy používáte a co vás trápí",
+  messagePlaceholder = "ERP, e‑shop, CRM… a co byste rádi vyřešili",
+  source,
+}: Props = {}) {
   const [status, setStatus] = useState<Status>("idle");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -52,7 +66,7 @@ export function ContactForm() {
         },
         body: JSON.stringify({
           access_key: web3formsKey,
-          subject: `Nová poptávka z PeakFlow.cz — ${name}`,
+          subject: `Nová poptávka z PeakFlow.cz${source ? ` (${source})` : ""} — ${name}`,
           from_name: "PeakFlow.cz",
           // Reply in the mail client goes straight to the lead.
           replyto: email,
@@ -62,6 +76,7 @@ export function ContactForm() {
           phone: data.get("phone") || "—",
           topic: data.get("topic"),
           message: data.get("message") || "—",
+          source: source ?? "kontakt",
         }),
       });
 
@@ -145,20 +160,20 @@ export function ContactForm() {
 
       <label className={styles.field}>
         Co vás zajímá
-        <select className={styles.select} name="topic" defaultValue={TOPICS[0]}>
-          {TOPICS.map((topic) => (
+        <select className={styles.select} name="topic" defaultValue={topics[0]}>
+          {topics.map((topic) => (
             <option key={topic}>{topic}</option>
           ))}
         </select>
       </label>
 
       <label className={styles.field}>
-        Jaké systémy používáte a co vás trápí
+        {messageLabel}
         <textarea
           className={styles.textarea}
           name="message"
           rows={5}
-          placeholder="ERP, e‑shop, CRM… a co byste rádi vyřešili"
+          placeholder={messagePlaceholder}
         />
       </label>
 

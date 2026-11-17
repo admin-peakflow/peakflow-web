@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ContactForm } from "@/components/ContactForm";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -252,18 +253,34 @@ export default function WebyPage() {
           </div>
         </section>
 
-        <section className="wrap wrapTight" style={{ paddingBottom: 96 }}>
-          <div className="ctaBand" style={{ padding: "56px 48px" }}>
+        <section id="poptavka" className={styles.inquiry} aria-labelledby="poptavka-title">
+          <div className={styles.inquiryInner}>
             <div>
-              <h2 className="ctaTitle">Potřebujete nový web?</h2>
-              <p className="ctaBody">
-                Na úvodním hovoru probereme, komu web prodává a co má dělat. Pak
-                dostanete návrh a cenu.
+              <h2 id="poptavka-title" className={styles.inquiryTitle}>
+                Poptejte web
+              </h2>
+              <p className={styles.inquiryLead}>
+                Napište, co děláte a co má web umět. Ozveme se do 2 pracovních dnů
+                a domluvíme krátký hovor. Pak dostanete návrh a cenu.
               </p>
+              <ul className={styles.inquiryPoints}>
+                <li>Design podle vašeho oboru, ne šablona</li>
+                <li>SEO, Search Console a příprava na AI vyhledávání</li>
+                <li>Poptávky rovnou do e-mailu nebo CRM</li>
+              </ul>
             </div>
-            <Link href="/kontakt/" className="btn btnDark">
-              Domluvit discovery call →
-            </Link>
+            <ContactForm
+              source="weby"
+              topics={[
+                "Nový web",
+                "Redesign stávajícího webu",
+                "SEO a AI vyhledávání",
+                "Napojení webu na CRM nebo automatizace",
+                "Nevím, poradíte",
+              ]}
+              messageLabel="Co děláte a co má web umět"
+              messagePlaceholder="Obor, pro koho web je, odkaz na současný web, termín…"
+            />
           </div>
         </section>
       </main>
