@@ -8,6 +8,7 @@
     "start": "npx serve out",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "gate": "node scripts/gate.mjs",
     "deploy": "next build && wrangler deploy"
   },
   "dependencies": {

@@ -16,6 +16,7 @@ export function SiteFooter({ variant = "compact" }: { variant?: "full" | "compac
             <a href={`tel:${contact.phone.replace(/\s/g, "")}`}>{contact.phone}</a>
             <Link href="/">Domů</Link>
             <Link href="/sluzby/">Služby</Link>
+            <Link href="/weby/">Weby</Link>
             <Link href="/kontakt/">Kontakt</Link>
           </div>
         </div>
@@ -36,6 +37,7 @@ export function SiteFooter({ variant = "compact" }: { variant?: "full" | "compac
         <div className={styles.col}>
           <strong className={styles.colTitle}>Navigace</strong>
           <Link href="/sluzby/">Služby</Link>
+          <Link href="/weby/">Weby</Link>
           <Link href="/#reference">Reference</Link>
           <Link href="/#postup">Jak pracujeme</Link>
           <Link href="/#faq">FAQ</Link>
