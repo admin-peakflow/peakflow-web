@@ -4,6 +4,15 @@ import styles from "./SiteFooter.module.css";
 
 const year = 2026;
 
+/** Otevře předvolby cookie lišty — `data-cc` naváže vanilla-cookieconsent. */
+function CookieSettingsLink() {
+  return (
+    <button type="button" data-cc="show-preferencesModal" className={styles.cookieLink}>
+      Nastavení cookies
+    </button>
+  );
+}
+
 /** Home uses the three-column footer; sub-pages use the single-row one. */
 export function SiteFooter({ variant = "compact" }: { variant?: "full" | "compact" }) {
   if (variant === "compact") {
@@ -18,6 +27,7 @@ export function SiteFooter({ variant = "compact" }: { variant?: "full" | "compac
             <Link href="/sluzby/">Služby</Link>
             <Link href="/weby/">Weby</Link>
             <Link href="/kontakt/">Kontakt</Link>
+            <CookieSettingsLink />
           </div>
         </div>
       </footer>
@@ -50,7 +60,9 @@ export function SiteFooter({ variant = "compact" }: { variant?: "full" | "compac
           <a href={site.url}>PeakFlow.cz</a>
         </div>
       </div>
-      <div className={styles.copyright}>© {year} {site.legalName}</div>
+      <div className={styles.copyright}>
+        © {year} {site.legalName} · <CookieSettingsLink />
+      </div>
     </footer>
   );
 }

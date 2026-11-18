@@ -1,0 +1,53 @@
+/* Cookie lišta v barvách webu. Proměnné knihovny vanilla-cookieconsent
+   napojené na design tokeny z app/globals.css. */
+#cc-main {
+  --cc-font-family: var(--font-dm-sans), system-ui, sans-serif;
+  --cc-bg: var(--surface);
+  --cc-primary-color: var(--text);
+  --cc-secondary-color: var(--text-muted);
+  --cc-link-color: var(--teal);
+  --cc-modal-border-radius: var(--radius-card);
+  --cc-btn-border-radius: var(--radius-pill);
+
+  --cc-btn-primary-bg: var(--teal);
+  --cc-btn-primary-color: #fff;
+  --cc-btn-primary-border-color: var(--teal);
+  --cc-btn-primary-hover-bg: var(--teal-dark);
+  --cc-btn-primary-hover-color: #fff;
+  --cc-btn-primary-hover-border-color: var(--teal-dark);
+
+  /* Sekundární = „Uložit volbu" v předvolbách. „Jen nezbytné" je díky
+     equalWeightButtons stejně výrazné jako „Přijmout vše" (požadavek ÚOOÚ / EDPB). */
+  --cc-btn-secondary-bg: var(--navy);
+  --cc-btn-secondary-color: #fff;
+  --cc-btn-secondary-border-color: var(--navy);
+  --cc-btn-secondary-hover-bg: var(--navy-grad-end);
+  --cc-btn-secondary-hover-color: #fff;
+  --cc-btn-secondary-hover-border-color: var(--navy-grad-end);
+
+  --cc-separator-border-color: var(--divider);
+  --cc-toggle-on-bg: var(--teal);
+  --cc-toggle-readonly-bg: var(--teal-100);
+  --cc-cookie-category-block-bg: var(--surface-input);
+  --cc-cookie-category-block-border: var(--border);
+  --cc-cookie-category-block-hover-bg: var(--teal-50);
+  --cc-cookie-category-block-hover-border: var(--teal-100);
+  --cc-cookie-category-expanded-block-bg: var(--surface-input);
+  --cc-footer-bg: var(--bg);
+  --cc-footer-border-color: var(--divider);
+}
+
+#cc-main .cm__title,
+#cc-main .pm__title {
+  font-family: var(--font-outfit), sans-serif;
+}
+
+/* „Nastavení" na liště jako textový odkaz, ať nekonkuruje dvěma volbám. */
+#cc-main .cm__btn[data-role="show"] {
+  --cc-btn-secondary-bg: transparent;
+  --cc-btn-secondary-color: var(--text-slate);
+  --cc-btn-secondary-border-color: var(--border-strong);
+  --cc-btn-secondary-hover-bg: var(--bg);
+  --cc-btn-secondary-hover-color: var(--text);
+  --cc-btn-secondary-hover-border-color: var(--border-strong);
+}

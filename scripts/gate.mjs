@@ -6,6 +6,7 @@
 // 3. každá route ze sitemapy existuje v out/ jako index.html
 // 4. každý lokální <img src> / href na /… v out/**/*.html míří na existující soubor
 // 5. každá stránka má <title>, meta description a právě jeden <h1>
+// 6. výchozí Consent Mode v2 je na každé stránce a v <head> před GTM
 //
 // Lint zatím není: `next lint` v projektu nemá ESLint konfiguraci.
 import { execSync } from "node:child_process";
@@ -72,6 +73,19 @@ step("every page has title, description, one h1", () => {
     if (!/<title>[^<]+<\/title>/.test(html)) bad.push(`${file}: no <title>`);
     if (!/<meta name="description" content="[^"]+"/.test(html)) bad.push(`${file}: no description`);
     if (h1 !== 1) bad.push(`${file}: ${h1}× <h1>`);
+  }
+  if (bad.length) throw new Error(bad.join("; "));
+});
+
+step("consent default runs before GTM on every page", () => {
+  const bad = [];
+  for (const file of htmlFiles) {
+    const html = readFileSync(file, "utf8");
+    const consent = html.indexOf('<script id="consent-default">');
+    const gtm = html.indexOf("googletagmanager.com/gtm.js");
+    if (consent === -1) bad.push(`${file}: no consent default`);
+    else if (gtm !== -1 && gtm < consent) bad.push(`${file}: GTM before consent default`);
+    if (!html.includes("'consent','default'")) bad.push(`${file}: consent default not set`);
   }
   if (bad.length) throw new Error(bad.join("; "));
 });

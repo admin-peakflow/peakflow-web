@@ -90,6 +90,17 @@ export function ContactForm({
         throw new Error(result?.message ?? `HTTP ${response.status}`);
       }
 
+      // Konverze pro GTM (GA4, Sklik Lead, Meta Lead, TikTok SubmitForm).
+      // Jen po skutečném přijetí zprávy — honeypot a chyby sem nedojdou.
+      // Žádné osobní údaje, jen odkud lead přišel a téma.
+      const w = window as unknown as { dataLayer?: unknown[] };
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: "generate_lead",
+        lead_source: source ?? "kontakt",
+        lead_topic: String(data.get("topic") ?? ""),
+      });
+
       setStatus("sent");
       form.reset();
     } catch (error) {
