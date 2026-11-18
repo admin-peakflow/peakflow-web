@@ -115,7 +115,7 @@
           "2147479553",
           "102"
         ],
-        "tagFiringOption": "ONCE_PER_LOAD",
+        "tagFiringOption": "ONCE_PER_EVENT",
         "consentSettings": {
           "consentStatus": "NEEDED",
           "consentType": {
@@ -128,7 +128,7 @@
             ]
           }
         },
-        "notes": "All Pages + změna souhlasu, max. 1× za načtení stránky. Bez souhlasu ad_storage se nespustí.",
+        "notes": "All Pages + změna souhlasu. Možnost spouštění: Neomezeně, NE 'Jednou na stránku'. GTM totiž počítá i pokus zablokovaný souhlasem, takže po 'Přijmout vše' by se tag už nespustil. Dvojí inicializaci hlídá kód (__peakflowInit). Bez souhlasu ad_storage se nespustí.",
         "accountId": "1",
         "containerId": "1"
       },
@@ -188,7 +188,7 @@
           "2147479553",
           "102"
         ],
-        "tagFiringOption": "ONCE_PER_LOAD",
+        "tagFiringOption": "ONCE_PER_EVENT",
         "consentSettings": {
           "consentStatus": "NEEDED",
           "consentType": {
@@ -201,7 +201,7 @@
             ]
           }
         },
-        "notes": "All Pages + změna souhlasu, max. 1× za načtení stránky. Bez souhlasu ad_storage se nespustí.",
+        "notes": "All Pages + změna souhlasu. Možnost spouštění: Neomezeně, NE 'Jednou na stránku'. GTM totiž počítá i pokus zablokovaný souhlasem, takže po 'Přijmout vše' by se tag už nespustil. Dvojí inicializaci hlídá kód (__peakflowInit). Bez souhlasu ad_storage se nespustí.",
         "accountId": "1",
         "containerId": "1"
       },

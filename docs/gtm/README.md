@@ -12,11 +12,18 @@ marketingové tagy nedostanou souhlas.
 |---|---|---|---|
 | Sklik – SEM – PageView | šablona Seznam SEM | All Pages | šablona čte Consent Mode v2 sama (i jeho pozdější změnu) |
 | Sklik – SEM – Lead | šablona Seznam SEM | `generate_lead` | dtto |
-| Meta Pixel – základ + PageView | Custom HTML | All Pages + `cookie_consent_update`, max. 1× za stránku | `ad_storage` |
+| Meta Pixel – základ + PageView | Custom HTML | All Pages + `cookie_consent_update`, spouštění **Neomezeně** | `ad_storage` |
 | Meta Pixel – Lead | Custom HTML | `generate_lead` | `ad_storage` |
-| TikTok Pixel – základ + page | Custom HTML | All Pages + `cookie_consent_update`, max. 1× za stránku | `ad_storage` |
+| TikTok Pixel – základ + page | Custom HTML | All Pages + `cookie_consent_update`, spouštění **Neomezeně** | `ad_storage` |
 | TikTok Pixel – SubmitForm | Custom HTML | `generate_lead` | `ad_storage` |
 | GA4 – generate_lead | GA4 event (`G-87RT5RRBRR`) | `generate_lead` | Consent Mode (vestavěný) |
+
+> [!warning] U základních tagů Meta a TikTok nenastavovat „Jednou na stránku“
+> GTM do „jednou“ započítá i pokus, který zablokoval souhlas (All Pages před
+> volbou v liště). Po „Přijmout vše“ se pak tag na té stránce už nespustí.
+> Kdo přijde rovnou na /kontakt/, odsouhlasí a odešle formulář, nepošle Metě
+> ani TikToku žádný hit, ani Lead. Ověřeno testem 2026-11-18. Dvojí
+> inicializaci hlídá kód tagu (`__peakflowInit`), takže stačí „Neomezeně“.
 
 Proměnné (konstanty, vyplněné 2026-11-18):
 
