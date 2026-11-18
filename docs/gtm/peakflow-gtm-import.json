@@ -1,0 +1,519 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-11-18 15:58:40",
+  "containerVersion": {
+    "path": "accounts/1/containers/1/versions/0",
+    "containerVersionId": "0",
+    "container": {
+      "path": "accounts/1/containers/1",
+      "name": "peakflow.cz",
+      "publicId": "GTM-T4RFMPPX",
+      "usageContext": [
+        "WEB"
+      ],
+      "accountId": "1",
+      "containerId": "1"
+    },
+    "tag": [
+      {
+        "tagId": "1",
+        "name": "Sklik – SEM – PageView",
+        "type": "cvt_1_301",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "id",
+            "value": "{{Sklik SEM ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "PageView"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "currency",
+            "value": "CZK"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "usingConsentModeV2",
+            "value": "true"
+          }
+        ],
+        "firingTriggerId": [
+          "2147479553"
+        ],
+        "blockingTriggerId": [
+          "103"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "notes": "Šablona Seznam SEM (Pavel Šabatka). Souhlas si čte sama z Consent Mode v2 a reaguje i na jeho pozdější změnu.",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "tagId": "2",
+        "name": "Sklik – SEM – Lead",
+        "type": "cvt_1_301",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "id",
+            "value": "{{Sklik SEM ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "Lead"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "currency",
+            "value": "CZK"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "usingConsentModeV2",
+            "value": "true"
+          }
+        ],
+        "firingTriggerId": [
+          "101"
+        ],
+        "blockingTriggerId": [
+          "103"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "notes": "Šablona Seznam SEM (Pavel Šabatka). Souhlas si čte sama z Consent Mode v2 a reaguje i na jeho pozdější změnu.",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "tagId": "3",
+        "name": "Meta Pixel – základ + PageView",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n/* Meta Pixel – základ. Spouští se jen se souhlasem ad_storage (nastavení souhlasu tagu v GTM). */\n(function () {\n  var id = '{{Meta Pixel ID}}';\n  if (!/^[0-9]{6,}$/.test(id)) return; // ID ještě není vyplněné\n  if (window.fbq && window.fbq.__peakflowInit) return;\n  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;\n  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;\n  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,\n  document,'script','https://connect.facebook.net/en_US/fbevents.js');\n  window.fbq('init', id);\n  window.fbq('track', 'PageView');\n  window.fbq.__peakflowInit = true;\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "2147479553",
+          "102"
+        ],
+        "tagFiringOption": "ONCE_PER_LOAD",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "notes": "All Pages + změna souhlasu, max. 1× za načtení stránky. Bez souhlasu ad_storage se nespustí.",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "tagId": "4",
+        "name": "Meta Pixel – Lead",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function () {\n  if (typeof window.fbq !== 'function') return;\n  window.fbq('track', 'Lead', { content_name: '{{DLV – lead_topic}}', content_category: '{{DLV – lead_source}}' });\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "101"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "notes": "Po odeslání kontaktního formuláře.",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "tagId": "5",
+        "name": "TikTok Pixel – základ + page",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n/* TikTok Pixel – základ. Spouští se jen se souhlasem ad_storage (nastavení souhlasu tagu v GTM). */\n(function () {\n  var id = '{{TikTok Pixel ID}}';\n  if (!/^[A-Z0-9]{10,}$/.test(id)) return; // ID ještě není vyplněné\n  if (window.ttq && window.ttq.__peakflowInit) return;\n  !function (w, d, t) {\n    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=[\"page\",\"track\",\"identify\",\"instances\",\"debug\",\"on\",\"off\",\"once\",\"ready\",\"alias\",\"group\",\"enableCookie\",\"disableCookie\",\"holdConsent\",\"revokeConsent\",\"grantConsent\"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r=\"https://analytics.tiktok.com/i18n/pixel/events.js\",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement(\"script\");n.type=\"text/javascript\",n.async=!0,n.src=r+\"?sdkid=\"+e+\"&lib=\"+t;e=document.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(n,e)};\n    ttq.load(id);\n    ttq.page();\n  }(window, document, 'ttq');\n  window.ttq.__peakflowInit = true;\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "2147479553",
+          "102"
+        ],
+        "tagFiringOption": "ONCE_PER_LOAD",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "notes": "All Pages + změna souhlasu, max. 1× za načtení stránky. Bez souhlasu ad_storage se nespustí.",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "tagId": "6",
+        "name": "TikTok Pixel – SubmitForm",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function () {\n  if (!window.ttq || typeof window.ttq.track !== 'function') return;\n  window.ttq.track('SubmitForm', { content_name: '{{DLV – lead_topic}}' });\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "101"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "notes": "Po odeslání kontaktního formuláře.",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "tagId": "7",
+        "name": "GA4 – generate_lead",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "generate_lead"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-87RT5RRBRR"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "sendEcommerceData",
+            "value": "false"
+          },
+          {
+            "type": "LIST",
+            "key": "eventSettingsTable",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "lead_source"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – lead_source}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "lead_topic"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – lead_topic}}"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "firingTriggerId": [
+          "101"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "notes": "Konverze z kontaktního formuláře. V GA4 označit generate_lead jako klíčovou událost.",
+        "accountId": "1",
+        "containerId": "1"
+      }
+    ],
+    "trigger": [
+      {
+        "triggerId": "101",
+        "name": "Lead – formulář odeslán (generate_lead)",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "generate_lead"
+              }
+            ]
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "triggerId": "102",
+        "name": "Souhlas – změna (cookie_consent_update)",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "cookie_consent_update"
+              }
+            ]
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "triggerId": "103",
+        "name": "Blokace – chybí Sklik ID",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": ".*"
+              }
+            ]
+          }
+        ],
+        "filter": [
+          {
+            "type": "CONTAINS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Sklik SEM ID}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "DOPLNIT"
+              }
+            ]
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      }
+    ],
+    "variable": [
+      {
+        "variableId": "201",
+        "name": "Sklik SEM ID",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "DOPLNIT_SEM_ID"
+          }
+        ],
+        "notes": "SEM ID ze Sklik → Nastavení účtu → Zobrazit SEM kód. Dokud je tu DOPLNIT, Sklik tagy blokuje trigger 'Blokace – chybí Sklik ID'.",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "202",
+        "name": "Meta Pixel ID",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "DOPLNIT_META_PIXEL_ID"
+          }
+        ],
+        "notes": "Číselné ID pixelu z Meta Events Manager → Datové zdroje. Dokud není číselné, Meta tagy nic nedělají.",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "203",
+        "name": "TikTok Pixel ID",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "DOPLNIT_TIKTOK_PIXEL_ID"
+          }
+        ],
+        "notes": "ID pixelu z TikTok Ads Manager → Events Manager (např. C1ABCD...). Dokud není vyplněné, TikTok tagy nic nedělají.",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "204",
+        "name": "DLV – lead_source",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "lead_source"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "205",
+        "name": "DLV – lead_topic",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "lead_topic"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      }
+    ],
+    "builtInVariable": [
+      {
+        "type": "EVENT",
+        "name": "Event",
+        "accountId": "1",
+        "containerId": "1"
+      }
+    ],
+    "customTemplate": [
+      {
+        "templateId": "301",
+        "name": "Seznam SEM",
+        "templateData": "___TERMS_OF_SERVICE___\n\nBy creating or modifying this file you agree to Google Tag Manager's Community\nTemplate Gallery Developer Terms of Service available at\nhttps://developers.google.com/tag-manager/gallery-tos (or such other URL as\nGoogle may provide), as modified from time to time.\n\n\n___INFO___\n\n{\n  \"type\": \"TAG\",\n  \"id\": \"cvt_temp_public_id\",\n  \"version\": 1,\n  \"securityGroups\": [],\n  \"displayName\": \"Seznam SEM\",\n  \"categories\": [\n    \"MARKETING\",\n    \"REMARKETING\",\n    \"ADVERTISING\"\n  ],\n  \"brand\": {\n    \"id\": \"github.com_pavelsabatka\",\n    \"displayName\": \"pavelsabatka\",\n    \"thumbnail\": \"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wAARCABAAEADASIAAhEBAxEB/8QAHAAAAgMBAQEBAAAAAAAAAAAABgcEBQgBAAID/8QAPhAAAQMDAQYEAwQFDQAAAAAAAQIDBAUGEQAHEiExQVETImGBFDJxQnKRsQgWYqHSGCMkJTRSVoKSlKLR4f/EABsBAAIDAAMAAAAAAAAAAAAAAAQFAAMGAQIH/8QAKhEAAQMEAQIFBAMAAAAAAAAAAQIDBAAFESESMUETImGRoQYyUXEjUvD/2gAMAwEAAhEDEQA/ANUaFL52g0yx4gVJJfmOg+DFQRvK9T/dHTP56JnnUx2nHnFBKEJKlHsANZGui4JNz12XVZSiVPrJQk/YQD5Uj0A/E5PXQkuR4Sddae2G0ic6ef2p60Q3BteuuuLWETzT45+VqL5MD73zZ9wPTQs9WalIVvPVGY6rnlbyjn9+pVr21Nu2ss0uAE+I5lSlrzutoHNRx05cOpIHXTpp/wCj9b7DKRNnz5TuPMpKkoTn0GD+Z0tQ08/5s6rZyJluteG+OD6DdJKHc1bp6wuJV57JByNx9QHuM4PvphWjt1qtPeRHuBAnxScF9CQl1v1wMBQ9gfU8tWF3bBURILsy35j7zjSSsxZGFFYHRKgBx9CPcaTZGBqEuxyM1y2m33ZslIz8EVsemVOJV4LE6E+h+O8neQtByD/121L0itgNzOsVKTbz6yph9BfYBPyrGN4D0IOf8unrpuw6HEBVee3OCYUhTJ7dP1UKsRlTaVMjNnC3mFtpPqUkax4pCm1FCklKkkggjBBHMHWzyM8McNIva3sslx5r9wUSOp+M8S5JjtjKmlHmtI5kHqOYJzy5CzmStIUntTv6WuDcd1TThxy70JbLLqiWjdKZk/IivsqjuOAZ8MEg72Oo8uD1456a0xAqMOqRkSYUpmQysZS40sKB/DWN+OptMrNRoz3jU6dJiOcMqZcKCcd+PEeh0JHllocSNVoLx9Ppmr8dCsK+DWxDggjSpnbAaZNmyJQq8psPuKc3EtpwnJJwPTjoMoe3a5qapKKgmNVGhz8RIbX/AKkjH/HTUtHaxb92OIipcVCnL4CPION8/sq5K+nP00cHWX9GssqDcrXlbfQ9xuq609jUK1Lgi1hiqynlx9/+bUhICgpKk4OPvfuGmOdc667opttKBhIpNKlvSV83jk17XiM89DW0G45dqWtKq8Flp51lSAUug7uFKCc8PrpSfyg7g4f1bTMfRf8AFqtyQhs4UaLhWeTMR4jIyP3TNunZTbV0LW+7FMOWo5MiKdxSj+0OR9xnSyvC129ldLjJaap9UfmyFkvzIiVlLaUpwgBRIHEnJ650x9lt+yL5p8x2a1HZkRnQncZzjcI4E5J6hQ9tC36RX9iovbxXfyTod9LZbLqKaW1yUiYmDIUeOdg7HSht6HcceI66ukWh8S0x8S5CTFZ+JQ1gHeKMdiOvUa483VocRiVJRYkYvR0yW2nWWUOKQRkEJKRn/wAxqXMXSp9LlrrVXolTjohf0SotK8GepwJ8qFoByRzGD248+HzcjrNVolPEOTaLiEUplpxcp9Hxbawk5CePAjIx2JOqcayCfemAcJUElI2f66/3zX7Vy/to1uR6c9KdgFuot78fwmQrI8vA8uPmGrePed9Ua86RQ689AWmcpClJZb+wokc+GDkairuS3pS4sepTo7jVLhxalHCXEnffbQUqaznmfJ5fQ6qV1lut33ZEpMtqS8Y0f4goWFFDpWoqSrBOFZPI99dskbCqqDaFp4qZA0rJx6ZGKd1xUZq4KJMpb5wiU0pvOM7pI4H6g4PtrJlZpEyhVORTZ7RakR1lC0nkexB6gjBB6gg62LoSvrZ1S75jpMjMec2khqW2BvJHZQ+0nPTn2IydXyo/igEdRS2wXgQXChz7FdfT1rO9n3hUbLqgnQCFpUN15lfyupz19QeR5j1BILMqe1WxbyiMNXLRZwUyd9KUklKSeykqBPLqBoLuDZFddCWopgGoMDOHYnnyPu/Nn2I9ToUfpc+KrdkQpLKs4w40oY9iNLgt1kcCNVsnIkC4LD7avN+Qd0bVu4tnLSN2i2i8+4T88mS4hOPoFkn3xqj/AFkoP+DYH+7kfx6qItFqc5QRFp0yQo8AG2VKz+AOjq1tiFwVh1t2qpFKh8CrfO86odgkcj6nl2OokuOHyj4qOohREfzOHX5Uc+2astmlBod9TpIkWjFjwY6MreRKfJKzySMrweGc9sDvpnU3ZdaNInMz4VIDchhW+2svOK3T3wVY1cW9b8C2aY1TaayGmG+PdS1HmpR6nVnpq0wEp8wGawM65uPOqLSiEdhk9Pev/9k\\u003d\"\n  },\n  \"description\": \"Seznam SEM tracking.\\nRemarketing and conversion tracking code for Seznam.cz. SEM is available from 04/2026.\",\n  \"containerContexts\": [\n    \"WEB\"\n  ]\n}\n\n\n___TEMPLATE_PARAMETERS___\n\n[\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"id\",\n    \"displayName\": \"Seznam ID\",\n    \"simpleValueType\": true,\n    \"alwaysInSummary\": true,\n    \"help\": \"SEM ID generated in Sklik administration\",\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\"\n      }\n    ]\n  },\n  {\n    \"type\": \"SELECT\",\n    \"name\": \"eventName\",\n    \"displayName\": \"Event Name\",\n    \"macrosInSelect\": true,\n    \"selectItems\": [\n      {\n        \"value\": \"AddPaymentInfo\",\n        \"displayValue\": \"AddPaymentInfo\"\n      },\n      {\n        \"value\": \"AddToCart\",\n        \"displayValue\": \"AddToCart\"\n      },\n      {\n        \"value\": \"AddToWishlist\",\n        \"displayValue\": \"AddToWishlist\"\n      },\n      {\n        \"value\": \"CompleteRegistration\",\n        \"displayValue\": \"CompleteRegistration\"\n      },\n      {\n        \"value\": \"Contact\",\n        \"displayValue\": \"Contact\"\n      },\n      {\n        \"value\": \"CustomizeProduct\",\n        \"displayValue\": \"CustomizeProduct\"\n      },\n      {\n        \"value\": \"Donate\",\n        \"displayValue\": \"Donate\"\n      },\n      {\n        \"value\": \"InitiateCheckout\",\n        \"displayValue\": \"InitiateCheckout\"\n      },\n      {\n        \"value\": \"Lead\",\n        \"displayValue\": \"Lead\"\n      },\n      {\n        \"value\": \"PageView\",\n        \"displayValue\": \"PageView\"\n      },\n      {\n        \"value\": \"Purchase\",\n        \"displayValue\": \"Purchase\"\n      },\n      {\n        \"value\": \"Search\",\n        \"displayValue\": \"Search\"\n      },\n      {\n        \"value\": \"Schedule\",\n        \"displayValue\": \"Schedule\"\n      },\n      {\n        \"value\": \"StartTrial\",\n        \"displayValue\": \"StartTrial\"\n      },\n      {\n        \"value\": \"SubmitApplication\",\n        \"displayValue\": \"SubmitApplication\"\n      },\n      {\n        \"value\": \"Subscribe\",\n        \"displayValue\": \"Subscribe\"\n      },\n      {\n        \"value\": \"ViewContent\",\n        \"displayValue\": \"ViewContent\"\n      },\n      {\n        \"value\": \"updateUserData\",\n        \"displayValue\": \"UserDataUpdate\"\n      }\n    ],\n    \"simpleValueType\": true,\n    \"help\": \"Value will be used as event name. Based on this value, other parameters sent with the event will be selected.\",\n    \"alwaysInSummary\": true,\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\"\n      }\n    ],\n    \"clearOnCopy\": true\n  },\n  {\n    \"type\": \"GROUP\",\n    \"name\": \"params\",\n    \"displayName\": \"Parameters\",\n    \"groupStyle\": \"ZIPPY_OPEN\",\n    \"subParams\": [\n      {\n        \"type\": \"SELECT\",\n        \"name\": \"contentType\",\n        \"displayName\": \"Content Type\",\n        \"macrosInSelect\": false,\n        \"selectItems\": [\n          {\n            \"value\": \"product\",\n            \"displayValue\": \"product\"\n          },\n          {\n            \"value\": \"product_group\",\n            \"displayValue\": \"product_group\"\n          },\n          {\n            \"value\": \"page\",\n            \"displayValue\": \"page\"\n          }\n        ],\n        \"simpleValueType\": true,\n        \"help\": \"product (single product), product_group (collection or products - e.g. on product category page), page (detail of content page - like a blog post), search (used for Search event)\",\n        \"enablingConditions\": [\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"Search\",\n            \"type\": \"NOT_EQUALS\"\n          }\n        ],\n        \"notSetText\": \"\",\n        \"defaultValue\": \"product\"\n      },\n      {\n        \"type\": \"SELECT\",\n        \"name\": \"products\",\n        \"displayName\": \"Products related to given context\",\n        \"macrosInSelect\": true,\n        \"selectItems\": [],\n        \"simpleValueType\": true,\n        \"help\": \"Products related to given context. Expected array of objects in GTM Ecommerce format.\",\n        \"enablingConditions\": [\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"AddToCart\",\n            \"type\": \"EQUALS\"\n          },\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"AddPaymentInfo\",\n            \"type\": \"EQUALS\"\n          },\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"AddToWishlist\",\n            \"type\": \"EQUALS\"\n          },\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"InitiateCheckout\",\n            \"type\": \"EQUALS\"\n          },\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"Purchase\",\n            \"type\": \"EQUALS\"\n          },\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"Search\",\n            \"type\": \"EQUALS\"\n          },\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"ViewContent\",\n            \"type\": \"EQUALS\"\n          }\n        ],\n        \"notSetText\": \"No products\"\n      },\n      {\n        \"type\": \"SELECT\",\n        \"name\": \"order\",\n        \"displayName\": \"Order\",\n        \"macrosInSelect\": true,\n        \"selectItems\": [],\n        \"simpleValueType\": true,\n        \"help\": \"Object of order in GTM Ecommerce format\",\n        \"notSetText\": \"\",\n        \"enablingConditions\": [\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"Purchase\",\n            \"type\": \"EQUALS\"\n          }\n        ]\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"currency\",\n        \"displayName\": \"Currency Code\",\n        \"simpleValueType\": true,\n        \"defaultValue\": \"CZK\",\n        \"help\": \"Currency code in ISO 4217 format (e.g. CZK, EUR, USD)\",\n        \"valueValidators\": [\n          {\n            \"type\": \"REGEX\",\n            \"args\": [\n              \"^[A-Z]{3}$\"\n            ],\n            \"errorMessage\": \"Must be ISO 4217 format (e.g. CZK, EUR, USD)\"\n          }\n        ]\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"reviewEmail\",\n        \"displayName\": \"Email for Review\",\n        \"simpleValueType\": true,\n        \"alwaysInSummary\": true,\n        \"enablingConditions\": [\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"Purchase\",\n            \"type\": \"EQUALS\"\n          }\n        ],\n        \"help\": \"Customer\\u0027s email for review. Fill in this value only with consent.\",\n        \"valueHint\": \"customer@email.cz\"\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"url\",\n        \"displayName\": \"Page URL (optional)\",\n        \"simpleValueType\": true,\n        \"help\": \"Optional parameter. You can rewrite real URL sent to Seznam.\"\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"eventId\",\n        \"displayName\": \"Event ID (optional)\",\n        \"simpleValueType\": true,\n        \"help\": \"Optional. Used for event deduplication when you are using frontend and backed tracking.\"\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"contentCategory\",\n        \"displayName\": \"Content Category (optional)\",\n        \"simpleValueType\": true,\n        \"enablingConditions\": [],\n        \"help\": \"String of content category. Recommended for content_type \\u003d page, product-level data should be used in \\\"Products\\\" field.\"\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"contentName\",\n        \"displayName\": \"Content Name (optional)\",\n        \"simpleValueType\": true,\n        \"enablingConditions\": [],\n        \"help\": \"String of contentName (e.g. in page title). Recommended for content_type \\u003d page, product-level data should be used in \\\"Products\\\" field.\"\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"value\",\n        \"displayName\": \"Value (recommended, without VAT)\",\n        \"simpleValueType\": true,\n        \"help\": \"Optional. Used as value parameter.\"\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"searchString\",\n        \"displayName\": \"Search String\",\n        \"simpleValueType\": true,\n        \"enablingConditions\": [\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"Search\",\n            \"type\": \"EQUALS\"\n          }\n        ],\n        \"help\": \"Only for Search event\"\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"predictedLtv\",\n        \"displayName\": \"Predicted LTV\",\n        \"simpleValueType\": true,\n        \"help\": \"\",\n        \"enablingConditions\": [\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"StartTrial\",\n            \"type\": \"EQUALS\"\n          },\n          {\n            \"paramName\": \"eventName\",\n            \"paramValue\": \"Subscribe\",\n            \"type\": \"EQUALS\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"type\": \"GROUP\",\n    \"name\": \"simpleParams\",\n    \"displayName\": \"Custom Parameters\",\n    \"groupStyle\": \"ZIPPY_OPEN_ON_PARAM\",\n    \"subParams\": [\n      {\n        \"type\": \"SIMPLE_TABLE\",\n        \"name\": \"customParams\",\n        \"displayName\": \"Parameters\",\n        \"simpleTableColumns\": [\n          {\n            \"defaultValue\": \"\",\n            \"displayName\": \"Name\",\n            \"name\": \"name\",\n            \"type\": \"TEXT\"\n          },\n          {\n            \"defaultValue\": \"\",\n            \"displayName\": \"Value\",\n            \"name\": \"value\",\n            \"type\": \"TEXT\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"type\": \"GROUP\",\n    \"name\": \"userDataGroup\",\n    \"displayName\": \"User Data\",\n    \"groupStyle\": \"ZIPPY_OPEN_ON_PARAM\",\n    \"subParams\": [\n      {\n        \"type\": \"SELECT\",\n        \"name\": \"user\",\n        \"displayName\": \"User (optional)\",\n        \"macrosInSelect\": true,\n        \"selectItems\": [],\n        \"simpleValueType\": true,\n        \"help\": \"Object of User\",\n        \"notSetText\": \"\"\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"userEmail\",\n        \"displayName\": \"Email (em)\",\n        \"simpleValueType\": true,\n        \"help\": \"Expected normalized email (lowercased and trimmed).\"\n      },\n      {\n        \"type\": \"TEXT\",\n        \"name\": \"userPhone\",\n        \"displayName\": \"Phone (ph)\",\n        \"simpleValueType\": true,\n        \"help\": \"Expected the phone in E.164 format (e.g. +420777111222)\"\n      }\n    ]\n  },\n  {\n    \"type\": \"GROUP\",\n    \"name\": \"consent\",\n    \"displayName\": \"Consent\",\n    \"groupStyle\": \"ZIPPY_OPEN_ON_PARAM\",\n    \"subParams\": [\n      {\n        \"type\": \"CHECKBOX\",\n        \"name\": \"usingConsentModeV2\",\n        \"checkboxText\": \"Using Consent Mode v2\",\n        \"simpleValueType\": true,\n        \"defaultValue\": true\n      },\n      {\n        \"type\": \"SELECT\",\n        \"name\": \"consentStateObject\",\n        \"displayName\": \"Consent statuses\",\n        \"macrosInSelect\": true,\n        \"selectItems\": [],\n        \"simpleValueType\": true,\n        \"enablingConditions\": [\n          {\n            \"paramName\": \"usingConsentModeV2\",\n            \"paramValue\": true,\n            \"type\": \"NOT_EQUALS\"\n          }\n        ],\n        \"help\": \"Object with consent statuses - ad_storage, ad_personalization, ad_user_data, analytics_storage, functionality_storage. You can use \\\"granted\\\"/\\\"denied\\\", 1/0 or true/false.\"\n      }\n    ]\n  }\n]\n\n\n___SANDBOXED_JS_FOR_WEB_TEMPLATE___\n\n// Enter your template code here.\nconst log = require('logToConsole');\nconst injectScript = require('injectScript');\nconst templateStorage = require('templateStorage');\nconst callInWindow = require('callInWindow');\nconst isConsentGranted = require('isConsentGranted');\nconst addConsentListener = require('addConsentListener');\nconst makeNumber = require('makeNumber');\nconst makeInteger = require('makeInteger');\nconst makeString = require('makeString');\nconst Math = require('Math');\nconst getType = require('getType');\nconst Object = require('Object');\nconst getContainerVersion = require('getContainerVersion');\n\n\n\nconst TEMPLATE_VERSION = '2.9';\n\n\n\n/**\n * Constant definition\n */\nconst CACHE_TOKEN = 'seznam_sem_' + data.id;\nconst CONFIG_WAS_CALLED = 'CONFIG_WAS_CALLED_'+data.id;\nconst LAST_SEM_CONSENT_SNAPSHOT = 'LAST_SEM_CONSENT_SNAPSHOT_'+data.id;\nconst CONSENT_LISTENERS_INITED = 'CONSENT_LISTENERS_INITED_'+data.id;\nconst USER_DATA = 'USER_DATA_'+data.id;\n\n\n\n\n/**\n * Transformes different possible consent statuses to 'granted' / 'denied'\n *\n * @param mixed status\n * @return string granted|denied\n */\nfunction getConsentStatus(status) {\n  return ([1, '1', true, 'true', 'granted'].indexOf(status) > -1) ? 'granted' : 'denied';\n}\n\n\n\n/**\n * Checks if given value is defined - it is not null or undefined\n *\n * @param mixed val\n * @return bool\n */\nfunction isDefined(val) {\n  const type = getType(val);\n  return type !== 'undefined' && type !== 'null' && val !== '';\n}\n\n\n\n/**\n * Returns value from first defined value in array\n *\n * @param arr array of values\n * @param type string|integer|number\n * @return mixed - first defined value\n */\nfunction getFirstValue(arr, type) {\n  let val;\n  for (let i = 0; i < arr.length; i++) {\n    if (isDefined(arr[i])) {\n      switch (type) {\n        case 'string':\n          return makeString(arr[i]);\n        case 'integer':\n          return makeInteger(arr[i]);\n        case 'number':\n          return makeNumber(arr[i]);\n        default:\n          return arr[i];\n      }\n    }\n  }\n}\n\n\n\n/**\n * Return object with all consent statuses. If \"usingConsentModeV2\" checkbox is enabled, \n * statuses will be readed from consent mode v2, otherwise consent object will be parsed\n * \n * @return object\n */\nfunction getConsentObject() {\n  if (data.usingConsentModeV2) {\n    return {\n      'ad_storage': isConsentGranted('ad_storage') ? 'granted' : 'denied',\n      'ad_user_data': isConsentGranted('ad_user_data') ? 'granted' : 'denied',\n      'ad_personalization': isConsentGranted('ad_personalization') ? 'granted' : 'denied',\n      'analytics_storage': isConsentGranted('analytics_storage') ? 'granted' : 'denied',\n      'functionality_storage': isConsentGranted('functionality_storage') ? 'granted' : 'denied',\n    };\n  } else {\n    let consents = data.consentStateObject || {};\n    return {\n      'ad_storage': getConsentStatus(consents.ad_storage),\n      'ad_user_data': getConsentStatus(consents.ad_user_data),\n      'ad_personalization': getConsentStatus(consents.ad_personalization),\n      'analytics_storage': getConsentStatus(consents.analytics_storage),\n      'functionality_storage': getConsentStatus(consents.functionality_storage),\n    };\n  }\n}\n\n\n\n/**\n * Initiates params object and prepares generic hit params\n *\n * @return object params\n */\nfunction callSEMConfig() {\n\n  const consentStatus = getConsentObject();\n  \n  const adStorage = consentStatus.ad_storage === 'granted' ? '1' : '0';\n  const adPersonalization = consentStatus.ad_personalization === 'granted' ? '1' : '0';\n  const adUserData = consentStatus.ad_user_data === 'granted' ? '1' : '0';\n  const currentConsentSnapshot = adStorage + adPersonalization + adUserData;\n  const lastConsentSnapshot = templateStorage.getItem(LAST_SEM_CONSENT_SNAPSHOT);\n  \n  \n  if (currentConsentSnapshot === lastConsentSnapshot) {\n    // Pokud už jsou listenery nastaveny, prostě vyskočíme\n    if (templateStorage.getItem(CONSENT_LISTENERS_INITED) && templateStorage.getItem(CONFIG_WAS_CALLED)) {\n      return;\n    }\n  }\n  \n  templateStorage.setItem(CONFIG_WAS_CALLED, true);\n  templateStorage.setItem(LAST_SEM_CONSENT_SNAPSHOT, currentConsentSnapshot);\n  \n  \n  // init consent listeners\n  if (!templateStorage.getItem(CONSENT_LISTENERS_INITED)) {\n    templateStorage.setItem(CONSENT_LISTENERS_INITED, true);\n    addConsentListener('ad_storage', callSEMConfig);\n    addConsentListener('ad_personalization', callSEMConfig);\n    addConsentListener('ad_user_data', callSEMConfig);\n  }\n  \n  \n  let configData = {\n    'sem_id': data.id,\n    'event_type': 'rtgconv',\n    'event_source': 'web',\n    'consent_mode': {\n      'ad_storage': consentStatus.ad_storage,\n      'ad_user_data': consentStatus.ad_user_data,\n      'ad_personalization': consentStatus.ad_personalization,\n      'analytics_storage': consentStatus.analytics_storage,\n      'functionality_storage': consentStatus.functionality_storage,\n    },\n    'api': {\n      'name': 'GTM_T',\n      'template_version': 't'+TEMPLATE_VERSION+'-c'+getContainerVersion().version\n    }\n  };\n\n  // add user data - if we have consent\n  let userData = templateStorage.getItem(USER_DATA);\n  if (userData && consentStatus.ad_user_data === 'granted') {\n    configData.user_ids = {\n      'user_data': userData\n    };\n  }\n\n  log('Seznam SEM: called config with params', configData);\n  callInWindow('SEM', 'config', configData);\n}\n\n\n\n/**\n * Rounds a price to 2 decimals; returns undefined for anything unusable\n */\nfunction toPrice(val) {\n  if (!isDefined(val)) return undefined;\n  const n = makeNumber(val);\n  if (n !== n) return undefined; // NaN check, the sandbox has no isNaN\n  return Math.round(n * 100) / 100;\n}\n\n\n\n/**\n * Get array of products from GTM ecommerce format\n *\n * @params bool validate\n * @return array of products\n */\nfunction prepareProducts(validate) {\n  let products = data.products || [];\n  if (getType(products) === 'object') products = [ products ];\n  let prepared = [],\n      category;\n  \n  for (let i in products) {\n    category = [];\n    if (products[i].category) {\n      // support for MeasureGuard\n      category = products[i].category.split('/');\n\n    } else if (products[i].currentCategory || products[i].defaultCategory) {\n      // support for Shoptet\n      category = products[i].currentCategory || products[i].defaultCategory;\n      category = category.split(' | ');\n\n    } else {\n      // support for Enhancend Ecommerce\n      if (products[i].item_category) category.push(products[i].item_category);\n      if (products[i].item_category2) category.push(products[i].item_category2);\n      if (products[i].item_category3) category.push(products[i].item_category3);\n      if (products[i].item_category4) category.push(products[i].item_category4);\n      if (products[i].item_category5) category.push(products[i].item_category5);\n    }\n\n    const p = {\n      'id': getFirstValue([products[i].id, products[i].item_id], 'string'),\n      'content_name': getFirstValue([products[i].name, products[i].item_name], 'string'),\n      'quantity': getFirstValue([products[i].quantity, 1], 'integer'),\n      'unit_price': toPrice(getFirstValue([products[i].price, products[i].priceWithVat, products[i].fullPrice], 'number')),\n      'content_category': category.join(' | ')\n    };\n    if (validate) {\n      if (!isDefined(p.id) || !p.content_name || !p.quantity || !isDefined(p.unit_price)) {\n        log('Seznam SEM: ERROR: product must have keys id, content_name, quantity, unit_price; current value', p);\n      }\n    }\n    prepared.push(p);\n  }\n  \n  return prepared;\n}\n\n\n\n/**\n * Count value of all products in given array.\n *\n * @param array products\n * @return float total value\n */\nfunction countProductValue(products) {\n  if (!products) return;\n  let v = 0;\n  for (let p in products) {\n    v += products[p].unit_price * products[p].quantity;\n  }\n  return v;\n}\n\n\n\n/**\n * Adds user data to user object.\n *\n * @return object params\n */\nfunction getUserData() {\n  const user = data.user || {};\n  let userData = {\n    'em': data.userEmail || user.email || user.em,\n    'ph': data.userPhone || user.phone || user.ph,\n    'fn': user.fname || user.fn,\n    'ln': user.lname || user.ln,\n    'ge': user.g || user.ge || user.gender,\n    'ct': user.city,\n    'sr': user.street,\n    'region': user.region,\n    'zp': user.postalCode || user.zip,\n    'country': user.countryCode,\n    'db': user.birth || user.birthDate,\n    'subscription_id': user.subscription || user.subscriptionId\n  };\n  \n\n  // Remove undefined data\n  const keys = Object.keys(userData);\n  for (let i = 0; i < keys.length; i++) {\n    if (!isDefined(userData[keys[i]])) {\n      Object.delete(userData, keys[i]);\n    }\n  }\n\n  // There is no usefull data in userData object -> return false\n  return Object.keys(userData).length ? userData : false;\n}\n\n\n\n\n/**\n * Checks if User Data object is same as in template storage.\n * If it is not -> update is needed\n *\n * @param object newUserData\n * @return bool\n */\nfunction isUserUpdateNeeded(newUserData) {\n  if (!newUserData) return false;\n\n  // No update needed if none of the values is defined\n  const keys = Object.keys(newUserData);\n  let hasValue = false;\n  for (let i = 0; i < keys.length; i++) {\n    if (isDefined(newUserData[keys[i]])) {\n      hasValue = true;\n      break;\n    }\n  }\n  if (!hasValue) return false;\n\n  const oldUserData = templateStorage.getItem(USER_DATA);\n  if (!oldUserData) return true;\n\n  const newKeys = Object.keys(newUserData);\n  const oldKeys = Object.keys(oldUserData);\n\n  // there is a different count of keys\n  if (newKeys.length !== oldKeys.length) {\n    return true;\n  }\n\n  // compare each value\n  for (let i = 0; i < newKeys.length; i++) {\n    const key = newKeys[i];\n    if (newUserData[key] !== oldUserData[key]) {\n      return true;\n    }\n  }\n\n  // objects are same\n  return false;\n}\n\n\n\n/**\n * Assigns value to params[key] only when the value is usable\n * @param params\n * @param string key of value\n * @param value\n */\nfunction setIfDefined(params, key, value) {\n  if (isDefined(value)) params[key] = value;\n}\n\n\n\n/**\n * Create params object for given event\n *\n * @return object params\n */\nfunction getEventParams(eventName) {\n  const order = data.order || {};\n  \n  let params = {};\n  \n  params.sem_id = data.id;\n  \n  if (data.url) {\n    params.event_url = data.url;\n  }\n  if (data.currency) {\n    params.currency = data.currency;\n  }\n  if (data.user && getType(data.user.registered) !== 'undefined') {\n    params.status = !!data.user.registered;\n  }\n  if (data.contentType) {\n    params.content_type = data.contentType;\n  }\n  \n  \n  switch (eventName) {\n    case 'PageView':\n      break;\n\n    case 'Purchase':\n      params.order_id = getFirstValue([order.transaction_id, order.id, order.orderNo], 'string');\n      params.content_type = 'product';\n      params.contents = prepareProducts(true);\n      setIfDefined(params, 'value_tax', getFirstValue([order.tax, order.value_tax], 'number'));\n      setIfDefined(params, 'payment_type', order.payment_type);\n      setIfDefined(params, 'review_email', data.reviewEmail);\n      setIfDefined(params, 'delivery_price', getFirstValue([order.shipping, order.shipping_price, order.delivery_price], 'number'));\n      setIfDefined(params, 'delivery_type', getFirstValue([order.shipping_tier, order.shipping_type, order.delivery_type], 'string'));\n      setIfDefined(params, 'value', getFirstValue([data.value, order.value, order.revenue, order.totalWithoutVat, countProductValue(params.contents)], 'number'));\n      \n      if (!params.order_id) {\n        log('Seznam SEM: ERROR: order ID must be set in event Purchase, got ', params.order_id, '. Use key transaction_id, id or orderNo in object', order);\n      }\n      if (!params.value && params.value !== 0) {\n        log('Seznam SEM: ERROR: have no purchase value, got ', params.value, order);\n      }\n      if (!params.currency) {\n        log('Seznam SEM: ERROR currency must be submitted for event Purchase');\n      }\n      if (!params.contents || params.contents.length < 1) {\n        log('Seznam SEM: ERROR: no products are available for event', eventName);\n      }\n      break;\n\n    case 'ViewContent':\n      if (data.contentType == 'product' || data.contentType == 'product_group') {\n        const prods = prepareProducts();\n        if (prods.length) params.contents = prods;\n      }\n      params.value = data.value;\n      if (!params.value) {\n        params.value = countProductValue(params.contents);\n      }\n      break;\n\n    case 'AddToWishlist':\n      params.content_type = 'product';\n      params.contents = prepareProducts();\n      params.value = data.value;\n      if (!params.value) params.value = countProductValue(params.contents);\n      break;\n\n    case 'AddToCart':\n    case 'InitiateCheckout':\n    case 'AddPaymentInfo':\n      params.content_type = 'product';\n      params.contents = prepareProducts();\n      params.value = data.value;\n      if (!params.value) params.value = countProductValue(params.contents);\n      \n      if (!params.contents || params.contents.length < 1) {\n        log('Seznam SEM: error - no products are available for event', eventName);\n      }\n\n      break;\n      \n    case 'CompleteRegistration':\n      params.status = true;\n      params.value = data.value;\n      break;\n\n    case 'Lead':\n      params.value = data.value;\n      break;\n      \n    case 'StartTrial':\n    case 'Subscribe':\n      let possibleValues = [data.predictedLtv];\n      if (data.user) {\n        possibleValues = possibleValues.concat([data.user.predictedLTV, data.user.predicted_ltv, data.user.ltv]);\n      }      \n      setIfDefined(params, 'predicted_ltv', getFirstValue(possibleValues, 'number'));\n\n      params.value = data.value;\n      break;\n\n    case 'Search':\n      params.content_type = 'search';\n      params.search_string = data.searchString;\n      \n      const prods = prepareProducts();\n      if (prods.length) params.contents = prods;\n\n      params.value = data.value;\n      if (!params.value) params.value = countProductValue(params.contents);\n      break;\n\n\n    case 'CustomizeProduct':\n    case 'Contact':\n    case 'Donate':\n    case 'Schedule':\n    case 'SubmitApplication':\n      // nothing to do\n      break;\n  }\n\n  if (isDefined(params.value)) {\n    params.value = toPrice(params.value);\n  }\n  \n  \n  if (data.contentName || data.contentCategory) {\n    if (params.contents) {\n      log('Seznam SEM: warning - you cannot use \"Content Name\" or \"Content Category\" fields when product array is set', eventName);\n    } else {\n      let content = {};\n      if (data.contentName) content.content_name = data.contentName;\n      if (data.contentCategory) content.content_category = data.contentCategory;\n      params.contents = [content];\n    }\n  }\n  \n  \n  // add custom params\n  for (const k in data.customParams) {\n    let p = data.customParams[k];\n    params[p.name] = p.value;\n  }\n  \n  return params;\n}\n\n\n\n/**\n * Calls updateUserData on SEM\n *\n * @return void\n */\nfunction updateUserData() {  \n  let userData = templateStorage.getItem(USER_DATA);\n  if (!userData) return;\n\n  if (getConsentObject().ad_user_data !== 'granted') return;\n  \n  log('Seznam SEM: calling updateUserData with param', userData);\n  callInWindow('SEM', 'updateUserData', userData);\n}\n\n\n\n/**\n * Get or evaluates event ID\n *\n * @param string event name\n * @param object event data\n * @return string\n */\nfunction getEventId(eventName, eventParams) {\n  if (data.eventId) {\n    return makeString(data.eventId);\n  }\n  if (eventName === 'Purchase' && eventParams.order_id) {\n    return 'Purchase__' + eventParams.order_id;\n  }\n}\n\n\n\n\n/* *********** LOAD SCRIPT & INIT SENDING *********** */\n\n\n\ninjectScript('https://l.seznam.cz/sul.js?id=' + data.id,\n  () => {\n    // event data\n    const eventName = data.eventName;\n    const eventParams = getEventParams(eventName);\n    const eventId = getEventId(eventName, eventParams);\n  \n    // user data\n    let userData = getUserData();\n    let isUserUpdateNeed = isUserUpdateNeeded(userData);\n    if (isUserUpdateNeed) templateStorage.setItem(USER_DATA, userData);\n  \n    \n    callSEMConfig();\n    if (eventName === 'updateUserData') {\n      updateUserData();\n    } else {\n      if (isUserUpdateNeed) updateUserData();\n      log('Seznam SEM: sending event \"'+eventName+'\"'+(eventId ? (' event_id='+eventId) : '')+' with params', eventParams);\n      callInWindow('SEM', 'track', eventName, eventParams, 'rtgconv', eventId);\n    }\n    data.gtmOnSuccess();\n  },\n  () => {\n    log('Seznam SEM: javascript library cannot be loaded');\n    data.gtmOnFailure();\n  },\n  CACHE_TOKEN\n);\n\n\n___WEB_PERMISSIONS___\n\n[\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"logging\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"environments\",\n          \"value\": {\n            \"type\": 1,\n            \"string\": \"debug\"\n          }\n        }\n      ]\n    },\n    \"clientAnnotations\": {\n      \"isEditedByUser\": true\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"inject_script\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"urls\",\n          \"value\": {\n            \"type\": 2,\n            \"listItem\": [\n              {\n                \"type\": 1,\n                \"string\": \"https://l.seznam.cz/sul.js*\"\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"clientAnnotations\": {\n      \"isEditedByUser\": true\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"access_consent\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"consentTypes\",\n          \"value\": {\n            \"type\": 2,\n            \"listItem\": [\n              {\n                \"type\": 3,\n                \"mapKey\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"consentType\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"read\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"write\"\n                  }\n                ],\n                \"mapValue\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"ad_storage\"\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": true\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": false\n                  }\n                ]\n              },\n              {\n                \"type\": 3,\n                \"mapKey\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"consentType\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"read\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"write\"\n                  }\n                ],\n                \"mapValue\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"ad_user_data\"\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": true\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": false\n                  }\n                ]\n              },\n              {\n                \"type\": 3,\n                \"mapKey\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"consentType\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"read\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"write\"\n                  }\n                ],\n                \"mapValue\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"ad_personalization\"\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": true\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": false\n                  }\n                ]\n              },\n              {\n                \"type\": 3,\n                \"mapKey\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"consentType\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"read\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"write\"\n                  }\n                ],\n                \"mapValue\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"analytics_storage\"\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": true\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": false\n                  }\n                ]\n              },\n              {\n                \"type\": 3,\n                \"mapKey\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"consentType\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"read\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"write\"\n                  }\n                ],\n                \"mapValue\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"functionality_storage\"\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": true\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": false\n                  }\n                ]\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"clientAnnotations\": {\n      \"isEditedByUser\": true\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"access_template_storage\",\n        \"versionId\": \"1\"\n      },\n      \"param\": []\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"access_globals\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"keys\",\n          \"value\": {\n            \"type\": 2,\n            \"listItem\": [\n              {\n                \"type\": 3,\n                \"mapKey\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"key\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"read\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"write\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"execute\"\n                  }\n                ],\n                \"mapValue\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"SEM\"\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": false\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": false\n                  },\n                  {\n                    \"type\": 8,\n                    \"boolean\": true\n                  }\n                ]\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"clientAnnotations\": {\n      \"isEditedByUser\": true\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"read_container_data\",\n        \"versionId\": \"1\"\n      },\n      \"param\": []\n    },\n    \"isRequired\": true\n  }\n]\n\n\n___TESTS___\n\nscenarios:\n- name: Basic Test - Success was called\n  code: |-\n    runCode(mockData);\n    assertApi('injectScript').wasCalled();\n    assertApi('gtmOnSuccess').wasCalled();\n- name: Basic Test - Failure was called\n  code: |-\n    loadScriptImidiately = false;\n    runCode(mockData);\n    assertApi('gtmOnSuccess').wasNotCalled();\n\n    failScriptLoad();\n    assertApi('gtmOnFailure').wasCalled();\n    assertApi('callInWindow').wasNotCalled();\n- name: Basic - PageView was sent\n  code: |-\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\"\n    };\n\n    assertHitWasSent('PageView', expectedParams);\n- name: Script Load Immediately - With Consent\n  code: |-\n    runCode(mockData);\n\n    assertThat(SEM[0].command, 'First command must be \"config\"').isEqualTo('config');\n    assertThat(SEM[0].params.consent_mode, 'Config must report granted consent').isEqualTo({\n      'ad_storage': 'granted',\n      'ad_user_data': 'granted',\n      'ad_personalization': 'granted',\n      'analytics_storage': 'granted',\n      'functionality_storage': 'granted'\n    });\n- name: Script Load Immediately - Without Consent\n  code: |-\n    consentStatus.ad_storage = 'denied';\n    consentStatus.ad_personalization = 'denied';\n    consentStatus.ad_user_data = 'denied';\n    consentStatus.analytics_storage = 'denied';\n\n\n    runCode(mockData);\n\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\"\n    };\n\n    assertHitWasSent('PageView', expectedParams);\n- name: Script Loaded Later - With Consent - Then Loaded\n  code: |-\n    loadScriptImidiately = false;\n    runCode(mockData);\n\n    assertApi('callInWindow').wasNotCalled();\n    loadScriptCallback();\n    assertApi('callInWindow').wasCalled();\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\"\n    };\n\n    assertHitWasSent('PageView', expectedParams);\n- name: Script Loaded Later - Without Consent\n  code: |-\n    // Tag fires before sul js is loaded and without any consent.\n    loadScriptImidiately = false;\n\n    consentStatus.ad_storage = 'denied';\n    consentStatus.ad_user_data = 'denied';\n    consentStatus.ad_personalization = 'denied';\n    consentStatus.analytics_storage = 'denied';\n    consentStatus.functionality_storage = 'denied';\n\n    runCode(mockData);\n\n    // nothing may leave the tag before the library is ready\n    assertApi('callInWindow').wasNotCalled();\n\n    // sul js finished loading -> queue is flushed\n    loadScriptCallback();\n\n    assertThat(SEM.length, 'Expected config -> track even without consent').isEqualTo(2);\n\n    assertThat(SEM[0].command, 'First command must be \"config\"').isEqualTo('config');\n    assertThat(SEM[0].params.consent_mode, 'Config must report denied consent').isEqualTo({\n      'ad_storage': 'denied',\n      'ad_user_data': 'denied',\n      'ad_personalization': 'denied',\n      'analytics_storage': 'denied',\n      'functionality_storage': 'denied'\n    });\n\n    assertThat(SEM[1].command, 'Second command must be \"track\"').isEqualTo('track');\n    assertThat(SEM[1].name, 'Event name must be PageView').isEqualTo('PageView');\n- name: Event Params - Purchase\n  code: |-\n    mockData.eventName = 'Purchase';\n    mockData.contentType = 'product';\n    mockData.reviewEmail = 'pavel@sabatka.net';\n    mockData.user = user;\n    mockData.products = [{\n      'id': \"SKU_12345\",\n      'name': \"Adidas Ultraboost\",\n      'price': 3718.18,\n      'fullPrice': 4499,\n      'quantity': 3,\n      'category': \"Boty/Sportovní boty/Běžecké boty\"\n    }];\n    mockData.order = {\n      'id': 'T_123',\n      'value': 11154.54,\n      'shipping': 99,\n      'shipping_type': 'holub',\n      'payment': 19\n    };\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n\n      \"order_id\": \"T_123\",\n      \"value\": 11154.54,\n    //  \"event_id\": \"Purchase__T_123\",\n      \"delivery_price\": 99,\n      \"delivery_type\": \"holub\",\n      \"review_email\": \"pavel@sabatka.net\",\n\n      'content_type': 'product',\n      'contents': [expectedContent]\n    };\n\n\n    assertThat(SEM.length, 'Strange count of SEM calls, expected config -> updateUserData -> track PageView').isEqualTo(3);\n    assertThat(SEM[0].command, 'First command must be \"config\"').isEqualTo('config');\n\n    assertThat(SEM[1].command, 'Third command must be \"updateUserData\"').isEqualTo('updateUserData');\n    assertThat(SEM[1].params, 'Event params are not same').isEqualTo(expectedUserParams);\n\n    assertThat(SEM[2].command, 'Second command must be \"track\"').isEqualTo('track');\n    assertThat(SEM[2].name, 'Second command name must be \"Purchase\"').isEqualTo('Purchase');\n    assertThat(SEM[2].params, 'Event params are not same').isEqualTo(expectedParams);\n- name: Event Params - Purchase - Enhanced Ecommerce\n  code: |-\n    mockData.eventName = 'Purchase';\n    mockData.contentType = 'product';\n    mockData.reviewEmail = 'pavel@sabatka.net';\n    mockData.user = user;\n    mockData.products = [product];\n    mockData.order = {\n      'transaction_id': 'T_123',\n      'value': \"11154.54\",\n      'tax': \"3.60\",\n      'shipping': \"99\",\n      'shipping_tier': 'holub',\n      'currency': \"CZK\",\n      'coupon': 'SUMMER_SALE',\n      'customer_type': 'new',\n      'payment': 19\n    };\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n\n      \"order_id\": \"T_123\",\n      \"value\": 11154.54,\n      \"value_tax\": 3.60,\n    //  \"event_id\": \"Purchase__T_123\",\n      \"delivery_price\": 99,\n      \"delivery_type\": \"holub\",\n      \"review_email\": \"pavel@sabatka.net\",\n\n      'content_type': 'product',\n      'contents': [{\n        'content_name': 'Adidas Ultraboost',\n        'content_category': 'Boty | Sportovní boty | Běžecké boty',\n        'id': 'SKU_12345',\n        'quantity': 3,\n        'unit_price': 3718.18\n      }]\n    };\n\n\n    assertThat(SEM.length, 'Strange count of SEM calls, expected config -> updateUserData -> track PageView').isEqualTo(3);\n    assertThat(SEM[0].command, 'First command must be \"config\"').isEqualTo('config');\n\n    assertThat(SEM[1].command, 'Third command must be \"updateUserData\"').isEqualTo('updateUserData');\n    assertThat(SEM[1].params, 'Event params are not same').isEqualTo(expectedUserParams);\n\n    assertThat(SEM[2].command, 'Second command must be \"track\"').isEqualTo('track');\n    assertThat(SEM[2].name, 'Second command name must be \"Purchase\"').isEqualTo('Purchase');\n    assertThat(SEM[2].params, 'Event params are not same').isEqualTo(expectedParams);\n- name: Event Params - Purchase - Zero value\n  code: |-\n    mockData.eventName = 'Purchase';\n    mockData.contentType = 'product';\n    mockData.user = user;\n    mockData.products = [product];\n    mockData.order = {\n      'id': 'T_123',\n      'value': 0,\n      'shipping': 99,\n      'shipping_type': 'holub',\n      'payment': 19\n    };\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      \"order_id\": \"T_123\",\n      \"value\": 0,\n      \"delivery_price\": 99,\n      \"delivery_type\": \"holub\",\n\n      'content_type': 'product',\n      'contents': [expectedContent]\n    };\n\n\n    assertThat(SEM.length, 'Strange count of SEM calls, expected config -> updateUserData -> track PageView').isEqualTo(3);\n    assertThat(SEM[0].command, 'First command must be \"config\"').isEqualTo('config');\n\n    assertThat(SEM[1].command, 'Third command must be \"updateUserData\"').isEqualTo('updateUserData');\n    assertThat(SEM[1].params, 'Event params are not same').isEqualTo(expectedUserParams);\n\n    assertThat(SEM[2].command, 'Second command must be \"track\"').isEqualTo('track');\n    assertThat(SEM[2].name, 'Second command name must be \"Purchase\"').isEqualTo('Purchase');\n    assertThat(SEM[2].params, 'Event params are not same').isEqualTo(expectedParams);\n- name: Event Params - ViewContent - Page\n  code: |-\n    mockData.eventName = 'ViewContent';\n    mockData.contentType = 'page';\n    mockData.contentName = \"Šablona pro SEM\";\n    mockData.contentCategory = \"Nějaká kategorie / Podkategorie\";\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\": \"CZK\",\n      'content_type': 'page',\n      'contents': [{\n        'content_name': 'Šablona pro SEM',\n        'content_category': 'Nějaká kategorie / Podkategorie'\n      }]\n    };\n\n    assertHitWasSent('ViewContent', expectedParams);\n- name: Event Params - ViewContent - Product\n  code: |-\n    mockData.eventName = 'ViewContent';\n    mockData.contentType = 'product';\n    product.quantity = 1;\n    mockData.products = [product];\n\n    runCode(mockData);\n\n    expectedContent.quantity = 1;\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      'value': 3718.18,\n      'content_type': 'product',\n      'contents': [expectedContent]\n    };\n\n    assertHitWasSent('ViewContent', expectedParams);\n- name: Event Params - ViewContent - Shoptet Product\n  code: |-\n    mockData.eventName = 'ViewContent';\n    mockData.contentType = 'product';\n    mockData.products = [{\n      'id': 12345,\n      'name': \"Adidas Ultraboost\",\n      'priceWithVat': 3718.18,\n      'currentCategory': \"Boty | Sportovní boty | Běžecké boty\",\n      'defaultCategory': \"Boty | Sportovní boty | Běžecké boty\",\n      'manufacturer': 'Adidas',\n      'currency': 'CZK',\n    }];\n\n    runCode(mockData);\n\n    expectedContent.id = \"12345\";\n    expectedContent.quantity = 1;\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      'value': 3718.18,\n      'content_type': 'product',\n      'contents': [expectedContent]\n    };\n\n    assertHitWasSent('ViewContent', expectedParams);\n- name: Event Params - AddToCart\n  code: |-\n    mockData.eventName = 'AddToCart';\n    mockData.contentType = 'product';\n    mockData.products = [product];\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      \"value\": 11154.54,\n      'content_type': 'product',\n      'contents': [expectedContent]\n    };\n\n    assertHitWasSent('AddToCart', expectedParams);\n- name: Event Params - AddToCart - Products as Object\n  code: |-\n    mockData.eventName = 'AddToCart';\n    mockData.contentType = 'product';\n    mockData.products = product; // an object instead of array\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      \"value\": 11154.54,\n      'content_type': 'product',\n      'contents': [expectedContent]\n    };\n\n    assertHitWasSent('AddToCart', expectedParams);\n- name: Event Params - AddToCart - Product ID is Integer\n  code: |-\n    mockData.eventName = 'AddToCart';\n    mockData.contentType = 'product';\n    product.item_id = 12345;\n    mockData.products = [product];\n\n    runCode(mockData);\n\n    expectedContent.id = \"12345\";\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      \"value\": 11154.54,\n      'content_type': 'product',\n      'contents': [expectedContent]\n    };\n\n    assertHitWasSent('AddToCart', expectedParams);\n- name: Event Params - StartTrial - From Fields\n  code: |-\n    mockData.eventName = 'StartTrial';\n\n    // added user data\n    mockData.predictedLtv = 88.99;\n    mockData.value = 11.22;\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      \"value\": 11.22,\n      \"predicted_ltv\": 88.99\n    };\n\n\n    assertHitWasSent('StartTrial', expectedParams);\n- name: Event Params - StartTrial - From User Data\n  code: |-\n    mockData.eventName = 'StartTrial';\n\n    // added user data\n    mockData.user = user;\n    mockData.value = 11.22;\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      \"value\": 11.22\n    };\n\n    assertThat(SEM[SEM.length-1].command, 'Second command must be \"track\"').isEqualTo('track');\n    assertThat(SEM[SEM.length-1].params, 'Event params are not same').isEqualTo(expectedParams);\n- name: Event Params - InitiateCheckout\n  code: |-\n    mockData.eventName = 'InitiateCheckout';\n    mockData.contentType = 'product';\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      'content_type': 'product',\n      'contents': [],\n      'value': 0\n    };\n\n    assertHitWasSent('InitiateCheckout', expectedParams);\n- name: Event Params - Search\n  code: |-\n    mockData.eventName = 'Search';\n    mockData.contentType = 'search';\n    mockData.searchString = 'Adidas Ultra';\n    mockData.searchResultCount = 1;\n\n    product.quantity = 1;\n    mockData.products = [product];\n\n    runCode(mockData);\n\n\n    expectedContent.quantity = 1;\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      \"value\":3718.18,\n      'content_type': 'search',\n      'search_string': 'Adidas Ultra',\n      'contents': [expectedContent]\n    };\n\n    assertHitWasSent('Search', expectedParams);\n- name: Event Params - Optional\n  code: |-\n    mockData.url = 'https://www.sabatka.net/cs';\n    mockData.eventId = 'ARTICLE_123';\n    mockData.contentName = 'Seznam SEM template finally approved';\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"event_url\": \"https://www.sabatka.net/cs\",\n      \"contents\": [{\n        \"content_name\": \"Seznam SEM template finally approved\",\n      }],\n      \"currency\":\"CZK\"\n    };\n\n    assertHitWasSent('PageView', expectedParams, 'ARTICLE_123');\n- name: Custom Params\n  code: |-\n    mockData.customParams = [{\"name\":\"foo\",\"value\":\"bar\"}];\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\":\"CZK\",\n      \"foo\": \"bar\"\n    };\n\n    assertHitWasSent('PageView', expectedParams);\n- name: Update User Data\n  code: |-\n    // run first event\n    runCode(mockData);\n\n\n    mockData.eventName = 'updateUserData';\n    mockData.user = user;\n\n    runCode(mockData);\n\n    var expectedParams = {\n      \"fn\":\"Pavel\",\n      \"ln\":\"Sabatka\",\n      \"ge\":\"m\",\n      \"ct\":\"Brno\",\n      \"sr\":\"Brnenska 1\",\n      \"zp\":\"60200\",\n      \"country\":\"CZ\",\n      \"db\":\"19800823\",\n      \"subscription_id\":\"subscription123\",\n      'em': \"pavel@sabatka.net\",\n      'ph': \"+420111222333\",\n    };\n\n    assertThat(SEM.length, 'Strange count of SEM calls, expected config -> track PageView -> updateUserData').isEqualTo(3);\n    assertThat(SEM[0].command, 'First command must be \"config\"').isEqualTo('config');\n    assertThat(SEM[1].command, 'Second command must be \"track\"').isEqualTo('track');\n    assertThat(SEM[2].command, 'Third command must be \"updateUserData\"').isEqualTo('updateUserData');\n    assertThat(SEM[2].params, 'Event params are not same').isEqualTo(expectedParams);\n- name: Update User Data - Email and Phone\n  code: |-\n    // run first event\n    runCode(mockData);\n\n\n    mockData.eventName = 'updateUserData';\n\n    mockData.userEmail = \"pavel@sabatka.net\";\n    mockData.userPhone = \"+420111222333\";\n\n    runCode(mockData);\n\n    var expectedParams = {\n      'em': \"pavel@sabatka.net\",\n      'ph': \"+420111222333\",\n    };\n\n    assertThat(SEM.length, 'Strange count of SEM calls, expected config -> track PageView -> updateUserData').isEqualTo(3);\n    assertThat(SEM[0].command, 'First command must be \"config\"').isEqualTo('config');\n    assertThat(SEM[1].command, 'Second command must be \"track\"').isEqualTo('track');\n    assertThat(SEM[2].command, 'Third command must be \"updateUserData\"').isEqualTo('updateUserData');\n    assertThat(SEM[2].params, 'Event params are not same').isEqualTo(expectedParams);\n- name: Update User Data - Before Other Event\n  code: |-\n    // standard ViewContent event\n    mockData.eventName = 'ViewContent';\n    mockData.contentType = 'product';\n    mockData.products = [{\n      'item_id': \"SKU_12345\",\n      'item_name': \"Adidas Ultraboost\",\n      'price': 3718.18,\n      'fullPrice': 4499,\n      'quantity': 1,\n      'item_category': \"Boty\",\n      'item_category2': \"Sportovní boty\",\n      'item_category3': \"Běžecké boty\",\n      'item_category4': false,\n      'item_category5': false\n    }];\n    // added user data\n    mockData.user = user;\n\n    runCode(mockData);\n\n\n    assertThat(SEM.length, 'Strange count of SEM calls, expected config -> updateUserData -> track PageView').isEqualTo(3);\n    assertThat(SEM[0].command, 'First command must be \"config\"').isEqualTo('config');\n\n    assertThat(SEM[1].command, 'Third command must be \"updateUserData\"').isEqualTo('updateUserData');\n    assertThat(SEM[1].params, 'Event params are not same').isEqualTo(expectedUserParams);\n\n    assertThat(SEM[2].command, 'Second command must be \"track\"').isEqualTo('track');\n- name: Event ID - Two queued events keep their own event IDs\n  code: |-\n    // Both tags fire before sul js is loaded, so both go through the queue.\n    loadScriptImidiately = false;\n\n    let firstEvent = {\n      'id': 12345,\n      'eventName': 'ViewContent',\n      'contentType': 'page',\n      'currency': 'CZK',\n      'usingConsentModeV2': true,\n      'eventId': 'EVENT_ID_1'\n    };\n\n    let secondEvent = {\n      'id': 12345,\n      'eventName': 'Lead',\n      'currency': 'CZK',\n      'usingConsentModeV2': true,\n      'eventId': 'EVENT_ID_2'\n    };\n\n    runCode(firstEvent);\n    runCode(secondEvent);\n\n    assertApi('callInWindow').wasNotCalled();\n\n    // sul js finished loading -> queue is flushed\n    loadScriptCallback();\n\n    let tracks = getTrackCalls();\n\n    assertThat(tracks.length, 'Expected 2 tracked events').isEqualTo(2);\n    assertThat(tracks[0].name, 'First tracked event name').isEqualTo('ViewContent');\n    assertThat(tracks[0].eventId, 'First queued event must keep event ID EVENT_ID_1').isEqualTo('EVENT_ID_1');\n    assertThat(tracks[1].name, 'Second tracked event name').isEqualTo('Lead');\n    assertThat(tracks[1].eventId, 'Second queued event must use EVENT_ID_2, not inherit EVENT_ID_1').isEqualTo('EVENT_ID_2');\n- name: Event ID - Queued event without ID does not inherit ID from another event\n  code: |-\n    // First queued tag has an event ID, second one has none.\n    loadScriptImidiately = false;\n\n    let firstEvent = {\n      'id': 12345,\n      'eventName': 'Lead',\n      'currency': 'CZK',\n      'usingConsentModeV2': true,\n      'eventId': 'EVENT_ID_1'\n    };\n\n    let secondEvent = {\n      'id': 12345,\n      'eventName': 'PageView',\n      'currency': 'CZK',\n      'usingConsentModeV2': true\n    };\n\n    runCode(firstEvent);\n    runCode(secondEvent);\n\n    loadScriptCallback();\n\n    let tracks = getTrackCalls();\n\n    assertThat(tracks.length, 'Expected 2 tracked events').isEqualTo(2);\n    assertThat(tracks[0].eventId, 'First queued event must keep event ID EVENT_ID_1').isEqualTo('EVENT_ID_1');\n\n    let secondId = tracks[1].eventId;\n    assertThat(secondId === undefined || secondId === null, 'Second queued event has no event ID, sul js must generate its own').isTrue();\n- name: Event ID - Queued Purchase events derive ID from their own order\n  code: |-\n    loadScriptImidiately = false;\n\n    let firstOrder = {\n      'id': 12345,\n      'eventName': 'Purchase',\n      'contentType': 'product',\n      'currency': 'CZK',\n      'usingConsentModeV2': true,\n      'products': [product],\n      'order': { 'id': 'T_1', 'value': 100 }\n    };\n\n    let secondOrder = {\n      'id': 12345,\n      'eventName': 'Purchase',\n      'contentType': 'product',\n      'currency': 'CZK',\n      'usingConsentModeV2': true,\n      'products': [product],\n      'order': { 'id': 'T_2', 'value': 200 }\n    };\n\n    runCode(firstOrder);\n    runCode(secondOrder);\n\n    loadScriptCallback();\n\n    let tracks = getTrackCalls();\n\n    assertThat(tracks.length, 'Expected 2 tracked events').isEqualTo(2);\n    assertThat(tracks[0].eventId, 'First order must use Purchase__T_1').isEqualTo('Purchase__T_1');\n    assertThat(tracks[1].eventId, 'Second order must use Purchase__T_2').isEqualTo('Purchase__T_2');\n    assertThat(tracks[0].params.order_id, 'First order params').isEqualTo('T_1');\n    assertThat(tracks[1].params.order_id, 'Second order params').isEqualTo('T_2');\n- name: Event ID - Two events after script load keep their own event IDs\n  code: |-\n    // Control scenario - no queue involved, sul js is already loaded.\n    let firstEvent = {\n      'id': 12345,\n      'eventName': 'ViewContent',\n      'contentType': 'page',\n      'currency': 'CZK',\n      'usingConsentModeV2': true,\n      'eventId': 'EVENT_ID_1'\n    };\n\n    let secondEvent = {\n      'id': 12345,\n      'eventName': 'Lead',\n      'currency': 'CZK',\n      'usingConsentModeV2': true,\n      'eventId': 'EVENT_ID_2'\n    };\n\n    runCode(firstEvent);\n    runCode(secondEvent);\n\n    let tracks = getTrackCalls();\n\n    assertThat(tracks.length, 'Expected 2 tracked events').isEqualTo(2);\n    assertThat(tracks[0].eventId, 'First event must keep event ID EVENT_ID_1').isEqualTo('EVENT_ID_1');\n    assertThat(tracks[1].eventId, 'Second event must keep event ID EVENT_ID_2').isEqualTo('EVENT_ID_2');\n- name: Consent Object - Consent Mode v2 disabled without consent object\n  code: |-\n    // Checkbox unticked but the object left empty - the tag must not crash\n    // and must fall back to denied.\n    mockData.usingConsentModeV2 = false;\n\n    runCode(mockData);\n\n    assertApi('gtmOnSuccess').wasCalled();\n\n    assertThat(SEM[0].params.consent_mode, 'Missing consent object must default to denied').isEqualTo({\n      'ad_storage': 'denied',\n      'ad_user_data': 'denied',\n      'ad_personalization': 'denied',\n      'analytics_storage': 'denied',\n      'functionality_storage': 'denied'\n    });\n- name: Consent Object - Different formats\n  code: |-\n    consentStatus.ad_storage = 'denied';   // CM v2 all denied - must be ignored\n    consentStatus.ad_user_data = 'denied';\n    consentStatus.ad_personalization = 'denied';\n    consentStatus.analytics_storage = 'denied';\n    consentStatus.functionality_storage = 'denied';\n\n    mockData.usingConsentModeV2 = false;\n    mockData.consentStateObject = {\n      'ad_storage': 1, 'ad_user_data': 'granted', 'ad_personalization': true,\n      'analytics_storage': 'denied', 'functionality_storage': 0\n    };\n\n    runCode(mockData);\n\n    assertThat(SEM[0].params.consent_mode, 'All three input formats must be parsed').isEqualTo({\n      'ad_storage': 'granted', 'ad_user_data': 'granted', 'ad_personalization': 'granted',\n      'analytics_storage': 'denied', 'functionality_storage': 'denied'\n    });\n- name: Event Params - Product without price\n  code: |-\n    // Product has no price at all -> unit_price and value must be omitted,\n    // never sent as NaN.\n    mockData.eventName = 'AddToCart';\n    mockData.contentType = 'product';\n    mockData.products = [{\n      'item_id': 'SKU_NO_PRICE',\n      'item_name': 'Produkt bez ceny',\n      'quantity': 2,\n      'item_category': 'Boty'\n    }];\n\n    runCode(mockData);\n\n    let expectedParams = {\n      \"sem_id\": 12345,\n      \"currency\": \"CZK\",\n      'content_type': 'product',\n      'contents': [{\n        'id': 'SKU_NO_PRICE',\n        'content_name': 'Produkt bez ceny',\n        'quantity': 2,\n        'content_category': 'Boty'\n      }]\n    };\n\n    assertHitWasSent('AddToCart', expectedParams);\n    assertThat(SEM[1].params.value, 'value must be omitted, not NaN').isEqualTo(undefined);\nsetup: |2-\n\n  // --------- MOCK DATA ---------\n  let mockData = {\n    'id': 12345,\n    'eventName': 'PageView',\n    'currency': 'CZK',\n    'usingConsentModeV2': true\n  };\n\n  let consentStatus = {\n    'ad_storage': 'granted',\n    'ad_personalization': 'granted',\n    'ad_user_data': 'granted',\n    'analytics_storage': 'granted',\n    'functionality_storage': 'granted'\n  };\n\n  let product = {\n    'item_id': \"SKU_12345\",\n    'item_name': \"Adidas Ultraboost\",\n    'price': 3718.18,\n    'fullPrice': 4499,\n    'quantity': 3,\n    'item_category': \"Boty\",\n    'item_category2': \"Sportovní boty\",\n    'item_category3': \"Běžecké boty\"\n  };\n\n  let user = {\n    'email': 'pavel@sabatka.net',\n    'phone': '+420111222333',\n    'fname': 'Pavel',\n    'lname': 'Sabatka',\n    'g': 'm',\n    'birth': '19800823',\n    'city': 'Brno',\n    'street': 'Brnenska 1',\n    'postalCode': '60200',\n    'countryCode': 'CZ',\n    'subscription': 'subscription123'\n  };\n\n  let loadScriptImidiately = true;\n  let pendingSuccess = [];\n  let pendingFailure = [];\n\n\n  // --------- EXPECTED DATA ------------------\n\n  let expectedUserParams = {\n    \"fn\":\"Pavel\",\n    \"ln\":\"Sabatka\",\n    \"ge\":\"m\",\n    \"ct\":\"Brno\",\n    \"sr\":\"Brnenska 1\",\n    \"zp\":\"60200\",\n    \"country\":\"CZ\",\n    \"db\":\"19800823\",\n    \"subscription_id\":\"subscription123\",\n    'em': \"pavel@sabatka.net\",\n    'ph': \"+420111222333\",\n  };\n\n  let expectedContent = {\n    'id': 'SKU_12345',\n    'content_name': 'Adidas Ultraboost',\n    'content_category': 'Boty | Sportovní boty | Běžecké boty',\n    'quantity': 3,\n    'unit_price': 3718.18\n  };\n\n\n  // --------- RESET TEST ENVIRONMENT ---------\n  const log = require('logToConsole');\n  const templateStorage = require('templateStorage');\n  templateStorage.clear();\n  let SEM = [];\n\n\n\n  // --------- MOCK METHODS ---------\n\n  mock('injectScript', function(url, success, failure, cacheToken) {\n    assertThat(url).isEqualTo('https://l.seznam.cz/sul.js?id=12345');\n    assertThat(cacheToken, 'cacheToken must be set, otherwise every tag loads its own script').isEqualTo('seznam_sem_12345');\n\n    if (loadScriptImidiately) {\n      success();\n    } else {\n      pendingSuccess.push(success);\n      pendingFailure.push(failure);\n    }\n  });\n\n\n  // same name as before, so existing scenarios stay unchanged\n  function loadScriptCallback() {\n    const cbs = pendingSuccess;\n    pendingSuccess = [];\n    for (let i = 0; i < cbs.length; i++) cbs[i]();\n  }\n\n  function failScriptLoad() {\n    const cbs = pendingFailure;\n    pendingFailure = [];\n    for (let i = 0; i < cbs.length; i++) cbs[i]();\n  }\n\n\n  mock('isConsentGranted', function(name) {\n    return consentStatus[name] === 'granted';\n  });\n\n  mock('callInWindow', function(tracker, command, param1, param2, param3, param4) {\n    const JSON = require('JSON');\n\n    if (command === 'config' || command === 'updateUserData') {\n      SEM.push({\n        'command': command,\n        'params': JSON.parse(JSON.stringify(param1))\n      });\n\n    } else if (command === 'track') {\n      if (param2) {\n        param2 = JSON.parse(JSON.stringify(param2));\n      }\n      SEM.push({\n        'command': command,\n        'name': param1,\n        'params': param2,\n        'cmdstring': param3,\n        'eventId': param4\n      });\n    } else {\n      assertThat(false, 'Invalid command '+command).isTrue();\n    }\n  });\n\n  // --------- CUSTOM ASSERTATIONS ---------\n  function assertHitWasSent(name, params, eventId) {\n    const JSON = require('JSON');\n    params = JSON.parse(JSON.stringify(params));\n    assertThat(SEM.length, 'Expected only 1 event').isEqualTo(2);\n    assertThat(SEM[0].command, 'First command must be \"config\"').isEqualTo('config');\n    assertThat(SEM[1].command, 'Second command must be \"track\"').isEqualTo('track');\n    assertThat(SEM[1].name, 'Event name are not same').isEqualTo(name);\n    assertThat(SEM[1].params, 'Event params are not same').isEqualTo(params);\n    if (eventId) {\n      assertThat(SEM[1].eventId, 'Event ID is not same').isEqualTo(eventId);\n    }\n  }\n\n  // --------- HELPERS ---------\n  function getTrackCalls() {\n    let tracks = [];\n    for (let i = 0; i < SEM.length; i++) {\n      if (SEM[i].command === 'track') {\n        tracks.push(SEM[i]);\n      }\n    }\n    return tracks;\n  }\n\n\n___NOTES___\n\nCreated on 16. 1. 2026 15:17:46\n\n\n",
+        "accountId": "1",
+        "containerId": "1"
+      }
+    ],
+    "accountId": "1",
+    "containerId": "1"
+  }
+}

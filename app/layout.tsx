@@ -4,6 +4,8 @@ import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
 } from "@/components/GoogleTagManager";
+import { ConsentModeDefault } from "@/components/ConsentModeDefault";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { site } from "@/lib/site";
 import "./globals.css";
 import "./ui.css";
@@ -48,11 +50,14 @@ export default function RootLayout({
   return (
     <html lang="cs" className={`${outfit.variable} ${dmSans.variable}`}>
       <head>
+        {/* Pořadí je důležité: výchozí souhlas musí být v dataLayer dřív než GTM. */}
+        <ConsentModeDefault />
         <GoogleTagManager />
       </head>
       <body>
         <GoogleTagManagerNoScript />
         {children}
+        <CookieConsentBanner />
       </body>
     </html>
   );

@@ -116,12 +116,32 @@ nejdřív, jak může.
 V `npm run dev` se GTM nenačítá, ať lokální klikání nešpiní data. Debug se dělá
 Preview režimem GTM na nasazeném webu.
 
-### ⚠️ Souhlas s měřením (GDPR) není vyřešený
+(Výjimka: `components/ConsentModeDefault.tsx` definuje funkci `gtag()`, ale jen
+kvůli příkazům `consent`. Zapisuje do `dataLayer` a gtag.js nenačítá, takže
+nejde o druhou instalaci GA4.)
 
-Na webu **není cookie lišta ani Consent Mode v2**. Kontejner dnes spustí GA4
-hned při načtení stránky, bez souhlasu návštěvníka. Pro provoz mířený na EU je
-to potřeba dořešit — buď Consent Mode v2 s výchozím `denied` a CMP lištou, nebo
-omezit měření na to, co souhlas nevyžaduje.
+### Souhlas s cookies (Consent Mode v2 + lišta)
+
+- **Lišta:** open-source [vanilla-cookieconsent v3](https://github.com/orestbida/cookieconsent)
+  (MIT), komponenta `components/CookieConsentBanner.tsx`. Kategorie jsou
+  nezbytné, analytické (GA4) a marketingové (Sklik, Meta, TikTok). Volba se
+  ukládá do cookie `cc_cookie` na 6 měsíců. Odkaz „Nastavení cookies“ je v patičce.
+- **Výchozí stav:** `components/ConsentModeDefault.tsx` je inline v `<head>`
+  **před** GTM. Nový návštěvník dostane všechno `denied`. U vracejícího se
+  návštěvníka se výchozí stav přečte z `cc_cookie`.
+- **Po volbě:** `gtag('consent','update',…)` + event `cookie_consent_update`
+  v `dataLayer`. Při odvolání se smažou cookies dané kategorie a stránka se obnoví.
+- Mapování kategorií na signály Consent Mode je v `lib/consent.ts`.
+- Gate hlídá, že výchozí souhlas je na každé stránce a před GTM.
+
+### Konverze z formuláře
+
+Po úspěšném odeslání kontaktního formuláře jde do `dataLayer`:
+`{ event: 'generate_lead', lead_source, lead_topic }`. Osobní údaje se neposílají.
+
+### Tagy v GTM (Sklik, Meta, TikTok)
+
+Import kontejneru a postup jsou v [`docs/gtm/README.md`](docs/gtm/README.md).
 
 ## Nasazení na Cloudflare
 

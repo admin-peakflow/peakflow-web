@@ -89,3 +89,15 @@
 }
 .compactLinks a { color: var(--text-muted); }
 .compactLinks a:hover { color: var(--teal); }
+
+/* „Nastavení cookies" — tlačítko, které vypadá jako odkaz v patičce. */
+.cookieLink {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.cookieLink:hover { color: var(--teal); }
