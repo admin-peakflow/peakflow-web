@@ -18,19 +18,27 @@ marketingové tagy nedostanou souhlas.
 | TikTok Pixel – SubmitForm | Custom HTML | `generate_lead` | `ad_storage` |
 | GA4 – generate_lead | GA4 event (`G-87RT5RRBRR`) | `generate_lead` | Consent Mode (vestavěný) |
 
-Proměnné: `Sklik SEM ID`, `Meta Pixel ID`, `TikTok Pixel ID` (konstanty
-s hodnotou `DOPLNIT_…`), `DLV – lead_source`, `DLV – lead_topic`.
+Proměnné (konstanty, vyplněné 2026-11-18):
 
-**Pojistka:** dokud ID obsahuje `DOPLNIT`, tag nic nepošle. Meta a TikTok tag
-ID kontrolují samy, Sklik blokuje trigger „Blokace – chybí Sklik ID“. Kontejner
-jde proto publikovat i s nevyplněným ID.
+| Proměnná | Hodnota |
+|---|---|
+| `Sklik SEM ID` | `hoa69hytujbepm722vt0lhbi` |
+| `Meta Pixel ID` | `2260552841175444` |
+| `TikTok Pixel ID` | `DBUUD7RC77UCDH70SM80` |
+
+Dál `DLV – lead_source` a `DLV – lead_topic`. ID pixelů nejsou tajná, každý je
+uvidí ve zdrojovém kódu stránky.
+
+**Pojistka:** když ID obsahuje `DOPLNIT` nebo nemá správný tvar, tag nic
+nepošle. Meta a TikTok tag ID kontrolují samy, Sklik blokuje trigger „Blokace –
+chybí Sklik ID“.
 
 ## Postup
 
 1. GTM → Správce → **Importovat kontejner** → soubor `peakflow-gtm-import.json`
    → pracovní prostor *nový* („Sklik Meta TikTok“) → **Sloučit** → **Přejmenovat
    konfliktní** (nic stávajícího se nepřepíše).
-2. V proměnných vyplnit ID:
+2. Zkontrolovat, že tři ID v proměnných odpovídají tabulce výše. Kde je najít:
    - **Sklik SEM ID:** Sklik → Nastavení účtu → *Zobrazit SEM kód*.
    - **Meta Pixel ID:** Meta Events Manager → Datové zdroje → číselné ID.
    - **TikTok Pixel ID:** TikTok Ads Manager → Events → Web Events → ID pixelu.

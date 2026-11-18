@@ -410,10 +410,10 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "DOPLNIT_SEM_ID"
+            "value": "hoa69hytujbepm722vt0lhbi"
           }
         ],
-        "notes": "SEM ID ze Sklik → Nastavení účtu → Zobrazit SEM kód. Dokud je tu DOPLNIT, Sklik tagy blokuje trigger 'Blokace – chybí Sklik ID'.",
+        "notes": "SEM ID ze Sklik → Nastavení účtu → Zobrazit SEM kód. Vyplněno 2026-11-18.",
         "accountId": "1",
         "containerId": "1"
       },
@@ -425,10 +425,10 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "DOPLNIT_META_PIXEL_ID"
+            "value": "2260552841175444"
           }
         ],
-        "notes": "Číselné ID pixelu z Meta Events Manager → Datové zdroje. Dokud není číselné, Meta tagy nic nedělají.",
+        "notes": "Číselné ID pixelu z Meta Events Manager → Datové zdroje. Vyplněno 2026-11-18.",
         "accountId": "1",
         "containerId": "1"
       },
@@ -440,10 +440,10 @@
           {
             "type": "TEMPLATE",
             "key": "value",
-            "value": "DOPLNIT_TIKTOK_PIXEL_ID"
+            "value": "DBUUD7RC77UCDH70SM80"
           }
         ],
-        "notes": "ID pixelu z TikTok Ads Manager → Events Manager (např. C1ABCD...). Dokud není vyplněné, TikTok tagy nic nedělají.",
+        "notes": "ID pixelu z TikTok Ads Manager → Events Manager (např. Vyplněno 2026-11-18.",
         "accountId": "1",
         "containerId": "1"
       },
