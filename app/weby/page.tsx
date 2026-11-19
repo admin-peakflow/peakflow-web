@@ -170,7 +170,6 @@ export default function WebyPage() {
           <section
             key={p.id}
             id={p.id}
-            data-track-item={`reference-${p.id}`}
             className={`${styles.project} ${i % 2 === 1 ? styles.projectAlt : ""}`}
             aria-labelledby={`${p.id}-title`}
           >

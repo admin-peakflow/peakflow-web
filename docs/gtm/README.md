@@ -13,7 +13,7 @@ a TikTok Pixelu. Marketingové pixely běží jen se souhlasem z cookie lišty
 |---|---|---|
 | `virtual_page_view` | přechod mezi stránkami bez reloadu (Next.js). První načtení měří GTM sám | `page_path`, `page_title`, `page_type`, `page_location` |
 | `view_item_list` | načtení /sluzby/ (3 služby), /weby/ (reference) | `ecommerce.items[]`, `ecommerce.item_list_name` |
-| `view_item` | sekce služby na /sluzby/ je vidět; přepnutí pilíře na home; načtení /weby/ (služba Weby); reference na /weby/ je vidět; detail case study | `ecommerce.items[]` |
+| `view_item` | sekce služby na /sluzby/ je vidět; přepnutí pilíře na home; načtení /weby/ (služba Weby); detail case study. Reference ve výpisu /weby/ jen ve `view_item_list`, ne každá zvlášť (šum pro pixely) | `ecommerce.items[]` |
 | `select_item` | klik „Celá case study“ na /weby/ | `ecommerce.items[]`, `item_list_name` = umístění |
 | `cta_click` | klik na tlačítko (`.btn`, `data-cta`, „Discovery call“ v hlavičce) | `cta_text`, `cta_location`, `cta_url`, `cta_type` (`discovery_call` / `internal` / `button`) |
 | `contact_click` | klik na e-mail / telefon | `contact_method` (`email` / `phone`), `contact_location` |
