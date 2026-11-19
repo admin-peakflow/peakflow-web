@@ -145,7 +145,7 @@ export default function HomePage() {
       <SiteHeader active="home" />
 
       {/* ===== HERO ===== */}
-      <section className={styles.hero}>
+      <section className={styles.hero} data-track-location="hero">
         <div className={styles.heroInner}>
           <div className={styles.heroCopy}>
             <span className={styles.badge}>
@@ -460,7 +460,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== CLOSING CTA ===== */}
-      <section data-reveal className="wrap" style={{ paddingBottom: 96 }}>
+      <section data-reveal className="wrap" style={{ paddingBottom: 96 }} data-track-location="final_cta">
         <div className="ctaBand">
           <div>
             <h2 className="ctaTitle">Začněme hodinovým discovery callem.</h2>

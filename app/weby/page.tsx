@@ -144,7 +144,7 @@ export default function WebyPage() {
     <>
       <SiteHeader active="weby" />
 
-      <section className={styles.hero}>
+      <section className={styles.hero} data-track-location="hero">
         <div className={styles.heroInner}>
           <div>
             <h1 className={styles.h1}>Weby, které najde Google i ChatGPT.</h1>
@@ -170,6 +170,7 @@ export default function WebyPage() {
           <section
             key={p.id}
             id={p.id}
+            data-track-item={`reference-${p.id}`}
             className={`${styles.project} ${i % 2 === 1 ? styles.projectAlt : ""}`}
             aria-labelledby={`${p.id}-title`}
           >
@@ -220,7 +221,7 @@ export default function WebyPage() {
                   ))}
                 </dl>
                 <p className={styles.links}>
-                  <Link href={`/weby/${p.id}/`} className={styles.caseLink}>
+                  <Link href={`/weby/${p.id}/`} className={styles.caseLink} data-track-select={`reference-${p.id}`}>
                     Celá case study <span aria-hidden="true">→</span>
                   </Link>
                   {p.domains.map((d) => (

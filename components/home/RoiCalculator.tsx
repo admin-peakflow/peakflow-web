@@ -28,7 +28,7 @@ export function RoiCalculator() {
   const fte = (monthlySaved / HOURS_PER_FTE_MONTH).toFixed(1).replace(".", ",");
 
   return (
-    <div className={styles.wrap}>
+    <div className={styles.wrap} data-track-calculator="roi">
       <div className={styles.controls}>
         <div>
           <strong className={styles.introTitle}>

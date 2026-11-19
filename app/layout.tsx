@@ -4,6 +4,7 @@ import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
 } from "@/components/GoogleTagManager";
+import { Analytics } from "@/components/Analytics";
 import { ConsentModeDefault } from "@/components/ConsentModeDefault";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { site } from "@/lib/site";
@@ -58,6 +59,7 @@ export default function RootLayout({
         <GoogleTagManagerNoScript />
         {children}
         <CookieConsentBanner />
+        <Analytics />
       </body>
     </html>
   );

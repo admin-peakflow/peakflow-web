@@ -67,6 +67,9 @@ const PILLARS: Pillar[] = [
 
 const STEP_MS = 700;
 
+/** ID služby pro měření (`lib/analytics.ts` → SERVICES), ve stejném pořadí jako PILLARS. */
+const TRACK_ITEM = ["sluzba-automatizace", "sluzba-analytika", "sluzba-crm"];
+
 export function PillarTabs() {
   const [index, setIndex] = useState(0);
   const [tick, setTick] = useState(0);
@@ -96,6 +99,7 @@ export function PillarTabs() {
             aria-controls="pillar-panel"
             className={`${styles.tab} ${i === index ? styles.tabActive : ""}`}
             onClick={() => select(i)}
+            data-track-item={TRACK_ITEM[i]}
           >
             <span className={styles.tabNum}>{pillar.num}</span>
             {pillar.title}

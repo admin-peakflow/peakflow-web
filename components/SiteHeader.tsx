@@ -46,7 +46,7 @@ export function SiteHeader({ active = "home" }: { active?: Page }) {
           {links}
           {/* On the contact page the CTA would just link to itself. */}
           {active !== "kontakt" && (
-            <Link href="/kontakt/" className={styles.cta}>
+            <Link href="/kontakt/" className={styles.cta} data-cta>
               Discovery call
             </Link>
           )}
@@ -59,7 +59,7 @@ export function SiteHeader({ active = "home" }: { active?: Page }) {
           <nav className={styles.mobilePanel} aria-label="Hlavní navigace">
             {links}
             {active !== "kontakt" && (
-              <Link href="/kontakt/" className={styles.cta}>
+              <Link href="/kontakt/" className={styles.cta} data-cta>
                 Discovery call
               </Link>
             )}

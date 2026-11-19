@@ -112,7 +112,7 @@ export default function SluzbyPage() {
     <>
       <SiteHeader active="sluzby" />
 
-      <section className={styles.hero}>
+      <section className={styles.hero} data-track-location="hero">
         <div className={styles.heroInner}>
           <div>
             <p className="eyebrow eyebrowLight">Služby</p>
@@ -136,7 +136,7 @@ export default function SluzbyPage() {
       </section>
 
       {/* ===== PILLAR I ===== */}
-      <section id="automatizace" className={styles.pillar}>
+      <section id="automatizace" className={styles.pillar} data-track-item="sluzba-automatizace">
         <div>
           <span className={styles.numeral}>I</span>
           <h2 className={styles.pillarTitle}>AI automatizace procesů</h2>
@@ -169,7 +169,7 @@ export default function SluzbyPage() {
       </section>
 
       {/* ===== PILLAR II ===== */}
-      <section id="analytika" className="surfaceWhite">
+      <section id="analytika" className="surfaceWhite" data-track-item="sluzba-analytika">
         <div className={styles.pillar}>
           <div>
             <span className={styles.numeral}>II</span>
@@ -206,7 +206,7 @@ export default function SluzbyPage() {
       </section>
 
       {/* ===== PILLAR III ===== */}
-      <section id="crm" className={styles.pillar}>
+      <section id="crm" className={styles.pillar} data-track-item="sluzba-crm">
         <div>
           <span className={styles.numeral}>III</span>
           <h2 className={styles.pillarTitle}>Obchodní procesy a CRM</h2>
@@ -268,7 +268,7 @@ export default function SluzbyPage() {
       </section>
 
       {/* ===== CTA ===== */}
-      <section className="wrap wrapTight" style={{ paddingBottom: 96 }}>
+      <section className="wrap wrapTight" style={{ paddingBottom: 96 }} data-track-location="final_cta">
         <div className="ctaBand" style={{ padding: "56px 48px" }}>
           <div>
             <h2 className="ctaTitle">Nevíte, kterým pilířem začít?</h2>
