@@ -52,6 +52,11 @@ export default function KontaktPage() {
 
           <div className={styles.vcard}>
             <strong>{site.legalName}</strong>
+            <span>{site.address}</span>
+            <span>
+              IČO {site.ico} · DIČ {site.dic}
+            </span>
+            <span>{site.register}</span>
             <a href={`mailto:${contact.email}`}>{contact.email}</a>
             <a href={`tel:${contact.phone.replace(/\s/g, "")}`}>{contact.phone}</a>
             <a href={site.url}>PeakFlow.cz</a>

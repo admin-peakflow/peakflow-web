@@ -4,7 +4,11 @@
 
 export const site = {
   name: "PeakFlow",
-  legalName: "PeakFlow s.r.o.",
+  legalName: "PackLabs Moravia s.r.o.",
+  ico: "23903554",
+  dic: "CZ23903554",
+  address: "Albrechtická 2160/39, 794 01 Krnov",
+  register: "Zapsáno v OR u KS v Ostravě, oddíl C, vložka 101292",
   domain: "peakflow.cz",
   url: "https://peakflow.cz",
   description:
