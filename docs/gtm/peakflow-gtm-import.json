@@ -1,6 +1,6 @@
 {
   "exportFormatVersion": 2,
-  "exportTime": "2026-11-19 10:35:43",
+  "exportTime": "2026-11-19 11:42:09",
   "containerVersion": {
     "path": "accounts/1/containers/1/versions/0",
     "containerVersionId": "0",
@@ -49,7 +49,7 @@
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "consentSettings": {
-          "consentStatus": "NOT_SET"
+          "consentStatus": "NOT_NEEDED"
         },
         "notes": "Šablona Seznam SEM (Pavel Šabatka), souhlas čte z Consent Mode v2. All Pages + virtual_page_view: Next.js přechází mezi stránkami bez reloadu a Sklik to sám nepozná.",
         "tagId": "1",
@@ -89,7 +89,7 @@
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "consentSettings": {
-          "consentStatus": "NOT_SET"
+          "consentStatus": "NOT_NEEDED"
         },
         "notes": "Šablona Seznam SEM (Pavel Šabatka), souhlas čte z Consent Mode v2. ",
         "tagId": "2",
@@ -139,7 +139,7 @@
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "consentSettings": {
-          "consentStatus": "NOT_SET"
+          "consentStatus": "NOT_NEEDED"
         },
         "notes": "Šablona Seznam SEM (Pavel Šabatka), souhlas čte z Consent Mode v2. Služba nebo reference (view_item).",
         "tagId": "3",
@@ -179,7 +179,7 @@
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "consentSettings": {
-          "consentStatus": "NOT_SET"
+          "consentStatus": "NOT_NEEDED"
         },
         "notes": "Šablona Seznam SEM (Pavel Šabatka), souhlas čte z Consent Mode v2. Klik na e-mail nebo telefon.",
         "tagId": "4",
@@ -214,6 +214,14 @@
               {
                 "type": "TEMPLATE",
                 "value": "ad_storage"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_user_data"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_personalization"
               }
             ]
           }
@@ -250,6 +258,14 @@
               {
                 "type": "TEMPLATE",
                 "value": "ad_storage"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_user_data"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_personalization"
               }
             ]
           }
@@ -286,6 +302,14 @@
               {
                 "type": "TEMPLATE",
                 "value": "ad_storage"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_user_data"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_personalization"
               }
             ]
           }
@@ -322,6 +346,14 @@
               {
                 "type": "TEMPLATE",
                 "value": "ad_storage"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_user_data"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_personalization"
               }
             ]
           }
@@ -358,6 +390,14 @@
               {
                 "type": "TEMPLATE",
                 "value": "ad_storage"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_user_data"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_personalization"
               }
             ]
           }
@@ -395,6 +435,14 @@
               {
                 "type": "TEMPLATE",
                 "value": "ad_storage"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_user_data"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_personalization"
               }
             ]
           }
@@ -431,6 +479,14 @@
               {
                 "type": "TEMPLATE",
                 "value": "ad_storage"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_user_data"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_personalization"
               }
             ]
           }
@@ -467,6 +523,14 @@
               {
                 "type": "TEMPLATE",
                 "value": "ad_storage"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_user_data"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_personalization"
               }
             ]
           }
@@ -503,6 +567,14 @@
               {
                 "type": "TEMPLATE",
                 "value": "ad_storage"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_user_data"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_personalization"
               }
             ]
           }
@@ -539,6 +611,14 @@
               {
                 "type": "TEMPLATE",
                 "value": "ad_storage"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_user_data"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "ad_personalization"
               }
             ]
           }
@@ -624,7 +704,7 @@
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "consentSettings": {
-          "consentStatus": "NOT_SET"
+          "consentStatus": "NOT_NEEDED"
         },
         "notes": "Konverze z formuláře. V GA4 označit jako klíčovou událost.",
         "tagId": "15",
@@ -857,7 +937,7 @@
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "consentSettings": {
-          "consentStatus": "NOT_SET"
+          "consentStatus": "NOT_NEEDED"
         },
         "notes": "Jeden tag pro cta_click, contact_click, outbound_click, nav_click, faq_open, contact_form_start, roi_calculator_use. Název = název události. Prázdné parametry GTM neposílá. Parametry zaregistrovat v GA4 jako vlastní dimenze.",
         "tagId": "16",
@@ -894,7 +974,7 @@
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "consentSettings": {
-          "consentStatus": "NOT_SET"
+          "consentStatus": "NOT_NEEDED"
         },
         "notes": "view_item, view_item_list, select_item. Položky = služby a reference (lib/analytics.ts).",
         "tagId": "17",

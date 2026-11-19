@@ -72,8 +72,25 @@ Přechody bez reloadu GA4, Meta a TikTok zachytí samy (ověřeno na živém web
 2026-11-19), proto jim `virtual_page_view` neposíláme, jinak by pageviewy byly
 dvakrát. Sklik je sám nevidí, proto ho dostává.
 
-Souhlas: Meta a TikTok tagy vyžadují `ad_storage`. Sklik a GA4 čtou Consent
-Mode samy (bez souhlasu měří bez cookies).
+### Souhlas v kontejneru (Přehled souhlasu v GTM)
+
+| Tagy | Nastavení souhlasu | Proč |
+|---|---|---|
+| Google tag, GA4 události | Další souhlas není potřeba | vestavěné kontroly Consent Mode, bez souhlasu pingy bez cookies (`gcs=G100`) |
+| Sklik (šablona Seznam SEM) | Další souhlas není potřeba | šablona čte Consent Mode v2 sama a reaguje i na změnu. Bez souhlasu měří bez identifikátorů (`ad_storage: denied`) |
+| Meta, TikTok | Vyžaduje `ad_storage`, `ad_user_data`, `ad_personalization` | bez souhlasu s marketingem se nenačtou vůbec |
+
+Výchozí stav nastavuje web v `<head>` před GTM (`ConsentModeDefault`), ne GTM
+(trigger Consent Initialization se nepoužívá). Ověřeno 2026-11-19 přes
+`google_tag_data.ics`: nový návštěvník = vše `denied` kromě functionality
+a security; „Jen nezbytné“ = `denied`; jen analytické = `analytics_storage`
+granted, reklamní denied, Meta a TikTok se nenačtou; „Přijmout vše“ = vše
+granted a pixely naběhnou hned; vracející se návštěvník = výchozí stav
+granted z `cc_cookie`; odvolání = reload a zpět `denied`.
+
+Kdo bude chtít Sklik spouštět až po souhlasu (přísnější výklad), nastaví
+u čtyř Sklik tagů „Vyžaduje další souhlas: ad_storage“. Ztratí se tím měření
+návštěvníků, kteří lištu ignorují.
 
 > [!warning] Základní tagy Meta a TikTok: spouštění „Neomezeně“
 > GTM do „Jednou na stránku“ započítá i pokus zablokovaný souhlasem. Po

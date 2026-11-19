@@ -11,3 +11,6 @@ next-env.d.ts
 .DS_Store
 .vercel
 .wrangler/
+
+# Exporty pracovních prostorů z GTM (reference, necommitovat)
+docs/gtm/GTM-*_workspace*.json
