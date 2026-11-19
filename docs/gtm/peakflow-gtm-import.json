@@ -1,6 +1,6 @@
 {
   "exportFormatVersion": 2,
-  "exportTime": "2026-11-18 15:58:40",
+  "exportTime": "2026-11-19 10:35:43",
   "containerVersion": {
     "path": "accounts/1/containers/1/versions/0",
     "containerVersionId": "0",
@@ -16,7 +16,6 @@
     },
     "tag": [
       {
-        "tagId": "1",
         "name": "Sklik – SEM – PageView",
         "type": "cvt_1_301",
         "parameter": [
@@ -42,7 +41,8 @@
           }
         ],
         "firingTriggerId": [
-          "2147479553"
+          "2147479553",
+          "104"
         ],
         "blockingTriggerId": [
           "103"
@@ -51,12 +51,12 @@
         "consentSettings": {
           "consentStatus": "NOT_SET"
         },
-        "notes": "Šablona Seznam SEM (Pavel Šabatka). Souhlas si čte sama z Consent Mode v2 a reaguje i na jeho pozdější změnu.",
+        "notes": "Šablona Seznam SEM (Pavel Šabatka), souhlas čte z Consent Mode v2. All Pages + virtual_page_view: Next.js přechází mezi stránkami bez reloadu a Sklik to sám nepozná.",
+        "tagId": "1",
         "accountId": "1",
         "containerId": "1"
       },
       {
-        "tagId": "2",
         "name": "Sklik – SEM – Lead",
         "type": "cvt_1_301",
         "parameter": [
@@ -91,19 +91,109 @@
         "consentSettings": {
           "consentStatus": "NOT_SET"
         },
-        "notes": "Šablona Seznam SEM (Pavel Šabatka). Souhlas si čte sama z Consent Mode v2 a reaguje i na jeho pozdější změnu.",
+        "notes": "Šablona Seznam SEM (Pavel Šabatka), souhlas čte z Consent Mode v2. ",
+        "tagId": "2",
         "accountId": "1",
         "containerId": "1"
       },
       {
+        "name": "Sklik – SEM – ViewContent",
+        "type": "cvt_1_301",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "id",
+            "value": "{{Sklik SEM ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "ViewContent"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "currency",
+            "value": "CZK"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "usingConsentModeV2",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "contentType",
+            "value": "product"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "products",
+            "value": "{{DLV – ecommerce.items}}"
+          }
+        ],
+        "firingTriggerId": [
+          "105"
+        ],
+        "blockingTriggerId": [
+          "103"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "notes": "Šablona Seznam SEM (Pavel Šabatka), souhlas čte z Consent Mode v2. Služba nebo reference (view_item).",
         "tagId": "3",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "name": "Sklik – SEM – Contact",
+        "type": "cvt_1_301",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "id",
+            "value": "{{Sklik SEM ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "Contact"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "currency",
+            "value": "CZK"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "usingConsentModeV2",
+            "value": "true"
+          }
+        ],
+        "firingTriggerId": [
+          "106"
+        ],
+        "blockingTriggerId": [
+          "103"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "notes": "Šablona Seznam SEM (Pavel Šabatka), souhlas čte z Consent Mode v2. Klik na e-mail nebo telefon.",
+        "tagId": "4",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
         "name": "Meta Pixel – základ + PageView",
         "type": "html",
         "parameter": [
           {
             "type": "TEMPLATE",
             "key": "html",
-            "value": "<script>\n/* Meta Pixel – základ. Spouští se jen se souhlasem ad_storage (nastavení souhlasu tagu v GTM). */\n(function () {\n  var id = '{{Meta Pixel ID}}';\n  if (!/^[0-9]{6,}$/.test(id)) return; // ID ještě není vyplněné\n  if (window.fbq && window.fbq.__peakflowInit) return;\n  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;\n  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;\n  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,\n  document,'script','https://connect.facebook.net/en_US/fbevents.js');\n  window.fbq('init', id);\n  window.fbq('track', 'PageView');\n  window.fbq.__peakflowInit = true;\n})();\n</script>"
+            "value": "<script>\n/* Meta Pixel – základ. Jen se souhlasem ad_storage. Spouštění „Neomezeně“ (ne „Jednou na stránku“), dvojí init hlídá __peakflowInit.\n   Přechody bez reloadu měří Meta sama (sleduje history API). */\n(function () {\n  var id = '{{Meta Pixel ID}}';\n  if (!/^[0-9]{6,}$/.test(id)) return;\n  if (window.fbq && window.fbq.__peakflowInit) return;\n  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;\n  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;\n  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,\n  document,'script','https://connect.facebook.net/en_US/fbevents.js');\n  window.fbq('init', id);\n  window.fbq('track', 'PageView');\n  window.fbq.__peakflowInit = true;\n})();\n</script>"
           },
           {
             "type": "BOOLEAN",
@@ -128,19 +218,19 @@
             ]
           }
         },
-        "notes": "All Pages + změna souhlasu. Možnost spouštění: Neomezeně, NE 'Jednou na stránku'. GTM totiž počítá i pokus zablokovaný souhlasem, takže po 'Přijmout vše' by se tag už nespustil. Dvojí inicializaci hlídá kód (__peakflowInit). Bez souhlasu ad_storage se nespustí.",
+        "notes": "All Pages + změna souhlasu. Spouštění Neomezeně: GTM do „Jednou na stránku“ počítá i pokus zablokovaný souhlasem.",
+        "tagId": "5",
         "accountId": "1",
         "containerId": "1"
       },
       {
-        "tagId": "4",
         "name": "Meta Pixel – Lead",
         "type": "html",
         "parameter": [
           {
             "type": "TEMPLATE",
             "key": "html",
-            "value": "<script>\n(function () {\n  if (typeof window.fbq !== 'function') return;\n  window.fbq('track', 'Lead', { content_name: '{{DLV – lead_topic}}', content_category: '{{DLV – lead_source}}' });\n})();\n</script>"
+            "value": "<script>\n(function () {\n  if (typeof window.fbq !== 'function') return;\n  window.fbq('track', 'Lead', { content_name: {{DLV – lead_topic}} || '', content_category: {{DLV – lead_source}} || '' });\n})();\n</script>"
           },
           {
             "type": "BOOLEAN",
@@ -164,19 +254,127 @@
             ]
           }
         },
-        "notes": "Po odeslání kontaktního formuláře.",
+        "notes": "Odeslaný kontaktní formulář.",
+        "tagId": "6",
         "accountId": "1",
         "containerId": "1"
       },
       {
-        "tagId": "5",
+        "name": "Meta Pixel – ViewContent",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function () {\n  if (typeof window.fbq !== 'function') return;\n  var items = {{DLV – ecommerce.items}} || [];\n  if (!items.length) return;\n  var ids = [], contents = [];\n  for (var i = 0; i < items.length; i++) { ids.push(items[i].item_id); contents.push({ id: items[i].item_id, quantity: 1 }); }\n  window.fbq('track', 'ViewContent', {\n    content_ids: ids, contents: contents, content_type: 'product',\n    content_name: items[0].item_name, content_category: items[0].item_category\n  });\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "105"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "notes": "Služba nebo reference (view_item).",
+        "tagId": "7",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "name": "Meta Pixel – Contact",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function () {\n  if (typeof window.fbq !== 'function') return;\n  window.fbq('track', 'Contact', { contact_method: {{DLV – contact_method}} || '', contact_location: {{DLV – contact_location}} || '' });\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "106"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "notes": "Klik na e-mail nebo telefon.",
+        "tagId": "8",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "name": "Meta Pixel – vlastní události",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function () {\n  if (typeof window.fbq !== 'function') return;\n  var map = { cta_click: 'CTAClick', contact_form_start: 'ContactFormStart', roi_calculator_use: 'RoiCalculatorUse' };\n  var name = map[{{Event}}];\n  if (!name) return;\n  var params = name === 'CTAClick'\n    ? { cta_text: {{DLV – cta_text}}, cta_location: {{DLV – cta_location}}, cta_type: {{DLV – cta_type}} }\n    : name === 'ContactFormStart' ? { form_name: {{DLV – form_name}} } : { calculator: {{DLV – calculator}} };\n  window.fbq('trackCustom', name, params);\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "108"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "notes": "CTAClick, ContactFormStart, RoiCalculatorUse (trackCustom).",
+        "tagId": "9",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
         "name": "TikTok Pixel – základ + page",
         "type": "html",
         "parameter": [
           {
             "type": "TEMPLATE",
             "key": "html",
-            "value": "<script>\n/* TikTok Pixel – základ. Spouští se jen se souhlasem ad_storage (nastavení souhlasu tagu v GTM). */\n(function () {\n  var id = '{{TikTok Pixel ID}}';\n  if (!/^[A-Z0-9]{10,}$/.test(id)) return; // ID ještě není vyplněné\n  if (window.ttq && window.ttq.__peakflowInit) return;\n  !function (w, d, t) {\n    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=[\"page\",\"track\",\"identify\",\"instances\",\"debug\",\"on\",\"off\",\"once\",\"ready\",\"alias\",\"group\",\"enableCookie\",\"disableCookie\",\"holdConsent\",\"revokeConsent\",\"grantConsent\"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r=\"https://analytics.tiktok.com/i18n/pixel/events.js\",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement(\"script\");n.type=\"text/javascript\",n.async=!0,n.src=r+\"?sdkid=\"+e+\"&lib=\"+t;e=document.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(n,e)};\n    ttq.load(id);\n    ttq.page();\n  }(window, document, 'ttq');\n  window.ttq.__peakflowInit = true;\n})();\n</script>"
+            "value": "<script>\n/* TikTok Pixel – základ. Jen se souhlasem ad_storage. Spouštění „Neomezeně“, dvojí init hlídá __peakflowInit.\n   Přechody bez reloadu měří TikTok sám (history API). */\n(function () {\n  var id = '{{TikTok Pixel ID}}';\n  if (!/^[A-Z0-9]{10,}$/.test(id)) return;\n  if (window.ttq && window.ttq.__peakflowInit) return;\n  !function (w, d, t) {\n    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=[\"page\",\"track\",\"identify\",\"instances\",\"debug\",\"on\",\"off\",\"once\",\"ready\",\"alias\",\"group\",\"enableCookie\",\"disableCookie\",\"holdConsent\",\"revokeConsent\",\"grantConsent\"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r=\"https://analytics.tiktok.com/i18n/pixel/events.js\",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement(\"script\");n.type=\"text/javascript\",n.async=!0,n.src=r+\"?sdkid=\"+e+\"&lib=\"+t;e=document.getElementsByTagName(\"script\")[0];e.parentNode.insertBefore(n,e)};\n    ttq.load(id);\n    ttq.page();\n  }(window, document, 'ttq');\n  window.ttq.__peakflowInit = true;\n})();\n</script>"
           },
           {
             "type": "BOOLEAN",
@@ -201,19 +399,19 @@
             ]
           }
         },
-        "notes": "All Pages + změna souhlasu. Možnost spouštění: Neomezeně, NE 'Jednou na stránku'. GTM totiž počítá i pokus zablokovaný souhlasem, takže po 'Přijmout vše' by se tag už nespustil. Dvojí inicializaci hlídá kód (__peakflowInit). Bez souhlasu ad_storage se nespustí.",
+        "notes": "All Pages + změna souhlasu. Spouštění Neomezeně: GTM do „Jednou na stránku“ počítá i pokus zablokovaný souhlasem.",
+        "tagId": "10",
         "accountId": "1",
         "containerId": "1"
       },
       {
-        "tagId": "6",
         "name": "TikTok Pixel – SubmitForm",
         "type": "html",
         "parameter": [
           {
             "type": "TEMPLATE",
             "key": "html",
-            "value": "<script>\n(function () {\n  if (!window.ttq || typeof window.ttq.track !== 'function') return;\n  window.ttq.track('SubmitForm', { content_name: '{{DLV – lead_topic}}' });\n})();\n</script>"
+            "value": "<script>\n(function () {\n  if (!window.ttq || typeof window.ttq.track !== 'function') return;\n  window.ttq.track('SubmitForm', { content_name: {{DLV – lead_topic}} || '' });\n})();\n</script>"
           },
           {
             "type": "BOOLEAN",
@@ -237,12 +435,120 @@
             ]
           }
         },
-        "notes": "Po odeslání kontaktního formuláře.",
+        "notes": "Odeslaný kontaktní formulář.",
+        "tagId": "11",
         "accountId": "1",
         "containerId": "1"
       },
       {
-        "tagId": "7",
+        "name": "TikTok Pixel – ViewContent",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function () {\n  if (!window.ttq || typeof window.ttq.track !== 'function') return;\n  var items = {{DLV – ecommerce.items}} || [];\n  if (!items.length) return;\n  var contents = [];\n  for (var i = 0; i < items.length; i++) contents.push({ content_id: items[i].item_id, content_name: items[i].item_name, content_category: items[i].item_category });\n  window.ttq.track('ViewContent', { contents: contents, content_type: 'product' });\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "105"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "notes": "Služba nebo reference (view_item).",
+        "tagId": "12",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "name": "TikTok Pixel – Contact",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function () {\n  if (!window.ttq || typeof window.ttq.track !== 'function') return;\n  window.ttq.track('Contact', { description: {{DLV – contact_method}} || '' });\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "106"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "notes": "Klik na e-mail nebo telefon.",
+        "tagId": "13",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "name": "TikTok Pixel – ClickButton",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function () {\n  if (!window.ttq || typeof window.ttq.track !== 'function') return;\n  window.ttq.track('ClickButton', { content_name: {{DLV – cta_text}} || '', description: {{DLV – cta_location}} || '' });\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "107"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "notes": "Klik na CTA (cta_click).",
+        "tagId": "14",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
         "name": "GA4 – generate_lead",
         "type": "gaawe",
         "parameter": [
@@ -294,6 +600,21 @@
                     "value": "{{DLV – lead_topic}}"
                   }
                 ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "form_name"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – form_name}}"
+                  }
+                ]
               }
             ]
           }
@@ -305,7 +626,278 @@
         "consentSettings": {
           "consentStatus": "NOT_SET"
         },
-        "notes": "Konverze z kontaktního formuláře. V GA4 označit generate_lead jako klíčovou událost.",
+        "notes": "Konverze z formuláře. V GA4 označit jako klíčovou událost.",
+        "tagId": "15",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "name": "GA4 – události z dataLayer",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "{{Event}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-87RT5RRBRR"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "sendEcommerceData",
+            "value": "false"
+          },
+          {
+            "type": "LIST",
+            "key": "eventSettingsTable",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "cta_text"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – cta_text}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "cta_location"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – cta_location}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "cta_url"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – cta_url}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "cta_type"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – cta_type}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "contact_method"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – contact_method}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "contact_location"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – contact_location}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "link_url"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – link_url}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "link_domain"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – link_domain}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "link_text"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – link_text}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "link_location"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – link_location}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "faq_question"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – faq_question}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "form_name"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – form_name}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameter",
+                    "value": "calculator"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "parameterValue",
+                    "value": "{{DLV – calculator}}"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "firingTriggerId": [
+          "109"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "notes": "Jeden tag pro cta_click, contact_click, outbound_click, nav_click, faq_open, contact_form_start, roi_calculator_use. Název = název události. Prázdné parametry GTM neposílá. Parametry zaregistrovat v GA4 jako vlastní dimenze.",
+        "tagId": "16",
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "name": "GA4 – ecommerce (služby a reference)",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "{{Event}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementIdOverride",
+            "value": "G-87RT5RRBRR"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "sendEcommerceData",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "getEcommerceDataFrom",
+            "value": "dataLayer"
+          }
+        ],
+        "firingTriggerId": [
+          "110"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "notes": "view_item, view_item_list, select_item. Položky = služby a reference (lib/analytics.ts).",
+        "tagId": "17",
         "accountId": "1",
         "containerId": "1"
       }
@@ -380,6 +972,8 @@
             ]
           }
         ],
+        "accountId": "1",
+        "containerId": "1",
         "filter": [
           {
             "type": "CONTAINS",
@@ -393,6 +987,172 @@
                 "type": "TEMPLATE",
                 "key": "arg1",
                 "value": "DOPLNIT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "triggerId": "104",
+        "name": "DL – virtual_page_view (přechod bez reloadu)",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "virtual_page_view"
+              }
+            ]
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "triggerId": "105",
+        "name": "DL – view_item",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "view_item"
+              }
+            ]
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "triggerId": "106",
+        "name": "DL – contact_click (e-mail, telefon)",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "contact_click"
+              }
+            ]
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "triggerId": "107",
+        "name": "DL – cta_click",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "cta_click"
+              }
+            ]
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "triggerId": "108",
+        "name": "DL – Meta vlastní události",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "^(cta_click|contact_form_start|roi_calculator_use)$"
+              }
+            ]
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "triggerId": "109",
+        "name": "DL – GA4 události",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "^(cta_click|contact_click|outbound_click|nav_click|faq_open|contact_form_start|roi_calculator_use)$"
+              }
+            ]
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "triggerId": "110",
+        "name": "DL – GA4 ecommerce",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "^(view_item|view_item_list|select_item)$"
               }
             ]
           }
@@ -413,7 +1173,7 @@
             "value": "hoa69hytujbepm722vt0lhbi"
           }
         ],
-        "notes": "SEM ID ze Sklik → Nastavení účtu → Zobrazit SEM kód. Vyplněno 2026-11-18.",
+        "notes": "SEM ID ze Sklik → Nastavení účtu → Zobrazit SEM kód.",
         "accountId": "1",
         "containerId": "1"
       },
@@ -428,7 +1188,7 @@
             "value": "2260552841175444"
           }
         ],
-        "notes": "Číselné ID pixelu z Meta Events Manager → Datové zdroje. Vyplněno 2026-11-18.",
+        "notes": "Meta Events Manager → Datové zdroje.",
         "accountId": "1",
         "containerId": "1"
       },
@@ -443,7 +1203,7 @@
             "value": "DBUUD7RC77UCDH70SM80"
           }
         ],
-        "notes": "ID pixelu z TikTok Ads Manager → Events Manager (např. Vyplněno 2026-11-18.",
+        "notes": "TikTok Ads Manager → Events.",
         "accountId": "1",
         "containerId": "1"
       },
@@ -490,6 +1250,462 @@
             "type": "TEMPLATE",
             "key": "name",
             "value": "lead_topic"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "206",
+        "name": "DLV – form_name",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "form_name"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "207",
+        "name": "DLV – cta_text",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "cta_text"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "208",
+        "name": "DLV – cta_location",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "cta_location"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "209",
+        "name": "DLV – cta_url",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "cta_url"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "210",
+        "name": "DLV – cta_type",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "cta_type"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "211",
+        "name": "DLV – contact_method",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "contact_method"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "212",
+        "name": "DLV – contact_location",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "contact_location"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "213",
+        "name": "DLV – link_url",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "link_url"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "214",
+        "name": "DLV – link_domain",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "link_domain"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "215",
+        "name": "DLV – link_text",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "link_text"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "216",
+        "name": "DLV – link_location",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "link_location"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "217",
+        "name": "DLV – faq_question",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "faq_question"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "218",
+        "name": "DLV – calculator",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "calculator"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "219",
+        "name": "DLV – page_path",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "page_path"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "220",
+        "name": "DLV – page_title",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "page_title"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "221",
+        "name": "DLV – page_type",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "page_type"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "222",
+        "name": "DLV – page_location",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "page_location"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "223",
+        "name": "DLV – ecommerce.items",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "ecommerce.items"
+          }
+        ],
+        "accountId": "1",
+        "containerId": "1"
+      },
+      {
+        "variableId": "224",
+        "name": "DLV – ecommerce.item_list_name",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "ecommerce.item_list_name"
           }
         ],
         "accountId": "1",

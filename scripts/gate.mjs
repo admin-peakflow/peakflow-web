@@ -7,6 +7,7 @@
 // 4. každý lokální <img src> / href na /… v out/**/*.html míří na existující soubor
 // 5. každá stránka má <title>, meta description a právě jeden <h1>
 // 6. výchozí Consent Mode v2 je na každé stránce a v <head> před GTM
+// 7. GTM import: každá {{proměnná}} v tazích existuje a každý parametr z lib/analytics.ts má proměnnou
 //
 // Lint zatím není: `next lint` v projektu nemá ESLint konfiguraci.
 import { execSync } from "node:child_process";
@@ -88,6 +89,23 @@ step("consent default runs before GTM on every page", () => {
     if (!html.includes("'consent','default'")) bad.push(`${file}: consent default not set`);
   }
   if (bad.length) throw new Error(bad.join("; "));
+});
+
+step("GTM import is consistent with lib/analytics.ts", () => {
+  const c = JSON.parse(readFileSync("docs/gtm/peakflow-gtm-import.json", "utf8")).containerVersion;
+  const names = new Set(c.variable.map((v) => v.name));
+  const builtIn = new Set(["Event", "_event"]);
+  const refs = new Set(JSON.stringify(c.tag).match(/\{\{[^}]+\}\}/g) || []);
+  JSON.stringify(c.trigger).match(/\{\{[^}]+\}\}/g)?.forEach((r) => refs.add(r));
+  const missing = [...refs].map((r) => r.slice(2, -2)).filter((n) => !names.has(n) && !builtIn.has(n));
+  const src = readFileSync("lib/analytics.ts", "utf8");
+  const keys = [...(src.match(/const PARAM_KEYS = \[([\s\S]*?)\]/)?.[1] ?? "").matchAll(/"([a-z_]+)"/g)].map((m) => m[1]);
+  if (!keys.length) throw new Error("PARAM_KEYS not found in lib/analytics.ts");
+  const noVar = keys.filter((k) => !names.has(`DLV – ${k}`));
+  const errs = [];
+  if (missing.length) errs.push(`undefined variables: ${missing.join(", ")}`);
+  if (noVar.length) errs.push(`params without GTM variable: ${noVar.join(", ")}`);
+  if (errs.length) throw new Error(errs.join("; "));
 });
 
 if (failures.length) {

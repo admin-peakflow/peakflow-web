@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@/lib/analytics";
 import { WEB3FORMS_ENDPOINT, contact, web3formsKey } from "@/lib/site";
 import styles from "./ContactForm.module.css";
 
@@ -93,10 +94,8 @@ export function ContactForm({
       // Konverze pro GTM (GA4, Sklik Lead, Meta Lead, TikTok SubmitForm).
       // Jen po skutečném přijetí zprávy — honeypot a chyby sem nedojdou.
       // Žádné osobní údaje, jen odkud lead přišel a téma.
-      const w = window as unknown as { dataLayer?: unknown[] };
-      w.dataLayer = w.dataLayer || [];
-      w.dataLayer.push({
-        event: "generate_lead",
+      track("generate_lead", {
+        form_name: source ?? "kontakt",
         lead_source: source ?? "kontakt",
         lead_topic: String(data.get("topic") ?? ""),
       });
@@ -110,7 +109,7 @@ export function ContactForm({
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit} data-track-form={source ?? "kontakt"}>
       {status === "sent" && (
         <div className={styles.notice} role="status">
           Děkujeme. Ozveme se do 2 pracovních dnů s návrhem termínu.

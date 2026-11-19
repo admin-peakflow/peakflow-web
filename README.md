@@ -134,10 +134,13 @@ nejde o druhou instalaci GA4.)
 - Mapování kategorií na signály Consent Mode je v `lib/consent.ts`.
 - Gate hlídá, že výchozí souhlas je na každé stránce a před GTM.
 
-### Konverze z formuláře
+### dataLayer (události)
 
-Po úspěšném odeslání kontaktního formuláře jde do `dataLayer`:
-`{ event: 'generate_lead', lead_source, lead_topic }`. Osobní údaje se neposílají.
+Všechny interakce (kliky na tlačítka, e-mail a telefon, odkazy ven, služby
+a reference jako „produkty“, formulář, FAQ, kalkulačka, přechody mezi
+stránkami) jdou přes `lib/analytics.ts` a `components/Analytics.tsx` do
+`dataLayer`. Osobní údaje se neposílají. Seznam událostí, atributy pro nové
+kliky a mapování do pixelů je v [`docs/gtm/README.md`](docs/gtm/README.md).
 
 ### Tagy v GTM (Sklik, Meta, TikTok)
 
