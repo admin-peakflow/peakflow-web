@@ -8,14 +8,13 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Kontakt",
   description:
-    "Domluvte si nezávazný discovery call s PeakFlow. 30–60 minut o vašich systémech, datech a tom, co vás trápí.",
+    "Ukažte nám jeden proces, který vás zdržuje. Za 30 minut řekneme, jestli a jak ho zautomatizovat. Bez prezentace a bez závazku.",
 };
 
 const TIMELINE = [
-  ["Do 3 dnů", "Shrnutí meetingu a hrubý návrh řešení."],
-  ["Do 1 týdne", "Upřesnění rozsahu a cenová nabídka."],
-  ["Do 2 týdnů", "Případný start PoC."],
-  ["Do 4 týdnů", "První viditelné výsledky."],
+  ["Do 3 dnů", "Shrnutí hovoru a hrubý návrh, co dává smysl."],
+  ["Do 1 týdne", "Nabídka s cenou: mapa příležitostí, nebo rovnou první kolo."],
+  ["Do 2 týdnů", "Start práce."],
 ];
 
 export default function KontaktPage() {
@@ -26,10 +25,10 @@ export default function KontaktPage() {
       <section className={styles.main}>
         <div>
           <p className="eyebrow">Kontakt</p>
-          <h1 className={styles.h1}>Domluvme si discovery call.</h1>
+          <h1 className={styles.h1}>Ukažte nám jeden proces.</h1>
           <p className={styles.lead}>
-            30–60 minut. Pochopíme vaše systémy, data a to, co vás trápí. Bez závazku
-            a bez prezentace na hodinu.
+            30 minut online nebo u vás. Projdeme, co vás zdržuje, a řekneme, jestli se vyplatí
+            to automatizovat a čím začít. Bez prezentace a bez závazku.
           </p>
 
           <ol className={styles.timeline}>

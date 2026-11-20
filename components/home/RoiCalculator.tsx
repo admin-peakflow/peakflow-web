@@ -35,7 +35,7 @@ export function RoiCalculator() {
             Spočítejte si, co ruční práce stojí
           </strong>
           <span className={styles.introBody}>
-            Reporty, překlady, přepisování do CRM — posuňte hodnoty podle sebe.
+            Reporty, přepisování do CRM, faktury. Posuňte hodnoty podle sebe.
           </span>
         </div>
 
@@ -109,7 +109,7 @@ export function RoiCalculator() {
           a zákazníkům.
         </div>
         <Link href="/kontakt/" className={styles.cta}>
-          Ověřit odhad na discovery callu →
+          Ověřit odhad za 30 minut
         </Link>
       </div>
     </div>

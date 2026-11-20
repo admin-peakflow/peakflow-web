@@ -25,8 +25,9 @@ a TikTok Pixelu. Marketingové pixely běží jen se souhlasem z cookie lišty
 | `generate_lead` | formulář úspěšně odeslán | `form_name`, `lead_source`, `lead_topic` |
 | `cookie_consent_update` | volba v cookie liště | `consent_analytics`, `consent_marketing` |
 
-**„Produkty“** jsou služby (`sluzba-automatizace`, `sluzba-analytika`,
-`sluzba-crm`, `sluzba-weby`) a reference (`reference-<slug>` z `lib/cases.ts`).
+**„Produkty“** jsou služby (`sluzba-erp`, `sluzba-automatizace`,
+`sluzba-asistenti`, `sluzba-data`, `sluzba-weby`; do 2026-11-20 byly
+`sluzba-analytika` a `sluzba-crm`) a reference (`reference-<slug>` z `lib/cases.ts`).
 Formát je GA4 ecommerce: `item_id`, `item_name`, `item_category`
 (Služba / Reference), u referencí `item_category2` = obor. Bez ceny.
 

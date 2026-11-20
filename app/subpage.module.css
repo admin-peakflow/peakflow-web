@@ -1,0 +1,219 @@
+/* Sdílený vzhled jednodušších podstránek (/reference/, /o-nas/). */
+
+.hero {
+  background:
+    radial-gradient(800px 420px at 85% -20%, rgba(18, 181, 163, .2), transparent 60%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-grad-end) 100%);
+  color: #fff;
+}
+
+.heroInner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 104px var(--gutter) 96px;
+}
+
+.h1 {
+  margin: 0;
+  font-weight: 600;
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  max-width: 14ch;
+}
+
+.heroLead {
+  margin: 24px 0 0;
+  max-width: 600px;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--on-dark-dim);
+}
+.heroLead strong { color: #fff; font-weight: 500; }
+
+.section { padding: 112px 0; }
+.sectionWhite {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.h2 {
+  margin: 0;
+  font-weight: 600;
+  font-size: clamp(30px, 3.4vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.lead {
+  margin: 16px 0 0;
+  max-width: 620px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* --- Seznam řádků (projekty, weby) --- */
+.rows {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--border-strong);
+}
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: start;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--border);
+}
+.rowTitle {
+  margin: 0;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.25;
+}
+.rowTitle a { color: inherit; border-bottom: 1px solid var(--teal-100); }
+.rowTitle a:hover { border-bottom-color: var(--teal); }
+.rowBody {
+  margin: 8px 0 0;
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 64ch;
+}
+.rowMeta {
+  font-size: 14px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  margin-top: 4px;
+}
+
+.status {
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  padding: 6px 12px;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+.status_live { background: var(--teal-50); color: var(--teal-dark); }
+.status_ready { background: #EEF2FF; color: #3730A3; }
+.status_next { background: var(--warn-bg); color: var(--warn-text); }
+
+.more {
+  margin: 28px 0 0;
+  font-weight: 600;
+}
+
+/* --- O nás --- */
+.people {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--border-strong);
+}
+.person {
+  padding: 36px 40px 40px 0;
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.person + .person {
+  padding-left: 40px;
+  padding-right: 0;
+  border-left: 1px solid var(--border);
+}
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--teal-50);
+  color: var(--teal-dark);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+}
+.personName {
+  display: block;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+}
+.personRole {
+  display: block;
+  margin-top: 2px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--teal);
+}
+.personBody {
+  margin: 12px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-slate);
+}
+
+.principles {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px;
+}
+.principleTitle {
+  margin: 0;
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.25;
+}
+.principleBody {
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.company {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.company strong { color: var(--text); }
+
+@media (max-width: 860px) {
+  .section { padding: 80px 0; }
+  .heroInner { padding: 72px var(--gutter) 72px; }
+  .row { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .status, .rowMeta { justify-self: start; }
+  .people,
+  .principles { grid-template-columns: minmax(0, 1fr); }
+  .person,
+  .person + .person {
+    padding: 32px 0;
+    border-left: 0;
+  }
+  .person + .person { border-top: 1px solid var(--border); }
+  .principles { gap: 36px; }
+}
+
+@media (max-width: 480px) {
+  .person { grid-template-columns: 72px minmax(0, 1fr); gap: 18px; }
+  .avatar { width: 72px; height: 72px; font-size: 22px; }
+}

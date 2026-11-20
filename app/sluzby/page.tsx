@@ -7,104 +7,96 @@ import styles from "./page.module.css";
 export const metadata: Metadata = {
   title: "Služby",
   description:
-    "Tři pilíře PeakFlow: datová analytika a reporting, AI automatizace procesů a obchodní procesy s CRM. Napojíme se na to, co máte, data vyčistíme a dodáme business výstup.",
+    "ERP na míru, automatizace obchodu a back-office nad Raynetem, AI asistenti a boti a datový reporting. Napojíme se na to, co máte, a předáváme až po kontrole.",
 };
 
-const JUMP_LINKS = [
-  { href: "#automatizace", num: "I.", label: "AI automatizace procesů" },
-  { href: "#analytika", num: "II.", label: "Datová analytika a reporting" },
-  { href: "#crm", num: "III.", label: "Obchodní procesy a CRM" },
-];
+type Card = [title: string, body: string];
 
-const ANALYTICS_STEPS = [
+type Service = {
+  id: string;
+  track: string;
+  title: string;
+  body: string;
+  audience: string;
+  cards: Card[];
+  flow?: Card[];
+  white?: boolean;
+};
+
+/* Texty služeb. Pravidlo: jen to, co umíme doložit projektem nebo stackem. */
+const SERVICES: Service[] = [
   {
-    title: "Audit datových zdrojů",
-    body: "Zmapujeme, kde všude data žijí — databáze, ERP, e‑shop, Excel, cloud, on‑premise.",
-    outcome: "Mapa datových zdrojů a priorit",
+    id: "erp",
+    track: "sluzba-erp",
+    title: "ERP a systémy na míru",
+    body: "Jeden systém pro obchod, sklad, výrobu, montáže a fakturaci. Stavíme ho podle toho, jak vaše firma opravdu funguje, a po etapách. První část tak používáte dřív, než je hotový celý.",
+    audience:
+      "provozní a výrobní firmy, kterým krabicové ERP nesedí a které jedou na tabulkách, telefonu a papíře.",
+    cards: [
+      ["Zakázka od poptávky po fakturu", "Obchod, plánování, realizace a vyúčtování v jednom toku, bez přepisování."],
+      ["Montáže a technici v terénu", "Plán, podklady a protokoly v mobilu. Zákazník dostane oznámení sám."],
+      ["Napojení na to, co máte", "Raynet, účetnictví, e‑shop i starší systémy bez API."],
+      ["Bez licencí za uživatele", "Provoz v cloudu za jednotky dolarů měsíčně. Kód a data patří vám."],
+    ],
   },
   {
-    title: "Napojení na zdroje",
-    body: "Legacy databáze, ERP, e‑shop platformy a další systémy — i bez moderního API.",
-    outcome: "Funkční datové konektory",
+    id: "automatizace",
+    track: "sluzba-automatizace",
+    title: "Automatizace obchodu a back‑office",
+    body: "AI převezme rutinu konkrétní pozice. Zapíše komunikaci do CRM, připomene další krok, zpracuje objednávku nebo fakturu. Člověk jen schvaluje výjimky.",
+    audience:
+      "obchodní týmy v Raynetu nebo jiném CRM a back‑office, které tráví hodiny přepisováním.",
+    white: true,
+    flow: [
+      ["1 · Obchodník komunikuje", "e‑mail, telefon, schůzka"],
+      ["2 · AI rozpozná údaje", "případ, kontakt, fáze, hodnota"],
+      ["3 · Systém je zapíše", "do Raynetu, ke správnému případu"],
+      ["4 · Obchodník potvrdí", "jedním klikem, výjimky řeší on"],
+    ],
+    cards: [
+      ["Asistent obchodníka", "Připraví podklady před schůzkou, shrne hovor a navrhne další krok."],
+      ["Doplnění dat do CRM", "Údaje o firmách a kontaktech se doplní samy z veřejných zdrojů."],
+      ["Faktury a objednávky", "Vytěžení z PDF a e‑mailů, spárování s objednávkou, kontrola rozdílů."],
+      ["Raynet bez dražšího tarifu", "Co Raynet nabízí až ve vyšším tarifu, často doplníme automatizací."],
+    ],
   },
   {
-    title: "Vlastní datová pipeline",
-    body: "Bezpečné spojení (server, linka) bez závislosti na infrastruktuře klienta.",
-    outcome: "Spolehlivý, monitorovaný přenos",
+    id: "asistenti",
+    track: "sluzba-asistenti",
+    title: "AI asistenti a boti",
+    body: "Chatbot na webu, který odpoví zákazníkovi a rovnou založí poptávku do CRM. Interní asistent, který zná vaše dokumenty, ceníky a postupy a odpovídá týmu. Zlepšuje se s každou opravou: co člověk opraví, asistent si zapamatuje, jakmile to někdo schválí.",
+    audience:
+      "firmy, kde se stejné otázky opakují: zákazníci na webu, noví kolegové, obchodníci v terénu.",
+    cards: [
+      ["Chatbot na web", "Odpovídá z vašich podkladů a poptávku předá do CRM."],
+      ["Firemní mozek", "Interní asistent nad dokumenty a postupy. Ve vlastní firmě PackLabs ho používáme denně."],
+      ["Produktový poradce", "Provede zákazníka výběrem a doporučí kombinaci produktů."],
+      ["Učí se pod dohledem", "Nové znalosti navrhuje sám, do paměti je pustí až člověk."],
+    ],
   },
   {
-    title: "Sanitace a transformace",
-    body: "Čištění, normalizace a validace — aby výsledkům šlo důvěřovat.",
-    outcome: "Čistá, konzistentní datová sada",
+    id: "data",
+    track: "sluzba-data",
+    title: "Data a reporting",
+    body: "Spojíme data z ERP, e‑shopu, CRM a účetnictví na jedno místo, vyčistíme je a postavíme přehledy, kterým vedení věří. Každé ráno aktuální, bez ruční práce.",
+    audience:
+      "firmy, které skládají reporty ručně v Excelu nebo mají data v několika systémech, které spolu nemluví.",
+    white: true,
+    cards: [
+      ["Napojení na zdroje", "Databáze, ERP, e‑shopy a CRM, i starší systémy bez moderního API."],
+      ["Čištění a sjednocení", "Duplicity, chybějící údaje a různé formáty srovnáme, aby číslům šlo věřit."],
+      ["Datový sklad", "Google BigQuery: škálovatelně a s kontrolou nad náklady."],
+      ["Přehledy pro vedení", "Looker Studio: marže, obchod a provoz v jednom pohledu."],
+    ],
   },
-  {
-    title: "Datový sklad (BigQuery)",
-    body: "Škálovatelně, bezpečně a s plnou kontrolou nad náklady.",
-    outcome: "Centralizovaný datový sklad",
-  },
-  {
-    title: "Reporting (Looker Studio)",
-    body: "Přehledné, akční dashboardy zaměřené na klíčové business otázky.",
-    outcome: "Dashboardy a reporty",
-  },
 ];
 
-const ANALYTICS_TAGS = [
-  "Prodejní analytika",
-  "RFM segmentace",
-  "ABC analýza",
-  "ROAS a atribuce",
-  "Provozní reporting",
-  "Finanční konsolidace",
-];
-
-const AUTOMATION_CARDS = [
-  ["Napojení na interní systémy", "ERP (Point, Raynet, Asana), e‑shop, SharePoint, FTP."],
-  [
-    "Interní slovník / překlady",
-    "Firemní terminologie (CS/EN/DE/…), kterou AI používá pro konzistentní překlady.",
-  ],
-  [
-    "Generování marketingových materiálů",
-    "Kampaně, bannery z Figma šablon, texty a A/B varianty.",
-  ],
-  [
-    "Vendor‑agnostický přístup",
-    "Optimální model pro daný úkol — OpenAI, Anthropic, Google a další.",
-  ],
-  ["Automatizace workflow", "Python, Make a n8n pro pravidelné úlohy bez ručního zásahu."],
-  ["Monitoring a logování", "Přehled o tom, co automatizace dělá a kdy selhala."],
-];
-
-const AUTOMATION_TAGS = [
-  "Automatické překlady",
-  "Generování bannerů",
-  "Kategorizace produktů",
-  "Extrakce z PDF a faktur",
-  "Drafty odpovědí podpory",
-];
-
-const CRM_FLOW = [
-  ["1 · Obchodník komunikuje", "e‑mail, telefon, chat, schůzka"],
-  ["2 · AI rozpozná údaje", "případ, kontakt, fáze, hodnota"],
-  ["3 · Make namapuje data", "scénář zpracuje a odešle"],
-  ["4 · Raynet se vyplní", "obchodník jen zkontroluje a potvrdí"],
-];
-
-const CRM_CARDS = [
-  ["Napojení Raynet ↔ kanály", "E‑mail, telefon, chat, kalendář."],
-  ["AI asistent pro obchodní tým", "Osobní chat, který rozumí kontextu případu."],
-  ["Mapování polí a validace", "AI navrhne, obchodník potvrdí — human‑in‑the‑loop."],
-  ["Přepis a sumarizace hovorů", "Z telefonátu rovnou strukturovaný záznam."],
-];
-
-const STACK = [
-  ["Zdroje dat", "Legacy DB, ERP (Point, Raynet), e‑shop platformy, SharePoint, FTP, API"],
-  ["Zpracování", "Python (pandas, SQLAlchemy), ETL/ELT, vlastní přenosová linka"],
-  ["Sklad a reporting", "Google BigQuery, Looker Studio, GA4"],
-  ["AI modely", "Multi‑model — OpenAI, Anthropic, Google a další dle úkolu"],
-  ["Orchestrace", "Make, n8n, cron, Python schedulery"],
-  ["Backend / hosting", "Supabase, Vercel, Figma plugin, REST API, webhooky"],
+const STACK: Card[] = [
+  ["AI modely", "Claude, GPT a Gemini podle úlohy, kdykoli vyměnitelné"],
+  ["CRM a ERP", "Raynet, vlastní ERP, napojení na účetnictví a e‑shopy"],
+  ["Data", "Python, SQL, Google BigQuery, Looker Studio"],
+  ["Automatizace", "Make, n8n, Google Apps Script, Cloudflare Workers"],
+  ["Aplikace a hosting", "Cloudflare, Supabase, Vercel"],
 ];
 
 export default function SluzbyPage() {
@@ -112,149 +104,84 @@ export default function SluzbyPage() {
     <>
       <SiteHeader active="sluzby" />
 
-      <section className={styles.hero} data-track-location="hero">
-        <div className={styles.heroInner}>
-          <div>
-            <p className="eyebrow eyebrowLight">Služby</p>
-            <h1 className={styles.h1}>Tři pilíře, které se v praxi kombinují.</h1>
-            <p className={styles.heroLead}>
-              Napojit se na to, co klient má → vyčistit a sjednotit → dodat business
-              výstup. Tento vzorec platí pro každý projekt.
-            </p>
-          </div>
-          <nav className={styles.jump} aria-label="Přehled pilířů">
-            {JUMP_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className={styles.jumpLink}>
-                <span>
-                  <strong style={{ fontWeight: 600 }}>{link.num}</strong> {link.label}
-                </span>
-                <span aria-hidden="true">→</span>
-              </a>
-            ))}
-          </nav>
-        </div>
-      </section>
-
-      {/* ===== PILLAR I ===== */}
-      <section id="automatizace" className={styles.pillar} data-track-item="sluzba-automatizace">
-        <div>
-          <span className={styles.numeral}>I</span>
-          <h2 className={styles.pillarTitle}>AI automatizace procesů</h2>
-          <p className={styles.pillarBody}>
-            Automatizujeme repetitivní marketingové a provozní procesy pomocí Pythonu
-            a AI — s ohledem na specifika klienta.
-          </p>
-          <p className={styles.audience}>
-            <strong>Pro koho:</strong> e‑shopy s rozsáhlým katalogem, firmy s více
-            jazykovými mutacemi a opakujícími se marketingovými úkoly.
-          </p>
-        </div>
-        <div>
-          <div className={styles.cards}>
-            {AUTOMATION_CARDS.map(([title, body]) => (
-              <div key={title} className={styles.card}>
-                <strong>{title}</strong>
-                <span>{body}</span>
-              </div>
-            ))}
-          </div>
-          <div className={styles.tags}>
-            {AUTOMATION_TAGS.map((tag) => (
-              <span key={tag} className={styles.tag}>
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PILLAR II ===== */}
-      <section id="analytika" className="surfaceWhite" data-track-item="sluzba-analytika">
-        <div className={styles.pillar}>
-          <div>
-            <span className={styles.numeral}>II</span>
-            <h2 className={styles.pillarTitle}>Datová analytika a reporting</h2>
-            <p className={styles.pillarBody}>
-              Pomáháme firmám vidět, co se skutečně děje v jejich byznysu — na základě
-              dat, ne odhadů.
-            </p>
-            <p className={styles.audience}>
-              <strong>Pro koho:</strong> B2B e‑shopy, distributoři, firmy s více zdroji
-              dat, které potřebují jednotný pohled na výkonnost.
-            </p>
-          </div>
-          <div className={styles.steps}>
-            {ANALYTICS_STEPS.map((step, i) => (
-              <div key={step.title} className={styles.stepRow}>
-                <span className={styles.stepNum}>{String(i + 1).padStart(2, "0")}</span>
-                <div>
-                  <strong className={styles.stepTitle}>{step.title}</strong>
-                  <span className={styles.stepBody}>{step.body}</span>
-                </div>
-                <span className={styles.stepOutcome}>→ {step.outcome}</span>
-              </div>
-            ))}
-            <div className={`${styles.tags} ${styles.tagsTight}`}>
-              {ANALYTICS_TAGS.map((tag) => (
-                <span key={tag} className={styles.tag}>
-                  {tag}
-                </span>
-              ))}
+      <main>
+        <section className={styles.hero} data-track-location="hero">
+          <div className={styles.heroInner}>
+            <div>
+              <h1 className={styles.h1}>Co pro firmy stavíme</h1>
+              <p className={styles.heroLead}>
+                Čtyři služby, které se v praxi kombinují. Vždycky se napojíme na to, co už
+                máte, a začneme tím, co vám vrátí nejvíc času.
+              </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PILLAR III ===== */}
-      <section id="crm" className={styles.pillar} data-track-item="sluzba-crm">
-        <div>
-          <span className={styles.numeral}>III</span>
-          <h2 className={styles.pillarTitle}>Obchodní procesy a CRM</h2>
-          <p className={styles.pillarBody}>
-            Data z obchodní komunikace se dostanou do CRM sama, správně a bez ručního
-            přepisování.
-          </p>
-          <p className={styles.audience}>
-            <strong>Pro koho:</strong> obchodní týmy v Raynetu nebo podobném CRM, které
-            tráví hodiny přepisováním komunikace.
-          </p>
-        </div>
-        <div>
-          <div className={styles.flowPanel}>
-            <p className={styles.flowLabel}>Jak to funguje</p>
-            <div className={styles.flowGrid}>
-              {CRM_FLOW.map(([title, body], i) => (
-                <div
-                  key={title}
-                  className={`${styles.flowStep} ${
-                    i === CRM_FLOW.length - 1 ? styles.flowStepFinal : ""
-                  }`}
-                >
-                  <strong>{title}</strong>
-                  <span>{body}</span>
-                </div>
+            <nav className={styles.jump} aria-label="Přehled služeb">
+              {SERVICES.map((s) => (
+                <a key={s.id} href={`#${s.id}`} className={styles.jumpLink}>
+                  {s.title}
+                </a>
               ))}
-            </div>
+            </nav>
           </div>
-          <div className={`${styles.cards} ${styles.crmCards}`}>
-            {CRM_CARDS.map(([title, body]) => (
-              <div key={title} className={`${styles.card} ${styles.cardOutlined}`}>
-                <strong>{title}</strong>
-                <span>{body}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ===== TECH STACK ===== */}
-      <section style={{ background: "var(--surface)", borderTop: "1px solid var(--border)" }}>
-        <div className="wrap wrapTight">
+        {SERVICES.map((s) => {
+          const content = (
+            <div className={styles.pillar}>
+              <div>
+                <h2 className={styles.pillarTitle}>{s.title}</h2>
+                <p className={styles.pillarBody}>{s.body}</p>
+                <p className={styles.audience}>
+                  <strong>Pro koho:</strong> {s.audience}
+                </p>
+              </div>
+              <div>
+                {s.flow && (
+                  <div className={styles.flowPanel}>
+                    <p className={styles.flowLabel}>Jak to funguje</p>
+                    <div className={styles.flowGrid}>
+                      {s.flow.map(([title, body], i) => (
+                        <div
+                          key={title}
+                          className={`${styles.flowStep} ${
+                            i === s.flow!.length - 1 ? styles.flowStepFinal : ""
+                          }`}
+                        >
+                          <strong>{title}</strong>
+                          <span>{body}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                <div className={`${styles.cards} ${s.flow ? styles.cardsAfterFlow : ""}`}>
+                  {s.cards.map(([title, body]) => (
+                    <div
+                      key={title}
+                      className={`${styles.card} ${s.white ? styles.cardOutlined : ""}`}
+                    >
+                      <strong>{title}</strong>
+                      <span>{body}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+          return (
+            <section
+              key={s.id}
+              id={s.id}
+              className={s.white ? "surfaceWhite" : undefined}
+              data-track-item={s.track}
+            >
+              {content}
+            </section>
+          );
+        })}
+
+        <section className="wrap wrapTight">
           <div className={styles.stackHead}>
-            <p className="eyebrow">Technologický stack</p>
-            <h2 className={styles.stackTitle}>
-              Python jako páteř. Cloud‑first, ne cloud‑only.
-            </h2>
+            <h2 className={styles.stackTitle}>Nástroje vybíráme podle úlohy</h2>
           </div>
           <div className={styles.stack}>
             {STACK.map(([label, body]) => (
@@ -264,24 +191,25 @@ export default function SluzbyPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ===== CTA ===== */}
-      <section className="wrap wrapTight" style={{ paddingBottom: 96 }} data-track-location="final_cta">
-        <div className="ctaBand" style={{ padding: "56px 48px" }}>
-          <div>
-            <h2 className="ctaTitle">Nevíte, kterým pilířem začít?</h2>
-            <p className="ctaBody">
-              Doporučujeme PoC nebo menší produkt — rychle uvidíte, jak spolupracujeme
-              a jaký máme přínos.
-            </p>
+        <section className="wrap wrapTight" style={{ paddingBottom: 112 }} data-track-location="final_cta">
+          <div className="ctaBand">
+            <div>
+              <h2 className="ctaTitle">Nevíte, čím začít?</h2>
+              <p className="ctaBody">
+                Ukažte nám jeden proces. Za 30 minut řekneme, jestli se vyplatí ho
+                automatizovat a kterou službou začít.
+              </p>
+            </div>
+            <div className="ctaActions">
+              <Link href="/kontakt/" className="btn btnDark">
+                Domluvit 30 minut
+              </Link>
+            </div>
           </div>
-          <Link href="/kontakt/" className="btn btnDark">
-            Domluvit discovery call →
-          </Link>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <SiteFooter />
     </>

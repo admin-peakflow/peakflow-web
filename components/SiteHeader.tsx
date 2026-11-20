@@ -2,13 +2,12 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import styles from "./SiteHeader.module.css";
 
-type Page = "home" | "sluzby" | "weby" | "kontakt";
+type Page = "home" | "sluzby" | "reference" | "o-nas" | "weby" | "kontakt";
 
 const LINKS = [
   { href: "/sluzby/", label: "Služby", page: "sluzby" as Page },
-  { href: "/weby/", label: "Weby", page: "weby" as Page },
-  { href: "/#reference", label: "Reference", page: null },
-  { href: "/#postup", label: "Postup", page: null },
+  { href: "/reference/", label: "Reference", page: "reference" as Page },
+  { href: "/o-nas/", label: "O nás", page: "o-nas" as Page },
   { href: "/kontakt/", label: "Kontakt", page: "kontakt" as Page },
 ];
 
@@ -25,8 +24,8 @@ export function SiteHeader({ active = "home" }: { active?: Page }) {
     <Link
       key={link.href}
       href={link.href}
-      className={link.page && link.page === active ? styles.linkActive : styles.link}
-      aria-current={link.page && link.page === active ? "page" : undefined}
+      className={link.page === active || (active === "weby" && link.page === "reference") ? styles.linkActive : styles.link}
+      aria-current={link.page === active ? "page" : undefined}
     >
       {link.label}
     </Link>
@@ -47,7 +46,7 @@ export function SiteHeader({ active = "home" }: { active?: Page }) {
           {/* On the contact page the CTA would just link to itself. */}
           {active !== "kontakt" && (
             <Link href="/kontakt/" className={styles.cta} data-cta>
-              Discovery call
+              Domluvit 30 minut
             </Link>
           )}
         </nav>
@@ -60,7 +59,7 @@ export function SiteHeader({ active = "home" }: { active?: Page }) {
             {links}
             {active !== "kontakt" && (
               <Link href="/kontakt/" className={styles.cta} data-cta>
-                Discovery call
+                Domluvit 30 minut
               </Link>
             )}
           </nav>
