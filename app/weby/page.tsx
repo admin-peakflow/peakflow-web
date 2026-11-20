@@ -39,8 +39,8 @@ const PROJECTS: Project[] = [
     name: "Dreamy",
     field: "E-shop s matracemi a postelemi",
     domains: ["dreamy.cz"],
-    lead: "E-shop se spánkem a nábytkem, za kterým stojí čtyři kamenné prodejny.",
-    body: "U matrace za desítky tisíc rozhoduje důvěra. Web proto staví dopředu značky, dopravu s montáží, výměnu až do 90 dní a poradce výběru.",
+    lead: "E-shop se spánkem a nábytkem, který jsme kompletně předělali na Shoptetu.",
+    body: "Nové menu a kategorie s filtry podle toho, co zákazník řeší, produktový detail, košík, prodejny, značky i Poradna. K tomu poradce výběru matrace a příprava na AI vyhledávání.",
     facts: [
       ["Pro koho", "Koncoví zákazníci"],
       ["Hlavní akce", "Nákup nebo návštěva prodejny"],

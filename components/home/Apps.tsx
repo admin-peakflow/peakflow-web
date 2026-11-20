@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { APPS } from "@/lib/apps";
 import styles from "./Apps.module.css";
 
@@ -89,6 +90,12 @@ export function Apps() {
               ))}
             </ul>
             <p className={styles.stack}>{app.stack}</p>
+            {app.caseLink && (
+              <Link href={app.caseLink.href} className={styles.caseLink} data-track-select="reference-dreamy">
+                {app.caseLink.text}
+                <span>Case study →</span>
+              </Link>
+            )}
           </div>
           <div className={styles.visual}>
             {app.id === "packlabsapp" ? (

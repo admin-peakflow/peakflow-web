@@ -137,6 +137,33 @@ export default async function CasePage({ params }: Props) {
           </section>
         )}
 
+        {c.gallery && c.gallery.length > 0 && (
+          <section className={styles.gallery} aria-labelledby="dnes">
+            <h2 id="dnes" className={styles.blockTitle}>
+              Jak web vypadá dnes
+            </h2>
+            <div className={styles.galleryGrid}>
+              {c.gallery.map((g) => (
+                <figure key={g.src} className={styles.galleryItem}>
+                  <a href={g.url} target="_blank" rel="noopener" className={styles.galleryFrame}>
+                    <span className={styles.browserBar} aria-hidden="true">
+                      <span className={styles.dots}>
+                        <i />
+                        <i />
+                        <i />
+                      </span>
+                      <span className={styles.url}>{g.url.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")}</span>
+                    </span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={g.src} width={1200} height={617} alt={g.caption} loading="lazy" decoding="async" />
+                  </a>
+                  <figcaption>{g.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className={styles.block} aria-labelledby="situace" data-reveal>
           <h2 id="situace" className={styles.blockTitle}>
             Výchozí situace
