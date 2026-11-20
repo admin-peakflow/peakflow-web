@@ -926,3 +926,14 @@
   .heroVisual { padding-bottom: 0; }
   .ctaSection { padding: 24px 0 80px; }
 }
+
+/* --- Tmavá sekce s aplikacemi v provozu --- */
+.sectionDark {
+  background:
+    radial-gradient(800px 420px at 10% 0%, rgba(18, 181, 163, .16), transparent 60%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-grad-end) 100%);
+  color: #fff;
+}
+.h2Light { color: #fff; }
+.leadLight { color: var(--on-dark-dim); }
+.leadLight .leadStrong { color: #fff; }

@@ -4,12 +4,13 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CASES } from "@/lib/cases";
 import { RUNNING } from "@/lib/running";
+import { APPS } from "@/lib/apps";
 import styles from "../subpage.module.css";
 
 export const metadata: Metadata = {
   title: "Reference",
   description:
-    "Co právě stavíme a provozujeme: ERP pro montážní firmu, automatizace obchodu nad Raynetem, firemní AI asistent a šest webů naostro. Bez vymyšlených referencí.",
+    "Aplikace v provozu (PackLabsApp, DreamyApp), rozpracované systémy (ERP, automatizace nad Raynetem) a šest webů naostro. Bez vymyšlených referencí.",
 };
 
 export default function ReferencePage() {
@@ -31,7 +32,28 @@ export default function ReferencePage() {
 
         <section className={styles.section}>
           <div className={styles.inner}>
-            <h2 className={styles.h2}>Projekty</h2>
+            <h2 className={styles.h2}>Aplikace v provozu</h2>
+            <ul className={styles.rows}>
+              {APPS.map((app) => (
+                <li key={app.id} className={styles.row}>
+                  <div>
+                    <h3 className={styles.rowTitle}>
+                      <Link href={`/#${app.id}`}>{app.name}</Link>: {app.title.toLowerCase()}
+                    </h3>
+                    <p className={styles.rowBody}>
+                      {app.client}. {app.points.slice(0, 2).join(". ")}.
+                    </p>
+                  </div>
+                  <span className={`${styles.status} ${styles.status_live}`}>{app.status}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className={styles.section}>
+          <div className={styles.inner}>
+            <h2 className={styles.h2}>Rozpracované projekty</h2>
             <ul className={styles.rows}>
               {RUNNING.map((item) => (
                 <li key={item.title} className={styles.row}>
