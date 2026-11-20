@@ -1,483 +1,414 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { ScrollReveal } from "@/components/ScrollReveal";
-import { DataFlow } from "@/components/home/DataFlow";
-import { PillarTabs } from "@/components/home/PillarTabs";
 import { RoiCalculator } from "@/components/home/RoiCalculator";
+import { RUNNING } from "@/lib/running";
 import styles from "./page.module.css";
 
-const TOOLS = [
-  "Google BigQuery",
-  "Looker Studio",
-  "Python",
-  "Raynet",
-  "Make",
-  "n8n",
-  "Supabase",
+/*
+ * Všechny texty homepage jsou v konstantách tady nahoře. Kdo chce upravit
+ * text, nemusí do JSX níž.
+ *
+ * Pravidlo pro reference: na web jen to, co běží a je doložené. Žádné citace,
+ * hvězdičky ani čísla bez podkladu. Jména klientů až s jejich souhlasem.
+ */
+
+/** Ukázka v hero: jedno dopoledne ve firmě, fiktivní data, viditelně označená. */
+const MORNING = [
+  { time: "06:00", area: "Data", text: "Ranní přehled zakázek a tržeb odešel vedení" },
+  { time: "06:40", area: "ERP", text: "Montáže na příští týden rozplánované, technici mají podklady v mobilu" },
+  { time: "07:15", area: "Raynet", text: "14 e‑mailů a 3 hovory zapsané k obchodním případům" },
+  { time: "08:02", area: "Web", text: "Dotaz na cenu zodpovězený, poptávka založená v CRM" },
+  { time: "08:30", area: "Faktury", text: "9 přijatých faktur vytěžených a spárovaných s objednávkami" },
 ];
 
 const PAINS = [
-  "„Máme Pohodu, Shoptet a Raynet — a nic spolu nemluví.“",
-  "„Měsíční report skládáme tři dny ručně v Excelu.“",
-  "„Překlady katalogu do tří jazyků brzdí každou kampaň.“",
-  "„Obchodníci přepisují e‑maily do CRM místo prodeje.“",
-];
-
-/** Sloupce v hero mocku — výška v % a barevný odstín. */
-const CHART_BARS: Array<{ h: number; tone: "Pale" | "Mid" | "Bright" }> = [
-  { h: 38, tone: "Pale" },
-  { h: 52, tone: "Pale" },
-  { h: 46, tone: "Pale" },
-  { h: 64, tone: "Mid" },
-  { h: 58, tone: "Mid" },
-  { h: 72, tone: "Mid" },
-  { h: 66, tone: "Mid" },
-  { h: 84, tone: "Bright" },
-  { h: 78, tone: "Bright" },
-  { h: 92, tone: "Bright" },
-];
-
-const CATEGORY_ROWS = [
-  { name: "Nářadí", revenue: "1,92 M", margin: "34 %" },
-  { name: "Spojovací mat.", revenue: "1,15 M", margin: "29 %" },
-  { name: "Ochranné pom.", revenue: "0,88 M", margin: "36 %" },
-];
-
-const CASES = [
   {
-    tag: "Případ 1 · B2B e‑shop",
-    title: "Jednotný zdroj pravdy z legacy databází",
-    body: "Čtyři legacy databáze bez API → jeden BigQuery sklad a živé dashboardy.",
-    metrics: [
-      { value: "4", label: "legacy systémy v jednom skladu" },
-      { value: "0 h", label: "ručního reportingu měsíčně" },
-    ],
+    role: "Majitel",
+    text: "Čísla vidí až na konci měsíce. Někdo je musí ručně poskládat z Excelu a stejně jim úplně nevěří.",
   },
   {
-    tag: "Případ 2 · Marketing",
-    title: "Desítky hodin měsíčně ušetřených na překladech",
-    body: "Interní slovník + AI překlady + bannery z Figmy přes Make/n8n.",
-    metrics: [
-      { value: "30+ h", label: "měsíčně ušetřené ruční práce" },
-      { value: "3 jazyky", label: "s jednotnou terminologií" },
-    ],
+    role: "Obchodník",
+    text: "Půl dne přepisuje e‑maily a hovory do CRM a hlídá, komu má zavolat. Na prodej zbývá zbytek.",
   },
   {
-    tag: "Případ 3 · Obchod / CRM",
-    title: "Konec přepisování komunikace do Raynetu",
-    body: "AI čte e‑maily a hovory, Make je zapíše do Raynetu, obchodník potvrdí.",
-    metrics: [
-      { value: "−80 %", label: "času na zápis do CRM" },
-      { value: "100 %", label: "komunikace uložené u případu" },
-    ],
+    role: "Provoz a back‑office",
+    text: "Objednávky, montáže a faktury běží přes tabulky, telefon a papír. Každá chyba se hledá ručně.",
   },
 ];
 
-const QUOTES = [
+const SERVICES = [
   {
-    text: "„Poprvé vidíme marži po kategoriích, aniž by ji někdo ručně skládal.“",
-    role: "Jednatel",
-    org: "B2B distributor, obrat 200+ mil. Kč",
+    id: "erp",
+    track: "sluzba-erp",
+    title: "ERP a systémy na míru",
+    body: "Obchod, sklad, výroba, montáže a fakturace v jednom systému. Postavený podle toho, jak vaše firma opravdu funguje, ne podle krabice.",
+    example: "Zakázka od poptávky po fakturu bez přepisování mezi tabulkami.",
   },
   {
-    text: "„Kampaň, která čekala týden na překlady, jde ven za den.“",
-    role: "Marketing manager",
-    org: "B2B e‑shop, 3 jazykové mutace",
+    id: "automatizace",
+    track: "sluzba-automatizace",
+    title: "Automatizace obchodu a back‑office",
+    body: "AI převezme rutinu pozice: zápisy do CRM, připomínky, zpracování objednávek a faktur. Člověk schvaluje jen výjimky.",
+    example: "Komunikace s klientem se sama zapíše k případu v Raynetu.",
   },
   {
-    text: "„Kdyby PeakFlow zítra zmizel, řešení nám běží dál. Máme dokumentaci i přístupy.“",
-    role: "Vedoucí IT",
-    org: "Obchodní firma s Raynet CRM",
+    id: "asistenti",
+    track: "sluzba-asistenti",
+    title: "AI asistenti a boti",
+    body: "Chatbot na webu, který odpoví a rovnou založí poptávku. Interní asistent, který zná vaše dokumenty a postupy a zlepšuje se s každou opravou.",
+    example: "Nový kolega se zeptá asistenta, ne tří lidí z týmu.",
+  },
+  {
+    id: "data",
+    track: "sluzba-data",
+    title: "Data a reporting",
+    body: "Jedno místo pravdy z ERP, e‑shopu a CRM. Přehledy, kterým vedení věří, každé ráno bez ruční práce.",
+    example: "Marže po zakázkách a obchodnících v jednom pohledu.",
   },
 ];
+
+/* „Co právě běží“ je v lib/running.ts (sdílí ho i /reference/). */
 
 const STEPS = [
-  { title: "Discovery call", time: "30–60 min", body: "Vaše systémy a co vás trápí." },
-  { title: "Analýza a návrh", time: "1–2 týdny", body: "Architektura, čas, cena." },
-  { title: "Implementace", time: "2–8 týdnů", body: "Napojení, data, výstupy v testu." },
-  { title: "Předání a provoz", time: "1 týden", body: "Dokumentace a vlastnictví." },
   {
-    title: "Měříme přínos",
-    time: "po 30 a 90 dnech",
-    body: "Ušetřené hodiny a chybovost. Když se nevrací, upravíme.",
+    title: "Mapa příležitostí",
+    time: "1–2 týdny",
+    body: "Projdeme procesy, spočítáme hodiny a vybereme, co se vyplatí zautomatizovat jako první.",
+  },
+  {
+    title: "První kolo",
+    time: "2–6 týdnů",
+    body: "Postavíme 2–3 věci s největším přínosem. Předem sepíšeme, co přesně musí fungovat.",
+  },
+  {
+    title: "Provoz a další kola",
+    time: "průběžně",
+    body: "Hlídáme, opravujeme a přidáváme další automatizace podle toho, co se osvědčilo.",
   },
 ];
 
-const BENEFITS = [
-  ["Méně ruční práce", "Reporty, překlady a CRM zápisy běží samy."],
-  ["Rozhodnutí z čísel", "Marže a obrátkovost v jednom pohledu, denně."],
-  ["Růst bez náboru", "Více kampaní a případů se stejným týmem."],
-  ["Propojené systémy", "ERP, e‑shop a CRM si data předávají samy."],
-  ["Data, kterým jde věřit", "Sanitace a validace jsou standard."],
-  ["Řešení, které vlastníte", "Dokumentace, přístupy, žádný lock‑in."],
+const PRICES = [
+  {
+    name: "Úvodní hovor",
+    price: "Zdarma",
+    note: "30 minut",
+    body: "Projdeme jeden proces a řekneme vám, jestli se vyplatí ho automatizovat.",
+  },
+  {
+    name: "Mapa příležitostí",
+    price: "25 000 Kč",
+    note: "odečte se z realizace",
+    body: "Seznam automatizací s cenou a návratností. Víte, co dává smysl, ještě než cokoli objednáte.",
+  },
+  {
+    name: "První kolo automatizací",
+    price: "od 90 000 Kč",
+    note: "2–3 automatizace",
+    body: "Věci s největším přínosem, postavené, otestované a předané do provozu.",
+  },
+  {
+    name: "ERP / systém na míru",
+    price: "od 600 000 Kč",
+    note: "po etapách",
+    body: "Systém podle toho, jak firma funguje. Každá etapa má vlastní cenu a termín.",
+  },
 ];
 
-const WHY = [
-  ["Legacy bez API", "Stavíme vlastní spojení. Vy nic neměníte."],
-  ["Žádný lock‑in", "Modely od více dodavatelů, kdykoli vyměnitelné."],
-  ["Jedna střecha", "Od dat po automatizaci. Tři dodavatele nekoordinujete."],
+const TEAM = [
+  {
+    name: "Tomáš Andrlík",
+    role: "Obchod, procesy a buildy",
+    body: "Zjistí, kde ve firmě utíká čas, a postaví systém, který ho vrátí.",
+    photo: "/podpis/tomas-andrlik-v3.png",
+    initials: "TA",
+  },
+  {
+    name: "Jirka Brtník",
+    role: "Data a reporting",
+    body: "Datový analytik. Python, SQL, BigQuery a Looker dělá na denní bázi.",
+    photo: null,
+    initials: "JB",
+  },
 ];
 
 const FAQS = [
   {
-    q: "Umíte se napojit na náš starý systém bez API?",
-    a: "Ano. Připojíme se přímo na databázi a postavíme vlastní přenosovou linku.",
+    q: "Kde budou naše data a kdo k nim má přístup?",
+    a: "Systémy stavíme tak, aby běžely v účtech, které patří vám (Cloudflare, Google, váš server). Přístupy, data i kód zůstávají vaše. AI modelům posíláme jen to, co daná úloha potřebuje.",
   },
   {
-    q: "Budeme závislí na jednom AI dodavateli?",
-    a: "Ne. Používáme modely od více poskytovatelů a kdykoli je vyměníme.",
+    q: "Nahradí to naše lidi?",
+    a: "Ne. Převezme rutinu pozice, ne pozici. Lidé schvalují výjimky a dělají práci, kterou za ně systém neudělá: obchod, vztahy s klienty a rozhodování.",
   },
   {
-    q: "Kde budou naše data?",
-    a: "Typicky v Google BigQuery, případně on‑premise či hybridně. Šifrované přístupy, minimální oprávnění, logování.",
+    q: "Co když se AI modely změní nebo zdraží?",
+    a: "Nejsme vázaní na jednoho dodavatele. Používáme modely od Anthropicu, OpenAI i Googlu a vybíráme podle úlohy. Když se něco změní, model vyměníme.",
   },
   {
-    q: "Jak dlouho trvá, než uvidíme výsledky?",
-    a: "Do 2–8 týdnů. PoC za 2–4 týdny.",
+    q: "Jak dlouho to trvá?",
+    a: "Mapa příležitostí 1–2 týdny, první kolo automatizací 2–6 týdnů. ERP stavíme po etapách a termín každé etapy dostanete v nabídce.",
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      <ScrollReveal />
       <SiteHeader active="home" />
 
-      {/* ===== HERO ===== */}
-      <section className={styles.hero} data-track-location="hero">
-        <div className={styles.heroInner}>
-          <div className={styles.heroCopy}>
-            <span className={styles.badge}>
-              <span className={styles.badgeDot} aria-hidden="true" />
-              Data &amp; AI automatizace pro B2B
-            </span>
-            <h1 className={styles.h1}>Přestaňte řídit firmu podle odhadů a Excelu.</h1>
-            <p className={styles.heroLead}>
-              Propojíme ERP, e‑shop a staré databáze, data vyčistíme a dodáme
-              dashboardy i AI automatizace. Vy rozhodujete z čísel, tým nepřepisuje.
-            </p>
-            <div className={styles.heroActions}>
-              <Link href="/kontakt/" className="btn btnAccent">
-                Domluvit discovery call →
-              </Link>
-              <Link href="/sluzby/" className="btn btnOnDark">
-                Jak PeakFlow funguje
-              </Link>
-            </div>
-            <div className={styles.heroChecks}>
-              <span className={styles.heroCheck}>
-                <span aria-hidden="true">✓</span>Napojíme i systémy bez API
-              </span>
-              <span className={styles.heroCheck}>
-                <span aria-hidden="true">✓</span>Žádný vendor lock‑in
-              </span>
-              <span className={styles.heroCheck}>
-                <span aria-hidden="true">✓</span>Výsledky za 2–8 týdnů
-              </span>
-            </div>
-          </div>
-
-          {/* Illustrative mock of the delivered dashboard — not real data. */}
-          <div className={styles.heroVisual}>
-            <div className={styles.floatLabel}>
-              <span>Datová základna</span>
-              <strong>Legacy DB · ERP · e‑shop</strong>
-            </div>
-            <div className={styles.browser} aria-hidden="true">
-              <div className={styles.browserBar}>
-                <span className={styles.dot} />
-                <span className={styles.dot} />
-                <span className={styles.dot} />
-                <span className={styles.browserTitle}>Přehled prodeje · září 2026</span>
+      <main>
+        {/* ===== HERO ===== */}
+        <section className={styles.hero} data-track-location="hero">
+          <div className={styles.heroInner}>
+            <div className={styles.heroCopy}>
+              <h1 className={styles.h1}>Administrativa, která se dělá sama.</h1>
+              <p className={styles.heroLead}>
+                <span className={styles.leadStrong}>Jsme AI‑first tým.</span> Stavíme ERP
+                na míru, automatizace obchodu nad Raynetem a AI asistenty, kteří ve firmě
+                opravdu pracují. Napojíme se na to, co už máte, a nepředáme nic, co
+                neprošlo kontrolou.
+              </p>
+              <div className={styles.heroActions}>
+                <Link href="/kontakt/" className="btn btnAccent">
+                  Domluvit 30 minut
+                </Link>
+                <Link href="/#sluzby" className="btn btnOnDark">
+                  Co stavíme
+                </Link>
               </div>
-              <div className={styles.dash}>
-                <div className={styles.dashCard}>
-                  <div className={styles.dashCardHead}>
-                    <span className={styles.dashCardLabel}>Tržby po týdnech</span>
-                    <span className={styles.dashCardDelta}>+18 %</span>
-                  </div>
-                  <strong className={styles.dashCardValue}>4,82 mil. Kč</strong>
-                  <div className={styles.bars}>
-                    {CHART_BARS.map((bar, i) => (
-                      <div
-                        key={i}
-                        className={`${styles.bar} ${styles[`bar${bar.tone}`]}`}
-                        style={{ height: `${bar.h}%` }}
-                      />
-                    ))}
-                  </div>
-                  <div className={styles.axis}>
-                    <span>T27</span>
-                    <span>T31</span>
-                    <span>T36</span>
-                  </div>
-                </div>
-                <div className={styles.dashSide}>
-                  <div className={styles.kpis}>
-                    <div className={styles.kpi}>
-                      <span>Marže</span>
-                      <strong>31,4 %</strong>
-                    </div>
-                    <div className={styles.kpi}>
-                      <span>Objedn.</span>
-                      <strong>1 286</strong>
-                    </div>
-                  </div>
-                  <div className={styles.table}>
-                    <div className={styles.tableHead}>
-                      <span>Kategorie</span>
-                      <span className={styles.cellRight}>Tržby</span>
-                      <span className={styles.cellRight}>Marže</span>
-                    </div>
-                    {CATEGORY_ROWS.map((row) => (
-                      <div key={row.name} className={styles.tableRow}>
-                        <span className={styles.cellName}>{row.name}</span>
-                        <span className={`${styles.cellRevenue} ${styles.cellRight}`}>
-                          {row.revenue}
-                        </span>
-                        <span className={`${styles.cellMargin} ${styles.cellRight}`}>
-                          {row.margin}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <ul className={styles.heroChecks}>
+                <li>Napojíme se na to, co máte</li>
+                <li>Předáváme až po kontrole</li>
+                <li>Kód a data patří vám</li>
+              </ul>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ===== TRUST STRIP ===== */}
-      <section className={styles.trust}>
-        <div className={styles.trustInner}>
-          <span className={styles.trustLabel}>Stavíme na ověřených nástrojích</span>
-          <ul className={styles.trustList}>
-            {TOOLS.map((tool) => (
-              <li key={tool}>{tool}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ===== PAIN POINTS + DATA FLOW ===== */}
-      <section className="wrap" style={{ paddingBottom: 40 }}>
-        <div className="sectionHead">
-          <p className="eyebrow">Znáte to?</p>
-          <h2 className="h2">Jedna cesta dat. Jeden partner na celou trasu.</h2>
-        </div>
-        <div className={styles.pains}>
-          {PAINS.map((pain) => (
-            <p key={pain} className={styles.pain}>
-              {pain}
-            </p>
-          ))}
-        </div>
-        <DataFlow />
-      </section>
-
-      {/* ===== SERVICES ===== */}
-      <section data-reveal id="sluzby" className="wrap wrapTight">
-        <div className="sectionHead">
-          <p className="eyebrow">Co pro vás uděláme</p>
-          <h2 className="h2">Roztroušená data proměníme v rozhodnutí.</h2>
-        </div>
-        <PillarTabs />
-        <div style={{ textAlign: "center", marginTop: 36 }}>
-          <Link href="/sluzby/" style={{ fontWeight: 600, fontSize: 16 }}>
-            Detail všech služeb →
-          </Link>
-        </div>
-      </section>
-
-      {/* ===== CASE STUDIES + TESTIMONIALS ===== */}
-      <section data-reveal id="reference" className="surfaceWhite">
-        <div className="wrap">
-          <div className="sectionHead">
-            <p className="eyebrow">Reference</p>
-            <h2 className="h2">Řešení, která fungují v praxi.</h2>
-            <p className="lead">Tři typy projektů, anonymně.</p>
-          </div>
-          <div className={styles.cases}>
-            {CASES.map((item) => (
-              <article key={item.title} className={styles.case}>
-                <span className={styles.caseTag}>{item.tag}</span>
-                <h3 className={styles.caseTitle}>{item.title}</h3>
-                <p className={styles.caseBody}>{item.body}</p>
-                <div className={styles.caseMetrics}>
-                  {item.metrics.map((metric) => (
-                    <div key={metric.label}>
-                      <strong>{metric.value}</strong>
-                      <span>{metric.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className={styles.quotes}>
-            {QUOTES.map((quote) => (
-              <blockquote key={quote.role} className={styles.quote}>
-                <span className={styles.stars} aria-label="Hodnocení 5 z 5">
-                  ★★★★★
+            <figure className={styles.morning} aria-label="Ukázka: co systém udělá za jedno dopoledne">
+              <figcaption className={styles.morningHead}>
+                <span>Dnes ráno ve firmě</span>
+                <span className={styles.sample}>Ukázka · fiktivní data</span>
+              </figcaption>
+              <ol className={styles.morningList}>
+                {MORNING.map((row, i) => (
+                  <li key={row.time} className={styles.morningRow} style={{ animationDelay: `${0.35 + i * 0.22}s` }}>
+                    <span className={styles.morningTime}>{row.time}</span>
+                    <span className={styles.morningArea}>{row.area}</span>
+                    <span className={styles.morningText}>{row.text}</span>
+                    <span className={styles.morningDone} aria-label="hotovo">✓</span>
+                  </li>
+                ))}
+              </ol>
+              <div className={styles.morningFoot} style={{ animationDelay: `${0.35 + MORNING.length * 0.22}s` }}>
+                <span>
+                  <strong>Čeká na vás:</strong> 2 výjimky ke schválení
                 </span>
-                <p>{quote.text}</p>
-                <footer>
-                  <strong>{quote.role}</strong>
-                  {quote.org}
-                </footer>
-              </blockquote>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PROCESS ===== */}
-      <section data-reveal id="postup" className="wrap">
-        <div className="sectionHead">
-          <p className="eyebrow">Jak pracujeme</p>
-          <h2 className="h2">
-            Od první hodiny k měřitelnému přínosu v pěti krocích.
-          </h2>
-        </div>
-        <ol className={styles.steps}>
-          {STEPS.map((step, i) => (
-            <li
-              key={step.title}
-              className={`${styles.step} ${i === STEPS.length - 1 ? styles.stepFinal : ""}`}
-            >
-              <span className={styles.stepNum}>{i + 1}</span>
-              <h3 className={styles.stepTitle}>{step.title}</h3>
-              <span className={styles.stepTime}>{step.time}</span>
-              <p className={styles.stepBody}>{step.body}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* ===== BENEFITS + ROI ===== */}
-      <section
-        data-reveal
-        id="prinosy"
-        style={{ background: "var(--surface)", borderTop: "1px solid var(--border)" }}
-      >
-        <div className="wrap">
-          <div className="sectionHead">
-            <p className="eyebrow">Přínosy</p>
-            <h2 className="h2">Co se u vás změní</h2>
-          </div>
-          <RoiCalculator />
-          <div className={styles.benefits}>
-            {BENEFITS.map(([title, body]) => (
-              <div key={title} className={styles.benefit}>
-                <strong>{title}</strong>
-                <span>{body}</span>
+                <span className={styles.approve} aria-hidden="true">
+                  Schválit
+                </span>
               </div>
-            ))}
+            </figure>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ===== WHY PEAKFLOW ===== */}
-      <section data-reveal className="surfaceDark">
-        <div className="wrap">
-          <div className="sectionHead">
-            <p className="eyebrow eyebrowLight">Proč PeakFlow</p>
-            <h2 className="h2">
-              Umíme to, co jiní ne. Neuzamkneme vás. Dodáme celou cestu.
-            </h2>
+        {/* ===== KDE TO DRHNE ===== */}
+        <section className={styles.section}>
+          <div className={styles.inner}>
+            <h2 className={styles.h2}>Kde firmám utíká čas</h2>
+            <div className={styles.pains}>
+              {PAINS.map((pain) => (
+                <div key={pain.role} className={styles.pain}>
+                  <span className={styles.painRole}>{pain.role}</span>
+                  <p>{pain.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className={styles.whyGrid}>
-            {WHY.map(([title, body]) => (
-              <div key={title} className={styles.why}>
-                <strong>{title}</strong>
-                <span>{body}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ===== PRICING MODEL (no numbers, by design) ===== */}
-      <section data-reveal id="cena" className="wrap">
-        <div className="sectionHead">
-          <p className="eyebrow">Transparentní model</p>
-          <h2 className="h2">Dvě složky. Žádné skryté hodiny.</h2>
-          <p className="lead">Cenu sdělujeme po poptání podle rozsahu.</p>
-        </div>
-        <div className={styles.pricing}>
-          <div className={`${styles.plan} ${styles.planFeatured}`}>
-            <span className={styles.planBadge}>Jednorázově</span>
-            <h3 className={styles.planTitle}>Cena za produkt</h3>
-            <ul className={styles.planList}>
-              <li><span aria-hidden="true">✓</span>Návrh, vývoj, napojení, nasazení</li>
-              <li><span aria-hidden="true">✓</span>Kompletní dokumentace</li>
-              <li><span aria-hidden="true">✓</span>Přístupy a vlastnictví</li>
+        {/* ===== SLUŽBY ===== */}
+        <section id="sluzby" className={`${styles.section} ${styles.sectionWhite}`}>
+          <div className={styles.inner}>
+            <div className={styles.head}>
+              <h2 className={styles.h2}>Co stavíme</h2>
+              <p className={styles.lead}>
+                <span className={styles.leadStrong}>Čtyři věci, které se v praxi kombinují.</span>{" "}
+                Začínáme tou, která vám vrátí nejvíc času.
+              </p>
+            </div>
+            <div className={styles.services}>
+              {SERVICES.map((s) => (
+                <article key={s.id} className={styles.service} data-track-item={s.track}>
+                  <h3 className={styles.serviceTitle}>{s.title}</h3>
+                  <p className={styles.serviceBody}>{s.body}</p>
+                  <p className={styles.serviceExample}>
+                    <span>Například:</span> {s.example}
+                  </p>
+                  <Link href={`/sluzby/#${s.id}`} className={styles.serviceLink}>
+                    Víc o službě
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== CO PRÁVĚ BĚŽÍ ===== */}
+        <section id="reference" className={styles.section}>
+          <div className={styles.inner}>
+            <div className={styles.head}>
+              <h2 className={styles.h2}>Co právě běží</h2>
+              <p className={styles.lead}>
+                <span className={styles.leadStrong}>Žádné vymyšlené reference.</span> Tohle
+                stavíme nebo provozujeme teď. Jména klientů uvádíme až s jejich souhlasem.
+              </p>
+            </div>
+            <ul className={styles.running}>
+              {RUNNING.map((item) => (
+                <li key={item.title} className={styles.runningRow}>
+                  <div>
+                    <h3 className={styles.runningTitle}>
+                      {item.href ? <Link href={item.href}>{item.title}</Link> : item.title}
+                    </h3>
+                    <p className={styles.runningBody}>{item.body}</p>
+                  </div>
+                  <span className={`${styles.status} ${styles[`status_${item.tone}`]}`}>
+                    {item.status}
+                  </span>
+                </li>
+              ))}
             </ul>
-            <Link href="/kontakt/" className={`btn btnPrimary ${styles.planCta}`}>
-              Poptat nabídku
-            </Link>
-          </div>
-          <div className={styles.plan}>
-            <span className={styles.planBadge}>Po nasazení</span>
-            <h3 className={styles.planTitle}>Fixní měsíční fee</h3>
-            <ul className={styles.planList}>
-              <li><span aria-hidden="true">✓</span>Monitoring a provozní dohled</li>
-              <li><span aria-hidden="true">✓</span>Údržba a opravy</li>
-              <li><span aria-hidden="true">✓</span>Drobný rozvoj a podpora</li>
-            </ul>
-            <Link href="/kontakt/" className="btn btnOutlineDark">
-              Začít s PoC
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== FAQ ===== */}
-      <section
-        data-reveal
-        id="faq"
-        style={{ background: "var(--surface)", borderTop: "1px solid var(--border)" }}
-      >
-        <div className={styles.faqWrap}>
-          <div className={styles.faqHead}>
-            <p className="eyebrow">FAQ</p>
-            <h2 className="h2">Časté otázky</h2>
-          </div>
-          <div className={styles.faqList}>
-            {FAQS.map((item) => (
-              <details key={item.q} className={styles.faq}>
-                <summary className={styles.faqSummary}>
-                  {item.q}
-                  <span className={styles.faqChevron} aria-hidden="true">⌄</span>
-                </summary>
-                <p className={styles.faqBody}>{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CLOSING CTA ===== */}
-      <section data-reveal className="wrap" style={{ paddingBottom: 96 }} data-track-location="final_cta">
-        <div className="ctaBand">
-          <div>
-            <h2 className="ctaTitle">Začněme hodinovým discovery callem.</h2>
-            <p className="ctaBody">
-              Do 3 dnů návrh řešení, do týdne nabídka. Bez závazku.
+            <p className={styles.more}>
+              <Link href="/reference/">Všechny reference</Link>
             </p>
           </div>
-          <div className="ctaActions">
-            <Link href="/kontakt/" className="btn btnDark">
-              Domluvit discovery call →
-            </Link>
-            <Link href="/sluzby/" className="btn btnOnDark">
-              Prohlédnout služby
-            </Link>
+        </section>
+
+        {/* ===== POSTUP ===== */}
+        <section id="postup" className={`${styles.section} ${styles.sectionWhite}`}>
+          <div className={styles.inner}>
+            <h2 className={styles.h2}>Jak pracujeme</h2>
+            <ol className={styles.steps}>
+              {STEPS.map((step, i) => (
+                <li key={step.title} className={styles.step}>
+                  <span className={styles.stepNum}>{i + 1}</span>
+                  <h3 className={styles.stepTitle}>{step.title}</h3>
+                  <span className={styles.stepTime}>{step.time}</span>
+                  <p className={styles.stepBody}>{step.body}</p>
+                </li>
+              ))}
+            </ol>
+            <div className={styles.proof}>
+              <div>
+                <h3 className={styles.proofTitle}>Hotovo znamená důkaz, ne slib.</h3>
+                <p className={styles.proofBody}>
+                  Než cokoli předáme, projde to automatickou kontrolou. Co přesně má
+                  fungovat, sepíšeme s vámi předem. Když kontrola neprojde, nepředáváme.
+                </p>
+              </div>
+              <pre className={styles.gate} aria-label="Výstup kontroly">
+                <span className={styles.gateDim}>$ npm run gate</span>
+                {"\n"}ok   typy{"\n"}ok   testy{"\n"}ok   build{"\n"}
+                <span className={styles.gatePass}>GATE: PASS</span>
+              </pre>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* ===== CENY ===== */}
+        <section id="cena" className={styles.section}>
+          <div className={styles.inner}>
+            <div className={styles.head}>
+              <h2 className={styles.h2}>Kolik to stojí</h2>
+              <p className={styles.lead}>
+                <span className={styles.leadStrong}>Ceny jsou bez DPH.</span> Přesnou nabídku
+                dostanete po mapě příležitostí, provoz a další rozvoj podle rozsahu.
+              </p>
+            </div>
+            <div className={styles.prices}>
+              {PRICES.map((p) => (
+                <div key={p.name} className={styles.price}>
+                  <span className={styles.priceName}>{p.name}</span>
+                  <strong className={styles.priceValue}>{p.price}</strong>
+                  <span className={styles.priceNote}>{p.note}</span>
+                  <p className={styles.priceBody}>{p.body}</p>
+                </div>
+              ))}
+            </div>
+            <div className={styles.roi}>
+              <RoiCalculator />
+            </div>
+          </div>
+        </section>
+
+        {/* ===== TÝM + FAQ ===== */}
+        <section id="faq" className={`${styles.section} ${styles.sectionWhite}`}>
+          <div className={`${styles.inner} ${styles.split}`}>
+            <div>
+              <h2 className={styles.h2}>Kdo za tím je</h2>
+              <p className={styles.lead}>
+                <span className={styles.leadStrong}>Dva lidi a AI agenti.</span> Každý
+                projekt stavíme s AI, proto zvládneme to, na co jinde potřebují celý tým.
+              </p>
+              <ul className={styles.team}>
+                {TEAM.map((person) => (
+                  <li key={person.name} className={styles.person}>
+                    {person.photo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={person.photo} alt={person.name} width={72} height={72} className={styles.avatar} />
+                    ) : (
+                      <span className={styles.avatar} aria-hidden="true">
+                        {person.initials}
+                      </span>
+                    )}
+                    <div>
+                      <strong className={styles.personName}>{person.name}</strong>
+                      <span className={styles.personRole}>{person.role}</span>
+                      <p className={styles.personBody}>{person.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/o-nas/" className={styles.serviceLink}>
+                Víc o nás
+              </Link>
+            </div>
+            <div>
+              <h2 className={styles.h2}>Časté otázky</h2>
+              <div className={styles.faqList}>
+                {FAQS.map((item) => (
+                  <details key={item.q} className={styles.faq}>
+                    <summary className={styles.faqSummary}>
+                      {item.q}
+                      <span className={styles.faqChevron} aria-hidden="true">⌄</span>
+                    </summary>
+                    <p className={styles.faqBody}>{item.a}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== CTA ===== */}
+        <section className={styles.section} data-track-location="final_cta">
+          <div className={styles.inner}>
+            <div className="ctaBand">
+              <div>
+                <h2 className="ctaTitle">Ukažte nám jeden proces, který vás zdržuje.</h2>
+                <p className="ctaBody">
+                  Za 30 minut vám řekneme, jestli a jak ho zautomatizovat. Bez prezentace
+                  a bez závazku.
+                </p>
+              </div>
+              <div className="ctaActions">
+                <Link href="/kontakt/" className="btn btnDark">
+                  Domluvit 30 minut
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
 
       <SiteFooter variant="full" />
     </>

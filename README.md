@@ -86,9 +86,12 @@ Kontaktní e-mail a telefon už doplněné jsou (`info@peakflow.cz`,
 
 ### 3. Obsahové placeholdery
 
-Čísla v case studies (`4`, `30+ h`, `−80 %`…) a tři citace v sekci Reference
-jsou **návrhové placeholdery** z designu. Před spuštěním je nahraďte reálnými
-hodnotami — jsou pohromadě v polích `CASES` a `QUOTES` v `app/page.tsx`.
+~~Čísla v case studies a tři citace v sekci Reference jsou návrhové
+placeholdery z designu.~~ **2026-11-20 odstraněno.** Placeholdery z designu
+(anonymní „případy“ s metrikami a citace s hvězdičkami) byly od spuštění na
+živém webu, protože je nikdo nenahradil. Homepage teď ukazuje sekci „Co právě
+běží“ z `lib/running.ts`. Pravidlo: na web jen to, co běží a je doložené,
+klienty jménem až s jejich souhlasem. Žádné citace ani čísla bez podkladu.
 
 ## Měření — Google Tag Manager
 

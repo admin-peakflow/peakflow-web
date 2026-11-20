@@ -187,7 +187,7 @@ export default async function CasePage({ params }: Props) {
               </p>
             </div>
             <Link href="/kontakt/" className="btn btnDark">
-              Domluvit discovery call →
+              Domluvit 30 minut
             </Link>
           </div>
         </section>

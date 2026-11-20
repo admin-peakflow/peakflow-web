@@ -8,10 +8,11 @@ import styles from "./ContactForm.module.css";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const TOPICS = [
-  "Datová analytika a reporting",
-  "AI automatizace procesů",
-  "Obchodní procesy a CRM (Raynet)",
-  "Kombinace / nevím, poradíte",
+  "Automatizace obchodu a back-office",
+  "ERP nebo systém na míru",
+  "AI asistent nebo chatbot",
+  "Data a reporting",
+  "Nevím, poradíte",
 ];
 
 type Props = {

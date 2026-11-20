@@ -30,7 +30,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — datová analytika a AI automatizace pro B2B`,
+    default: `${site.name} — AI pro firmy: ERP na míru, automatizace a AI asistenti`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "cs_CZ",
     siteName: site.name,
-    title: `${site.name} — datová analytika a AI automatizace pro B2B`,
+    title: `${site.name} — AI pro firmy: ERP na míru, automatizace a AI asistenti`,
     description: site.description,
     url: site.url,
   },
