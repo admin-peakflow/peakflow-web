@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RoiCalculator } from "@/components/home/RoiCalculator";
 import { Bento } from "@/components/home/Bento";
+import { Apps } from "@/components/home/Apps";
 import { LogoMarquee } from "@/components/home/LogoMarquee";
 import { PlayOnView } from "@/components/PlayOnView";
 import { AutoScrollShots } from "@/components/AutoScrollShots";
@@ -253,15 +254,29 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ===== CO JSME POSTAVILI A CO BĚŽÍ ===== */}
+        {/* ===== APLIKACE V PROVOZU ===== */}
+        <section id="aplikace" className={`${styles.section} ${styles.sectionDark}`}>
+          <div className={styles.inner}>
+            <div className={styles.head}>
+              <h2 className={`${styles.h2} ${styles.h2Light}`}>Aplikace, které už běží v provozu</h2>
+              <p className={`${styles.lead} ${styles.leadLight}`}>
+                <span className={styles.leadStrong}>Žádné prototypy.</span> Systémy, které
+                denně používají lidé ve skladu, v obchodě a v logistice.
+              </p>
+            </div>
+            <Apps />
+          </div>
+        </section>
+
+        {/* ===== WEBY A ROZPRACOVANÉ SYSTÉMY ===== */}
         <section id="reference" className={`${styles.section} ${styles.sectionWhite}`}>
           <div className={styles.inner}>
             <div className={styles.head}>
-              <h2 className={styles.h2}>Co jsme postavili a co právě běží</h2>
+              <h2 className={styles.h2}>Weby, které jsme postavili</h2>
               <p className={styles.lead}>
                 <span className={styles.leadStrong}>Žádné vymyšlené reference.</span> Weby
-                níž běží naostro a čísla jsou z jejich case studies. Jména klientů u
-                systémů uvádíme až s jejich souhlasem.
+                běží naostro a čísla jsou z jejich case studies. Jména klientů u
+                rozpracovaných systémů uvádíme až s jejich souhlasem.
               </p>
             </div>
 

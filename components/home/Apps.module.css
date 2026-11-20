@@ -1,0 +1,280 @@
+/* Aplikace v provozu. Sekce je tmavá (navy), karty jsou světlé obrysy. */
+
+.list {
+  display: grid;
+  gap: 28px;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 56px;
+  align-items: center;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 28px;
+  padding: 52px;
+  overflow: hidden;
+}
+.appAlt .copy { order: 2; }
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.name {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--teal-light);
+  letter-spacing: .01em;
+}
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(18, 181, 163, .16);
+  border: 1px solid rgba(18, 181, 163, .35);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+}
+.status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal-bright);
+  box-shadow: 0 0 0 0 rgba(18, 181, 163, .6);
+  animation: pulse 2s ease-out infinite;
+}
+
+.title {
+  margin: 18px 0 0;
+  font-weight: 600;
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: #fff;
+  text-wrap: balance;
+}
+.client {
+  margin: 10px 0 0;
+  font-size: 15px;
+  color: var(--on-dark-dim);
+}
+.points {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.points li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--on-dark);
+}
+.points li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--teal-bright);
+  font-weight: 700;
+}
+.stack {
+  margin: 24px 0 0;
+  font-size: 13px;
+  color: var(--on-dark-dim);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+/* ---------- Telefony (PackLabsApp) ---------- */
+.phones {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 18px;
+  padding-top: 12px;
+}
+.phone {
+  width: 31%;
+  max-width: 200px;
+  aspect-ratio: 1 / 2;
+  border-radius: 28px;
+  padding: 7px;
+  background: #050B15;
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .45);
+  transition: transform .3s ease;
+}
+.phone img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 22px;
+}
+.phoneMid { transform: translateY(-28px); }
+.phones:hover .phone { transform: translateY(-6px); }
+.phones:hover .phoneMid { transform: translateY(-34px); }
+
+.caption {
+  margin: 20px 0 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--on-dark-dim);
+}
+
+/* ---------- Plán závozu (DreamyApp) ---------- */
+.route {
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .4);
+  font-size: 14px;
+}
+.routeHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--divider);
+}
+.routeHead strong {
+  display: block;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+}
+.routeHead span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.sample {
+  font-size: 11px !important;
+  font-weight: 500;
+  white-space: nowrap;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 2px 9px;
+}
+.stops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.stops::before {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 26px;
+  bottom: 26px;
+  border-left: 2px dashed var(--teal-100);
+}
+.stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--divider);
+}
+.stop:last-child { border-bottom: 0; }
+.stopNum {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 13px;
+  position: relative;
+  z-index: 1;
+}
+.stop strong {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+}
+.stop span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.stop em {
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teal-dark);
+  background: var(--teal-50);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+.routeFoot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--text-slate);
+}
+.routeFoot strong { color: var(--text); }
+.qr {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background:
+    conic-gradient(from 90deg at 30% 30%, var(--navy) 25%, transparent 0) 0 0 / 10px 10px,
+    linear-gradient(var(--surface), var(--surface));
+  border: 4px solid var(--navy);
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(18, 181, 163, .6); }
+  70%  { box-shadow: 0 0 0 8px rgba(18, 181, 163, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(18, 181, 163, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status i { animation: none; }
+  .phone, .phones:hover .phone { transition: none; }
+}
+
+@media (max-width: 960px) {
+  .app {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    padding: 36px 28px;
+  }
+  .appAlt .copy { order: 0; }
+}
+
+@media (max-width: 560px) {
+  .phone:nth-child(3) { display: none; }
+  .phone { width: 46%; }
+  .phoneMid { transform: translateY(-20px); }
+  .stop { grid-template-columns: 28px minmax(0, 1fr); }
+  .stop em { grid-column: 2; justify-self: start; }
+  .routeHead { flex-direction: column; }
+}
+
+.stop .stopNum { color: #fff; font-size: 13px; }
