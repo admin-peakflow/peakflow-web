@@ -67,6 +67,12 @@ const STEPS = [
   },
 ];
 
+/**
+ * Veřejné ceny jsou skryté (Tomáš, 2026-11-20). Zpátky je zapne `true`.
+ * Sekce #cena pak ukáže ceník nad kalkulačkou úspor.
+ */
+const SHOW_PRICES = false;
+
 const PRICES = [
   {
     name: "Úvodní hovor",
@@ -392,25 +398,37 @@ export default function HomePage() {
         {/* ===== CENY ===== */}
         <section id="cena" className={`${styles.section} ${styles.sectionWhite}`}>
           <div className={styles.inner}>
-            <div className={styles.head}>
-              <h2 className={styles.h2}>Kolik to stojí</h2>
-              <p className={styles.lead}>
-                <span className={styles.leadStrong}>Ceny jsou bez DPH.</span> Přesnou nabídku
-                dostanete po mapě příležitostí, provoz a další rozvoj podle rozsahu.
-              </p>
-            </div>
-            <div className={styles.prices}>
-              {PRICES.map((p, i) => (
-                <div key={p.name} className={`${styles.price} ${i === 1 ? styles.priceStart : ""}`}>
-                  {i === 1 && <span className={styles.priceBadge}>Doporučený začátek</span>}
-                  <span className={styles.priceName}>{p.name}</span>
-                  <strong className={styles.priceValue}>{p.price}</strong>
-                  <span className={styles.priceNote}>{p.note}</span>
-                  <p className={styles.priceBody}>{p.body}</p>
+            {SHOW_PRICES ? (
+              <>
+                <div className={styles.head}>
+                  <h2 className={styles.h2}>Kolik to stojí</h2>
+                  <p className={styles.lead}>
+                    <span className={styles.leadStrong}>Ceny jsou bez DPH.</span> Přesnou nabídku
+                    dostanete po mapě příležitostí, provoz a další rozvoj podle rozsahu.
+                  </p>
                 </div>
-              ))}
-            </div>
-            <div className={styles.roi}>
+                <div className={styles.prices}>
+                  {PRICES.map((p, i) => (
+                    <div key={p.name} className={`${styles.price} ${i === 1 ? styles.priceStart : ""}`}>
+                      {i === 1 && <span className={styles.priceBadge}>Doporučený začátek</span>}
+                      <span className={styles.priceName}>{p.name}</span>
+                      <strong className={styles.priceValue}>{p.price}</strong>
+                      <span className={styles.priceNote}>{p.note}</span>
+                      <p className={styles.priceBody}>{p.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className={styles.head}>
+                <h2 className={styles.h2}>Vyplatí se to?</h2>
+                <p className={styles.lead}>
+                  <span className={styles.leadStrong}>Spočítejte si, kolik vás dnes stojí ruční práce.</span>{" "}
+                  Cenu řešení vám řekneme po úvodním hovoru.
+                </p>
+              </div>
+            )}
+            <div className={SHOW_PRICES ? styles.roi : undefined}>
               <RoiCalculator />
             </div>
           </div>
