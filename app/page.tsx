@@ -2,15 +2,23 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RoiCalculator } from "@/components/home/RoiCalculator";
+import { Bento } from "@/components/home/Bento";
+import { LogoMarquee } from "@/components/home/LogoMarquee";
+import { PlayOnView } from "@/components/PlayOnView";
+import { AutoScrollShots } from "@/components/AutoScrollShots";
+import { CASES } from "@/lib/cases";
 import { RUNNING } from "@/lib/running";
+import { contact } from "@/lib/site";
 import styles from "./page.module.css";
 
 /*
  * Všechny texty homepage jsou v konstantách tady nahoře. Kdo chce upravit
- * text, nemusí do JSX níž.
+ * text, nemusí do JSX níž. Služby (dlaždice s ukázkami) jsou
+ * v components/home/Bento.tsx, „Co právě běží“ v lib/running.ts.
  *
  * Pravidlo pro reference: na web jen to, co běží a je doložené. Žádné citace,
  * hvězdičky ani čísla bez podkladu. Jména klientů až s jejich souhlasem.
+ * Ukázky produktu jsou na fiktivních datech a jsou tak označené.
  */
 
 /** Ukázka v hero: jedno dopoledne ve firmě, fiktivní data, viditelně označená. */
@@ -26,49 +34,19 @@ const PAINS = [
   {
     role: "Majitel",
     text: "Čísla vidí až na konci měsíce. Někdo je musí ručně poskládat z Excelu a stejně jim úplně nevěří.",
+    tools: ["Excel", "e‑mail", "účetní"],
   },
   {
     role: "Obchodník",
     text: "Půl dne přepisuje e‑maily a hovory do CRM a hlídá, komu má zavolat. Na prodej zbývá zbytek.",
+    tools: ["Outlook", "CRM", "telefon"],
   },
   {
     role: "Provoz a back‑office",
     text: "Objednávky, montáže a faktury běží přes tabulky, telefon a papír. Každá chyba se hledá ručně.",
+    tools: ["tabulky", "telefon", "papír"],
   },
 ];
-
-const SERVICES = [
-  {
-    id: "erp",
-    track: "sluzba-erp",
-    title: "ERP a systémy na míru",
-    body: "Obchod, sklad, výroba, montáže a fakturace v jednom systému. Postavený podle toho, jak vaše firma opravdu funguje, ne podle krabice.",
-    example: "Zakázka od poptávky po fakturu bez přepisování mezi tabulkami.",
-  },
-  {
-    id: "automatizace",
-    track: "sluzba-automatizace",
-    title: "Automatizace obchodu a back‑office",
-    body: "AI převezme rutinu pozice: zápisy do CRM, připomínky, zpracování objednávek a faktur. Člověk schvaluje jen výjimky.",
-    example: "Komunikace s klientem se sama zapíše k případu v Raynetu.",
-  },
-  {
-    id: "asistenti",
-    track: "sluzba-asistenti",
-    title: "AI asistenti a boti",
-    body: "Chatbot na webu, který odpoví a rovnou založí poptávku. Interní asistent, který zná vaše dokumenty a postupy a zlepšuje se s každou opravou.",
-    example: "Nový kolega se zeptá asistenta, ne tří lidí z týmu.",
-  },
-  {
-    id: "data",
-    track: "sluzba-data",
-    title: "Data a reporting",
-    body: "Jedno místo pravdy z ERP, e‑shopu a CRM. Přehledy, kterým vedení věří, každé ráno bez ruční práce.",
-    example: "Marže po zakázkách a obchodnících v jednom pohledu.",
-  },
-];
-
-/* „Co právě běží“ je v lib/running.ts (sdílí ho i /reference/). */
 
 const STEPS = [
   {
@@ -120,7 +98,7 @@ const TEAM = [
     name: "Tomáš Andrlík",
     role: "Obchod, procesy a buildy",
     body: "Zjistí, kde ve firmě utíká čas, a postaví systém, který ho vrátí.",
-    photo: "/podpis/tomas-andrlik-v3.png",
+    photo: "/podpis/tomas-andrlik-panel.jpg",
     initials: "TA",
   },
   {
@@ -150,6 +128,21 @@ const FAQS = [
     a: "Mapa příležitostí 1–2 týdny, první kolo automatizací 2–6 týdnů. ERP stavíme po etapách a termín každé etapy dostanete v nabídce.",
   },
 ];
+
+/** Weby, které jsme postavili: skutečné screenshoty a čísla z case studies (lib/cases.ts). */
+const SHOWCASE = [
+  { slug: "fs-composites", number: 0 },
+  { slug: "dreamy", number: 0 },
+  { slug: "grig", number: 1 }, // screenshot je grig.sk, tak i číslo za grig.sk
+].flatMap(({ slug, number }) => {
+  const c = CASES.find((x) => x.slug === slug);
+  if (!c) return [];
+  const domain = c.domains.find((d) => c.shot.src.includes(`-${d.split(".").pop()}-`)) ?? c.domains[0];
+  return [{ ...c, domain, stat: c.numbers[number] ?? c.numbers[0] }];
+});
+
+/** Rozpracované systémy (bez webů, ty jsou ve SHOWCASE). */
+const SYSTEMS = RUNNING.filter((r) => !r.href);
 
 export default function HomePage() {
   return (
@@ -183,32 +176,48 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <figure className={styles.morning} aria-label="Ukázka: co systém udělá za jedno dopoledne">
-              <figcaption className={styles.morningHead}>
-                <span>Dnes ráno ve firmě</span>
-                <span className={styles.sample}>Ukázka · fiktivní data</span>
-              </figcaption>
-              <ol className={styles.morningList}>
-                {MORNING.map((row, i) => (
-                  <li key={row.time} className={styles.morningRow} style={{ animationDelay: `${0.35 + i * 0.22}s` }}>
-                    <span className={styles.morningTime}>{row.time}</span>
-                    <span className={styles.morningArea}>{row.area}</span>
-                    <span className={styles.morningText}>{row.text}</span>
-                    <span className={styles.morningDone} aria-label="hotovo">✓</span>
-                  </li>
-                ))}
-              </ol>
-              <div className={styles.morningFoot} style={{ animationDelay: `${0.35 + MORNING.length * 0.22}s` }}>
-                <span>
-                  <strong>Čeká na vás:</strong> 2 výjimky ke schválení
-                </span>
-                <span className={styles.approve} aria-hidden="true">
-                  Schválit
-                </span>
+            <div className={styles.heroVisual}>
+              <div className={styles.chip} aria-hidden="true">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logos/raynet.svg" alt="" width={64} height={18} />
+                <span>17 záznamů zapsáno</span>
               </div>
-            </figure>
+
+              <figure className={styles.morning} aria-label="Ukázka: co systém udělá za jedno dopoledne">
+                <figcaption className={styles.morningHead}>
+                  <span>Dnes ráno ve firmě</span>
+                  <span className={styles.sample}>Ukázka · fiktivní data</span>
+                </figcaption>
+                <ol className={styles.morningList}>
+                  {MORNING.map((row, i) => (
+                    <li key={row.time} className={styles.morningRow} style={{ animationDelay: `${0.35 + i * 0.22}s` }}>
+                      <span className={styles.morningTime}>{row.time}</span>
+                      <span className={styles.morningArea}>{row.area}</span>
+                      <span className={styles.morningText}>{row.text}</span>
+                      <span className={styles.morningDone} aria-label="hotovo">✓</span>
+                    </li>
+                  ))}
+                </ol>
+                <div className={styles.morningFoot} style={{ animationDelay: `${0.35 + MORNING.length * 0.22}s` }}>
+                  <span>
+                    <strong>Čeká na vás:</strong> 2 výjimky ke schválení
+                  </span>
+                  <span className={styles.approve} aria-hidden="true">
+                    Schválit
+                  </span>
+                </div>
+              </figure>
+
+              <div className={styles.bubble} aria-hidden="true">
+                <span className={styles.bubbleWho}>Asistent</span>
+                Montáž v Žabovřeskách je potvrzená na čtvrtek 8:00. Obyvatelé dostali
+                oznámení.
+              </div>
+            </div>
           </div>
         </section>
+
+        <LogoMarquee />
 
         {/* ===== KDE TO DRHNE ===== */}
         <section className={styles.section}>
@@ -219,14 +228,19 @@ export default function HomePage() {
                 <div key={pain.role} className={styles.pain}>
                   <span className={styles.painRole}>{pain.role}</span>
                   <p>{pain.text}</p>
+                  <ul className={styles.painTools} aria-label="Dnes to řeší přes">
+                    {pain.tools.map((tool) => (
+                      <li key={tool}>{tool}</li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ===== SLUŽBY ===== */}
-        <section id="sluzby" className={`${styles.section} ${styles.sectionWhite}`}>
+        {/* ===== SLUŽBY (bento s ukázkami) ===== */}
+        <section id="sluzby" className={`${styles.section} ${styles.sectionTint}`}>
           <div className={styles.inner}>
             <div className={styles.head}>
               <h2 className={styles.h2}>Co stavíme</h2>
@@ -235,40 +249,75 @@ export default function HomePage() {
                 Začínáme tou, která vám vrátí nejvíc času.
               </p>
             </div>
-            <div className={styles.services}>
-              {SERVICES.map((s) => (
-                <article key={s.id} className={styles.service} data-track-item={s.track}>
-                  <h3 className={styles.serviceTitle}>{s.title}</h3>
-                  <p className={styles.serviceBody}>{s.body}</p>
-                  <p className={styles.serviceExample}>
-                    <span>Například:</span> {s.example}
-                  </p>
-                  <Link href={`/sluzby/#${s.id}`} className={styles.serviceLink}>
-                    Víc o službě
-                  </Link>
-                </article>
-              ))}
-            </div>
+            <Bento />
           </div>
         </section>
 
-        {/* ===== CO PRÁVĚ BĚŽÍ ===== */}
-        <section id="reference" className={styles.section}>
+        {/* ===== CO JSME POSTAVILI A CO BĚŽÍ ===== */}
+        <section id="reference" className={`${styles.section} ${styles.sectionWhite}`}>
           <div className={styles.inner}>
             <div className={styles.head}>
-              <h2 className={styles.h2}>Co právě běží</h2>
+              <h2 className={styles.h2}>Co jsme postavili a co právě běží</h2>
               <p className={styles.lead}>
-                <span className={styles.leadStrong}>Žádné vymyšlené reference.</span> Tohle
-                stavíme nebo provozujeme teď. Jména klientů uvádíme až s jejich souhlasem.
+                <span className={styles.leadStrong}>Žádné vymyšlené reference.</span> Weby
+                níž běží naostro a čísla jsou z jejich case studies. Jména klientů u
+                systémů uvádíme až s jejich souhlasem.
               </p>
             </div>
+
+            <div className={styles.showcase}>
+              {SHOWCASE.map((c) => (
+                <article key={c.slug} className={styles.shotCard}>
+                  <a
+                    href={`https://${c.domain}/`}
+                    className={styles.browser}
+                    data-autoscroll
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`Otevřít web ${c.domain} v novém okně`}
+                  >
+                    <span className={styles.browserBar} aria-hidden="true">
+                      <span className={styles.dots}>
+                        <i />
+                        <i />
+                        <i />
+                      </span>
+                      <span className={styles.url}>{c.domain}</span>
+                    </span>
+                    <span className={styles.viewport}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={c.shot.src}
+                        width={c.shot.width}
+                        height={c.shot.height}
+                        alt={`Úvodní stránka webu ${c.domain}`}
+                        loading="lazy"
+                        decoding="async"
+                        className={styles.shot}
+                      />
+                    </span>
+                  </a>
+                  <div className={styles.shotMeta}>
+                    <strong className={styles.shotNumber}>{c.stat.value}</strong>
+                    <span className={styles.shotLabel}>{c.stat.label}</span>
+                    <Link
+                      href={`/weby/${c.slug}/`}
+                      className={styles.shotLink}
+                      data-track-select={`reference-${c.slug}`}
+                    >
+                      {c.name}: celá case study
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <h3 className={styles.subhead}>Systémy, které právě stavíme</h3>
             <ul className={styles.running}>
-              {RUNNING.map((item) => (
+              {SYSTEMS.map((item) => (
                 <li key={item.title} className={styles.runningRow}>
                   <div>
-                    <h3 className={styles.runningTitle}>
-                      {item.href ? <Link href={item.href}>{item.title}</Link> : item.title}
-                    </h3>
+                    <h4 className={styles.runningTitle}>{item.title}</h4>
                     <p className={styles.runningBody}>{item.body}</p>
                   </div>
                   <span className={`${styles.status} ${styles[`status_${item.tone}`]}`}>
@@ -279,12 +328,13 @@ export default function HomePage() {
             </ul>
             <p className={styles.more}>
               <Link href="/reference/">Všechny reference</Link>
+              <Link href="/weby/">Všech 6 webů</Link>
             </p>
           </div>
         </section>
 
         {/* ===== POSTUP ===== */}
-        <section id="postup" className={`${styles.section} ${styles.sectionWhite}`}>
+        <section id="postup" className={styles.section}>
           <div className={styles.inner}>
             <h2 className={styles.h2}>Jak pracujeme</h2>
             <ol className={styles.steps}>
@@ -297,7 +347,7 @@ export default function HomePage() {
                 </li>
               ))}
             </ol>
-            <div className={styles.proof}>
+            <div className={styles.proof} data-play>
               <div>
                 <h3 className={styles.proofTitle}>Hotovo znamená důkaz, ne slib.</h3>
                 <p className={styles.proofBody}>
@@ -305,17 +355,27 @@ export default function HomePage() {
                   fungovat, sepíšeme s vámi předem. Když kontrola neprojde, nepředáváme.
                 </p>
               </div>
-              <pre className={styles.gate} aria-label="Výstup kontroly">
-                <span className={styles.gateDim}>$ npm run gate</span>
-                {"\n"}ok   typy{"\n"}ok   testy{"\n"}ok   build{"\n"}
-                <span className={styles.gatePass}>GATE: PASS</span>
-              </pre>
+              <div className={styles.terminal} role="img" aria-label="Ukázka výstupu kontroly: všechny kroky ok, GATE: PASS">
+                <div className={styles.terminalBar} aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                </div>
+                <pre className={styles.gate} aria-hidden="true">
+                  <span className={`${styles.gl} ${styles.gateDim}`}>$ npm run gate</span>
+                  <span className={styles.gl}>ok   typy</span>
+                  <span className={styles.gl}>ok   testy</span>
+                  <span className={styles.gl}>ok   build</span>
+                  <span className={styles.gl}>ok   odkazy a stránky</span>
+                  <span className={`${styles.gl} ${styles.gatePass}`}>GATE: PASS</span>
+                </pre>
+              </div>
             </div>
           </div>
         </section>
 
         {/* ===== CENY ===== */}
-        <section id="cena" className={styles.section}>
+        <section id="cena" className={`${styles.section} ${styles.sectionWhite}`}>
           <div className={styles.inner}>
             <div className={styles.head}>
               <h2 className={styles.h2}>Kolik to stojí</h2>
@@ -325,8 +385,9 @@ export default function HomePage() {
               </p>
             </div>
             <div className={styles.prices}>
-              {PRICES.map((p) => (
-                <div key={p.name} className={styles.price}>
+              {PRICES.map((p, i) => (
+                <div key={p.name} className={`${styles.price} ${i === 1 ? styles.priceStart : ""}`}>
+                  {i === 1 && <span className={styles.priceBadge}>Doporučený začátek</span>}
                   <span className={styles.priceName}>{p.name}</span>
                   <strong className={styles.priceValue}>{p.price}</strong>
                   <span className={styles.priceNote}>{p.note}</span>
@@ -341,7 +402,7 @@ export default function HomePage() {
         </section>
 
         {/* ===== TÝM + FAQ ===== */}
-        <section id="faq" className={`${styles.section} ${styles.sectionWhite}`}>
+        <section id="faq" className={styles.section}>
           <div className={`${styles.inner} ${styles.split}`}>
             <div>
               <h2 className={styles.h2}>Kdo za tím je</h2>
@@ -354,7 +415,7 @@ export default function HomePage() {
                   <li key={person.name} className={styles.person}>
                     {person.photo ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={person.photo} alt={person.name} width={72} height={72} className={styles.avatar} />
+                      <img src={person.photo} alt={person.name} width={80} height={80} className={styles.avatar} />
                     ) : (
                       <span className={styles.avatar} aria-hidden="true">
                         {person.initials}
@@ -368,7 +429,7 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <Link href="/o-nas/" className={styles.serviceLink}>
+              <Link href="/o-nas/" className={styles.textLink}>
                 Víc o nás
               </Link>
             </div>
@@ -390,20 +451,31 @@ export default function HomePage() {
         </section>
 
         {/* ===== CTA ===== */}
-        <section className={styles.section} data-track-location="final_cta">
+        <section className={styles.ctaSection} data-track-location="final_cta">
           <div className={styles.inner}>
-            <div className="ctaBand">
+            <div className={styles.cta}>
               <div>
-                <h2 className="ctaTitle">Ukažte nám jeden proces, který vás zdržuje.</h2>
-                <p className="ctaBody">
+                <h2 className={styles.ctaTitle}>Ukažte nám jeden proces, který vás zdržuje.</h2>
+                <p className={styles.ctaBody}>
                   Za 30 minut vám řekneme, jestli a jak ho zautomatizovat. Bez prezentace
                   a bez závazku.
                 </p>
               </div>
-              <div className="ctaActions">
-                <Link href="/kontakt/" className="btn btnDark">
+              <div className={styles.ctaCard}>
+                <div className={styles.ctaPerson}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/podpis/tomas-andrlik-panel.jpg" alt="Tomáš Andrlík" width={72} height={72} />
+                  <div>
+                    <strong>Ozve se vám Tomáš</strong>
+                    <span>Obchod a návrh řešení</span>
+                  </div>
+                </div>
+                <Link href="/kontakt/" className={`btn btnDark ${styles.ctaButton}`}>
                   Domluvit 30 minut
                 </Link>
+                <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className={styles.ctaPhone}>
+                  nebo volejte {contact.phone}
+                </a>
               </div>
             </div>
           </div>
@@ -411,6 +483,8 @@ export default function HomePage() {
       </main>
 
       <SiteFooter variant="full" />
+      <PlayOnView />
+      <AutoScrollShots />
     </>
   );
 }
