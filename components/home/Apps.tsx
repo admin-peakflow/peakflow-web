@@ -3,9 +3,10 @@ import { APPS } from "@/lib/apps";
 import styles from "./Apps.module.css";
 
 /*
- * Aplikace v provozu: PackLabsApp (skutečné screenshoty z ukázkové verze
- * s vymyšlenými daty) a DreamyApp (ukázka plánu závozu na fiktivních datech,
- * skutečné obrazovky obsahují údaje zákazníků).
+ * Aplikace v provozu. Obě ukazují skutečné obrazovky z ukázkové verze
+ * s vymyšlenými daty: PackLabsApp z manuálu pro zaměstnance, DreamyApp
+ * z lokálního dema se seed daty aplikace (2026-11-20). Nikdy ne z ostrého
+ * provozu, tam jsou údaje zaměstnanců a zákazníků.
  */
 
 const PHONES = [
@@ -14,11 +15,10 @@ const PHONES = [
   { src: "/aplikace/packlabsapp-vykon.webp", alt: "PackLabsApp: výkon pracovníka za 30 dní vůči normě" },
 ];
 
-const STOPS = [
-  { time: "08:40", place: "Brno‑Líšeň", what: "matrace 160 × 200, postel", note: "SMS klientovi 08:10" },
-  { time: "10:15", place: "Blansko", what: "2× topper", note: "dobírka 12 400 Kč" },
-  { time: "11:50", place: "Boskovice", what: "rošty + matrace", note: "výnos do 2. patra" },
-  { time: "14:05", place: "Kuřim", what: "reklamace, odvoz", note: "protokol k podpisu" },
+const SCREENS = [
+  { src: "/aplikace/dreamyapp-prehled.webp", alt: "DreamyApp: přehled logistiky s požadavky na dnes a zítra" },
+  { src: "/aplikace/dreamyapp-plan.webp", alt: "DreamyApp: týdenní plán přeprav s kartami požadavků" },
+  { src: "/aplikace/dreamyapp-crm.webp", alt: "DreamyApp: CRM, můj den obchodníka s úkoly a schůzkami" },
 ];
 
 function Phones() {
@@ -34,37 +34,20 @@ function Phones() {
   );
 }
 
-function RoutePlan() {
+function DreamyScreens() {
   return (
-    <div className={styles.route} aria-hidden="true">
-      <div className={styles.routeHead}>
-        <div>
-          <strong>Závoz čt 26. 11.</strong>
-          <span>4 zastávky · 186 km · návrat 16:40</span>
+    <div className={styles.screens}>
+      {SCREENS.map((sc, i) => (
+        <div key={sc.src} className={`${styles.screen} ${styles[`screen${i}`]}`}>
+          <span className={styles.screenBar} aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={sc.src} alt={sc.alt} width={1200} height={750} loading="lazy" decoding="async" />
         </div>
-        <span className={styles.sample}>Ukázka · fiktivní data</span>
-      </div>
-      <ol className={styles.stops}>
-        {STOPS.map((s, i) => (
-          <li key={s.time} className={styles.stop}>
-            <span className={styles.stopNum}>{i + 1}</span>
-            <div>
-              <strong>
-                {s.time} · {s.place}
-              </strong>
-              <span>{s.what}</span>
-            </div>
-            <em>{s.note}</em>
-          </li>
-        ))}
-      </ol>
-      <div className={styles.routeFoot}>
-        <span className={styles.qr} />
-        <span>
-          <strong>Trasa optimalizovaná.</strong> Řidič má QR s navigací, zápis je
-          v Google Kalendáři.
-        </span>
-      </div>
+      ))}
     </div>
   );
 }
@@ -104,7 +87,10 @@ export function Apps() {
                 <p className={styles.caption}>Skutečné obrazovky z ukázkové verze s vymyšlenými daty.</p>
               </>
             ) : (
-              <RoutePlan />
+              <>
+                <DreamyScreens />
+                <p className={styles.caption}>Skutečné obrazovky z ukázkové verze s vymyšlenými daty.</p>
+              </>
             )}
           </div>
         </article>

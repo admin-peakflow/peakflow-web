@@ -296,3 +296,45 @@
 }
 .caseLink:hover { color: #fff; background: rgba(18, 181, 163, .16); border-color: rgba(18, 181, 163, .45); }
 .caseLink span { color: var(--teal-bright); white-space: nowrap; }
+
+/* ---------- Obrazovky DreamyApp (koláž) ---------- */
+.screens {
+  position: relative;
+  aspect-ratio: 16 / 12.5;
+}
+.screen {
+  position: absolute;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, .18);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .45);
+  transition: transform .35s ease;
+}
+.screen img { display: block; width: 100%; height: auto; }
+.screenBar {
+  display: flex;
+  gap: 5px;
+  padding: 7px 10px;
+  background: #f3eef1;
+  border-bottom: 1px solid #ead9e2;
+}
+.screenBar i { width: 8px; height: 8px; border-radius: 50%; background: #d9c3cf; }
+.screen0 { top: 0; right: 0; width: 82%; z-index: 1; }
+.screen1 { left: 0; bottom: 0; width: 58%; z-index: 3; }
+.screen2 { right: 4%; bottom: 6%; width: 40%; z-index: 2; }
+.screens:hover .screen0 { transform: translateY(-4px); }
+.screens:hover .screen1 { transform: translate(-4px, 4px); }
+.screens:hover .screen2 { transform: translate(4px, 4px); }
+@media (prefers-reduced-motion: reduce) {
+  .screen, .screens:hover .screen { transition: none; transform: none; }
+}
+@media (max-width: 560px) {
+  .screens { aspect-ratio: auto; display: grid; gap: 14px; }
+  .screen { position: relative; inset: auto; width: 100%; }
+  .screen2 { display: none; }
+}
+
+/* DreamyApp: širší sloupec s obrazovkami */
+.appAlt { grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); }
+@media (max-width: 960px) { .appAlt { grid-template-columns: minmax(0, 1fr); } }

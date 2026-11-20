@@ -17,6 +17,12 @@ export type Running = {
 
 export const RUNNING: Running[] = [
   {
+    title: "Raynet CRM pro ECOTERM s.r.o.",
+    body: "Zavedení Raynetu a automatický zápis e‑mailové komunikace z obchodní schránky k obchodním případům. Běží každý den a výpadky se samy dohánějí.",
+    status: "Běží od října 2026",
+    tone: "live",
+  },
+  {
     title: "ERP pro montážní firmu",
     body: "Obchod, montáže, odečty a správa v jednom systému místo tabulek. Provoz vyjde na jednotky dolarů měsíčně.",
     status: "Připraveno k nasazení",

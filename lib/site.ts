@@ -12,7 +12,7 @@ export const site = {
   domain: "peakflow.cz",
   url: "https://peakflow.cz",
   description:
-    "AI-first tým pro firmy. Stavíme ERP na míru, automatizace obchodu a back-office nad Raynetem a AI asistenty, kteří ve firmě opravdu pracují. Napojíme se na to, co už máte.",
+    "AI-first tým pro firmy. Stavíme ERP na míru a AI asistenty, zavádíme Raynet CRM a automatizujeme obchod a back-office. Napojíme se na to, co už máte.",
 } as const;
 
 export const contact: {
