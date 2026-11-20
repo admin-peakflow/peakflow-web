@@ -52,7 +52,7 @@ export function SiteFooter({ variant = "compact" }: { variant?: "full" | "compac
           <Link href="/reference/">Reference</Link>
           <Link href="/weby/">Weby, které jsme postavili</Link>
           <Link href="/#postup">Jak pracujeme</Link>
-          <Link href="/#cena">Ceny</Link>
+          <Link href="/#cena">Kalkulačka úspor</Link>
           <Link href="/o-nas/">O nás</Link>
           <Link href="/kontakt/">Kontakt</Link>
         </div>
