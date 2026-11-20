@@ -27,6 +27,8 @@ export type CaseStudy = {
   situation: string[];
   work: CaseArea[];
   numbers: { value: string; label: string }[];
+  /** Skutečné screenshoty stránek webu (živé, bez osobních údajů). */
+  gallery?: { src: string; url: string; caption: string }[];
   stack: string[];
 };
 
@@ -37,15 +39,34 @@ export const CASES: CaseStudy[] = [
     field: "E-shop s matracemi a postelemi",
     domains: ["dreamy.cz"],
     shot: { src: "/weby/dreamy-full.webp", width: 960, height: 3200 },
-    metaTitle: "Dreamy — poradce výběru matrace a AI vyhledávání",
+    metaTitle: "Dreamy — předělaný e-shop na Shoptetu a poradce výběru matrace",
     metaDescription:
-      "Case study: poradce výběru matrace a polštáře, příprava e-shopu na AI vyhledávání (llms.txt, strukturovaná data, FAQ) a SEO pro e-shop se čtyřmi prodejnami.",
-    headline: "Poradce výběru matrace, e-shop připravený na AI vyhledávání a SEO, které se dá opakovat každý týden.",
+      "Case study: kompletní předělání e-shopu Dreamy na Shoptetu (menu, kategorie, produkty, košík, prodejny, značky, Poradna), poradce výběru matrace a příprava na AI vyhledávání.",
+    headline: "Kompletně předělaný e-shop na Shoptetu, poradce výběru matrace a web připravený na AI vyhledávání.",
     situation: [
       "Dreamy prodává matrace, postele, polštáře a křesla La-Z-Boy na e-shopu a ve čtyřech kamenných prodejnách.",
-      "Matrace za desítky tisíc se online kupuje těžko: zákazník neví, jakou tuhost a materiál chce. A čím dál víc lidí se místo Googlu ptá ChatGPT.",
+      "E-shop na Shoptetu léta rostl po kouscích: vlastní kód od několika dodavatelů a popisky produktů v externím editoru s obrázky o velikosti 1,4 až 7,1 MB za kus.",
+      "A matrace za desítky tisíc se online kupuje těžko. Zákazník neví, jakou tuhost a materiál chce, a čím dál víc lidí se místo Googlu ptá ChatGPT.",
     ],
     work: [
+      {
+        area: "Předělání e-shopu",
+        items: [
+          "Přes 30 nasazených úprav za tři měsíce (srpen až listopad 2026), postupně a po částech. Začali jsme analýzou celého vlastního kódu webu.",
+          "Nové menu a výpis kategorií s filtry podle toho, co zákazník řeší: spí na boku, bolí ho záda, je mu v noci teplo.",
+          "Produktový detail: nové popisky u 102 produktů, hodnocení, lepivá lišta s datem doručení a sjednocené tuhosti matrací.",
+          "Nový košík a odznak košíku v hlavičce.",
+          "Popisky, kategorie a články převedené z externího editoru přímo do Shoptetu: 67 produktů, 15 kategorií a 5 článků.",
+        ],
+      },
+      {
+        area: "Stránky a obsah",
+        items: [
+          "Nová homepage, stránka prodejen s fotkami, mapou a otevírací dobou, 6 stránek značek a jejich přehled.",
+          "Poradna s novým výpisem i šablonou článku a desítky nových článků provázaných vnitřními odkazy.",
+          "Stránky O nás a Doprava a montáž, nové obchodní podmínky a garance, automatický přehled nejnižších cen za 30 dní.",
+        ],
+      },
       {
         area: "Poradce výběru",
         items: [
@@ -65,23 +86,48 @@ export const CASES: CaseStudy[] = [
       {
         area: "SEO a Search Console",
         items: [
-          "SEO audit e-shopu a mapa přesměrování pro adresy, které vracely chybu 404.",
+          "SEO audit e-shopu, mapa přesměrování pro adresy, které vracely chybu 404, a meta popisky na 54 stránkách.",
           "Opakovatelný postup pro obsah: návrh článku, kontrola, fact-check, publikace a žádost o indexaci v Search Console.",
           "Nové texty kategorií matrací podle tuhosti.",
         ],
       },
       {
-        area: "Web",
+        area: "Formuláře a interní aplikace",
         items: [
-          "Vlastní úpravy nad šablonou e-shopu: výpis kategorií, štítky produktů, stránky prodejen, akční landing pages a patička.",
+          "Formuláře z webu se ukládají rovnou do Google Sheetu.",
+          "Pro logistiku a obchod jsme postavili i interní aplikaci DreamyApp: přepravy, plán závozů, CRM a reklamace.",
         ],
       },
     ],
     numbers: [
+      { value: "30+", label: "nasazených úprav e-shopu za 3 měsíce" },
+      { value: "102", label: "nových popisků produktů" },
       { value: "545 112", label: "otestovaných kombinací odpovědí poradce" },
-      { value: "55", label: "matrací a řad polštářů v poradci" },
+      { value: "6", label: "nových stránek značek" },
     ],
-    stack: ["Shoptet", "vlastní JavaScript a CSS", "Google Tag Manager", "Search Console", "llms.txt", "Schema.org"],
+    gallery: [
+      {
+        src: "/weby/dreamy/kategorie.webp",
+        url: "https://www.dreamy.cz/matrace/",
+        caption: "Kategorie s filtry podle toho, co zákazník řeší",
+      },
+      {
+        src: "/weby/dreamy/produkt.webp",
+        url: "https://www.dreamy.cz/dreamy-procomfort-ultimate/",
+        caption: "Produktový detail s variantami a hodnocením",
+      },
+      {
+        src: "/weby/dreamy/poradna.webp",
+        url: "https://www.dreamy.cz/blog/",
+        caption: "Poradna s novým výpisem článků",
+      },
+      {
+        src: "/weby/dreamy/prodejny.webp",
+        url: "https://www.dreamy.cz/nase-prodejny/",
+        caption: "Prodejny s fotkami, mapou a otevírací dobou",
+      },
+    ],
+    stack: ["Shoptet", "vlastní JavaScript a CSS", "Google Tag Manager", "Search Console", "Google Sheets", "llms.txt", "Schema.org"],
   },
   {
     slug: "tereza-nosskova",

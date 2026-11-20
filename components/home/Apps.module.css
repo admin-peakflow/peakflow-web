@@ -278,3 +278,21 @@
 }
 
 .stop .stopNum { color: #fff; font-size: 13px; }
+
+.caseLink {
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  display: inline-flex;
+  margin-top: 24px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .16);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.4;
+  transition: background .2s, border-color .2s;
+}
+.caseLink:hover { color: #fff; background: rgba(18, 181, 163, .16); border-color: rgba(18, 181, 163, .45); }
+.caseLink span { color: var(--teal-bright); white-space: nowrap; }

@@ -16,6 +16,8 @@ export type App = {
   points: string[];
   status: string;
   stack: string;
+  /** Odkaz na související case study (např. web stejného klienta). */
+  caseLink?: { href: string; text: string };
 };
 
 export const APPS: App[] = [
@@ -46,5 +48,9 @@ export const APPS: App[] = [
     ],
     status: "V ostrém provozu",
     stack: "Node.js, React, SQLite",
+    caseLink: {
+      href: "/weby/dreamy/",
+      text: "Pro Dreamy jsme předělali i celý e-shop na Shoptetu.",
+    },
   },
 ];
