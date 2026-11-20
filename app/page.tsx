@@ -158,8 +158,8 @@ export default function HomePage() {
               <h1 className={styles.h1}>Administrativa, která se dělá sama.</h1>
               <p className={styles.heroLead}>
                 <span className={styles.leadStrong}>Jsme AI‑first tým.</span> Stavíme ERP
-                na míru, automatizace obchodu nad Raynetem a AI asistenty, kteří ve firmě
-                opravdu pracují. Napojíme se na to, co už máte, a nepředáme nic, co
+                na míru a AI asistenty, kteří ve firmě opravdu pracují, zavádíme Raynet
+                CRM a automatizujeme obchod. Napojíme se na to, co už máte, a nepředáme nic, co
                 neprošlo kontrolou.
               </p>
               <div className={styles.heroActions}>

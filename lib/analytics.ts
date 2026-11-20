@@ -23,7 +23,7 @@ export type Item = {
 /** Služby jako „produkty“ pro ecommerce události (view_item, select_item…). */
 export const SERVICES: Item[] = [
   { item_id: "sluzba-erp", item_name: "ERP a systémy na míru", item_category: "Služba" },
-  { item_id: "sluzba-automatizace", item_name: "Automatizace obchodu a back-office", item_category: "Služba" },
+  { item_id: "sluzba-automatizace", item_name: "Raynet CRM a automatizace obchodu", item_category: "Služba" },
   { item_id: "sluzba-asistenti", item_name: "AI asistenti a boti", item_category: "Služba" },
   { item_id: "sluzba-data", item_name: "Data a reporting", item_category: "Služba" },
   { item_id: "sluzba-weby", item_name: "Weby na míru", item_category: "Služba" },

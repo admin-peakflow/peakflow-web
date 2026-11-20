@@ -160,8 +160,9 @@ const TILES = [
   {
     id: "automatizace",
     track: "sluzba-automatizace",
-    title: "Automatizace obchodu a back‑office",
-    body: "AI převezme rutinu pozice: zápisy do CRM, připomínky, objednávky a faktury. Člověk schvaluje jen výjimky.",
+    title: "Raynet CRM a automatizace obchodu",
+    body: "Zavedeme Raynet do firmy a postavíme nad ním automatizace: zápisy e‑mailů, připomínky, objednávky i faktury. Člověk schvaluje jen výjimky.",
+    ref: "Například ECOTERM s.r.o.: e‑maily z obchodní schránky se do Raynetu zapisují samy, každý den.",
     mock: <FlowMock />,
     wide: true,
   },
@@ -180,6 +181,7 @@ export function Bento() {
           <div className={styles.copy}>
             <h3 className={styles.title}>{t.title}</h3>
             <p className={styles.body}>{t.body}</p>
+            {"ref" in t && t.ref && <p className={styles.ref}>{t.ref}</p>}
             <Link href={`/sluzby/#${t.id}`} className={styles.link}>
               Víc o službě
             </Link>

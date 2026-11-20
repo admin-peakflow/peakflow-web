@@ -21,6 +21,8 @@ type Service = {
   cards: Card[];
   flow?: Card[];
   white?: boolean;
+  /** Konkrétní klient jako doklad (jen se souhlasem). */
+  reference?: string;
 };
 
 /* Texty služeb. Pravidlo: jen to, co umíme doložit projektem nebo stackem. */
@@ -42,8 +44,9 @@ const SERVICES: Service[] = [
   {
     id: "automatizace",
     track: "sluzba-automatizace",
-    title: "Automatizace obchodu a back‑office",
-    body: "AI převezme rutinu konkrétní pozice. Zapíše komunikaci do CRM, připomene další krok, zpracuje objednávku nebo fakturu. Člověk jen schvaluje výjimky.",
+    title: "Raynet CRM a automatizace obchodu",
+    body: "Zavedeme Raynet do firmy: obchodní proces, vlastní pole a záložky, převod dat a zaškolení týmu. Nad ním postavíme automatizace, které převezmou rutinu pozice. Zapíšou komunikaci, připomenou další krok, zpracují objednávku nebo fakturu. Člověk jen schvaluje výjimky.",
+    reference: "Například ECOTERM s.r.o.: e‑maily z obchodní schránky se do Raynetu zapisují samy každý den, od října 2026.",
     audience:
       "obchodní týmy v Raynetu nebo jiném CRM a back‑office, které tráví hodiny přepisováním.",
     white: true,
@@ -54,6 +57,7 @@ const SERVICES: Service[] = [
       ["4 · Obchodník potvrdí", "jedním klikem, výjimky řeší on"],
     ],
     cards: [
+      ["Implementace Raynetu", "Obchodní proces, pole, záložky, import dat a zaškolení obchodníků."],
       ["Asistent obchodníka", "Připraví podklady před schůzkou, shrne hovor a navrhne další krok."],
       ["Doplnění dat do CRM", "Údaje o firmách a kontaktech se doplní samy z veřejných zdrojů."],
       ["Faktury a objednávky", "Vytěžení z PDF a e‑mailů, spárování s objednávkou, kontrola rozdílů."],
@@ -133,6 +137,7 @@ export default function SluzbyPage() {
                 <p className={styles.audience}>
                   <strong>Pro koho:</strong> {s.audience}
                 </p>
+                {s.reference && <p className={styles.reference}>{s.reference}</p>}
               </div>
               <div>
                 {s.flow && (

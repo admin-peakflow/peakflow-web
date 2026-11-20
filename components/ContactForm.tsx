@@ -8,7 +8,7 @@ import styles from "./ContactForm.module.css";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const TOPICS = [
-  "Automatizace obchodu a back-office",
+  "Raynet CRM a automatizace obchodu",
   "ERP nebo systém na míru",
   "AI asistent nebo chatbot",
   "Data a reporting",

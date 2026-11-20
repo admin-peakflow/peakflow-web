@@ -427,3 +427,14 @@
   .raynet { width: 46px; }
   .fields li { grid-template-columns: 48px minmax(0, 1fr) 14px; }
 }
+
+.ref {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  border-left: 3px solid var(--teal-bright);
+  background: var(--teal-50);
+  border-radius: 0 10px 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-slate);
+}
