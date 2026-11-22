@@ -937,3 +937,83 @@
 .h2Light { color: #fff; }
 .leadLight { color: var(--on-dark-dim); }
 .leadLight .leadStrong { color: #fff; }
+
+/* --- Výzva uprostřed stránky (hlavní CTA se opakuje, vzor inizio.cz) --- */
+.inlineCta {
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  gap: 14px 24px;
+  flex-wrap: wrap;
+}
+.inlineCtaNote {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+.inlineCtaLink {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--on-dark-dim);
+  border-bottom: 1px solid rgba(255, 255, 255, .25);
+  padding-bottom: 2px;
+}
+.inlineCtaLink:hover { color: #fff; border-bottom-color: #fff; }
+.inlineCtaDark { margin-top: 64px; }
+
+/* --- Weby jako menší pruh pod systémy --- */
+.showcase.showcaseCompact { gap: 24px; margin-top: 24px; }
+.showcaseCompact .viewport { aspect-ratio: 16 / 10; }
+.showcaseCompact .shotNumber { font-size: clamp(22px, 2vw, 28px); }
+.showcaseCompact .shotCard { gap: 14px; }
+
+/* --- Katalog za e-mail --- */
+.magnetSection { padding: 96px 0 0; }
+.magnet {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 56px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, .6fr);
+  gap: 48px;
+  align-items: center;
+  color: #fff;
+  background:
+    radial-gradient(700px 360px at 0% 0%, rgba(18, 181, 163, .2), transparent 60%),
+    linear-gradient(160deg, var(--navy) 0%, var(--navy-grad-end) 100%);
+}
+.magnetCopy { display: grid; gap: 18px; max-width: 620px; }
+.magnetEyebrow {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--teal-bright);
+}
+.magnetBody {
+  margin: 0 0 6px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--on-dark-dim);
+}
+
+@media (max-width: 960px) {
+  .magnet { grid-template-columns: minmax(0, 1fr); padding: 40px 28px; }
+  .magnet > figure { display: none; }
+}
+
+@media (max-width: 760px) {
+  .inlineCta { margin-top: 40px; }
+  .inlineCta :global(.btn) { width: 100%; }
+  .magnetSection { padding-top: 56px; }
+  /* Weby vedle sebe s posunem do strany místo tří obrazovek pod sebou. */
+  .showcase.showcaseCompact {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 78%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 12px;
+    scroll-padding-inline: var(--gutter);
+  }
+  .showcaseCompact .shotCard { scroll-snap-align: start; }
+}

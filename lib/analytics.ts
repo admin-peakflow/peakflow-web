@@ -96,6 +96,7 @@ export function pageType(path: string): string {
   if (path.startsWith("/kontakt")) return "kontakt";
   if (path.startsWith("/reference")) return "reference";
   if (path.startsWith("/o-nas")) return "o_nas";
+  if (path.startsWith("/katalog")) return "katalog";
   if (/^\/weby\/[^/]+\/?$/.test(path)) return "reference_detail";
   if (path.startsWith("/weby")) return "weby";
   return "other";

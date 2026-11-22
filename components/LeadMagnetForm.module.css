@@ -1,0 +1,105 @@
+.form {
+  display: grid;
+  gap: 10px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.input {
+  flex: 1 1 220px;
+  min-width: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: 14px 20px;
+  background: var(--surface);
+  font-size: 16px;
+}
+
+.submit {
+  flex: 0 0 auto;
+  border: 0;
+  background: var(--teal);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(11, 122, 110, .25);
+  transition: background .2s;
+}
+.submit:hover:not(:disabled) { background: var(--teal-dark); }
+.submit:disabled { opacity: .6; cursor: progress; }
+
+.consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-slate);
+  cursor: pointer;
+}
+.consent input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  accent-color: var(--teal);
+}
+.onDark .consent { color: var(--on-dark); }
+
+.legal {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.done {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  background: var(--teal-50);
+  border: 1px solid var(--teal-100);
+  border-radius: 18px;
+  padding: 22px 24px;
+}
+.doneTitle {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--teal-ink, var(--text));
+}
+.download { padding: 13px 22px; }
+.next {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+.next a { font-weight: 600; border-bottom: 1px solid var(--teal-100); }
+
+/* Tmavé pozadí */
+.onDark .label { color: #fff; }
+.onDark .legal { color: var(--on-dark-dim); }
+.onDark .input { border-color: transparent; }
+.onDark .submit {
+  background: var(--teal-bright);
+  color: var(--teal-ink);
+  box-shadow: 0 10px 24px rgba(18, 181, 163, .3);
+}
+.onDark .submit:hover:not(:disabled) { background: var(--teal-light); }
+
+@media (max-width: 520px) {
+  .submit { flex: 1 1 100%; }
+}

@@ -29,6 +29,7 @@ export function SiteFooter({ variant = "compact" }: { variant?: "full" | "compac
             <Link href="/weby/">Weby</Link>
             <Link href="/o-nas/">O nás</Link>
             <Link href="/kontakt/">Kontakt</Link>
+            <Link href="/katalog/">Katalog automatizací</Link>
             <CookieSettingsLink />
           </div>
         </div>
@@ -53,6 +54,7 @@ export function SiteFooter({ variant = "compact" }: { variant?: "full" | "compac
           <Link href="/weby/">Weby, které jsme postavili</Link>
           <Link href="/#postup">Jak pracujeme</Link>
           <Link href="/#cena">Kalkulačka úspor</Link>
+          <Link href="/katalog/">Katalog 15 automatizací (PDF)</Link>
           <Link href="/o-nas/">O nás</Link>
           <Link href="/kontakt/">Kontakt</Link>
         </div>

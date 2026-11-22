@@ -23,9 +23,30 @@ export const contact: {
 } = {
   email: "info@peakflow.cz",
   phone: "+420 732 854 316",
-  // TODO(klient): doplnit rezervační odkaz, až bude.
-  bookingUrl: null,
+  // Rezervační stránka z Google Kalendáře (Plán schůzek). Až bude, doplnit sem,
+  // nebo nastavit NEXT_PUBLIC_BOOKING_URL a nasadit. Na /kontakt/ se pak
+  // rezervace ukáže jako hlavní cesta a formulář jako záloha.
+  bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || null,
 };
+
+/**
+ * Hlavní výzva webu. Jeden text v první osobě, opakovaný na stránce víckrát
+ * (vzor inizio.cz, 2026-11-22). Hlavička má kvůli místu kratší „Domluvit 30 minut“.
+ */
+export const MAIN_CTA = "Chci vědět, co jde zautomatizovat";
+
+/**
+ * Lákadlo za e-mail pro ty, kdo ještě nechtějí volat: katalog v PDF.
+ * Zdroj textu je ve vaultu: 03 Projects/03-07 - Peakflow Blog/Lákadla/.
+ * Formulář (components/LeadMagnetForm.tsx) pošle e-mail přes Web3Forms
+ * na info@peakflow.cz a hned nabídne PDF ke stažení.
+ */
+export const magnet = {
+  title: "15 automatizací, které firmě vrátí nejvíc času",
+  subtitle:
+    "Katalog pro firmy s obchodním týmem, zakázkami a back-office. Co každá automatizace dělá, kdy se vyplatí a co k ní potřebujete.",
+  pdf: "/ke-stazeni/peakflow-katalog-automatizaci.pdf",
+} as const;
 
 /**
  * Kontaktní formulář jede přes Web3Forms (https://web3forms.com).

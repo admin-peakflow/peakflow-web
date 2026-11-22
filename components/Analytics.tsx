@@ -16,6 +16,7 @@ import { REFERENCES, SERVICES, getItem, pageType, track, trackItems } from "@/li
  * | `data-track-location="x"`  | přepíše odvozené umístění kliku (header/footer/sekce) |
  * | `data-track-form="<name>"` | první interakce s formulářem = `contact_form_start`   |
  * | `data-track-calculator`    | první změna posuvníku = `roi_calculator_use`          |
+ * | `data-contact-method="x"`  | klik na odkaz = `contact_click` s `contact_method: x` (rezervace v kalendáři) |
  *
  * Bez atributů se měří: `mailto:` / `tel:` (`contact_click`), odkazy ven
  * (`outbound_click`), navigace v hlavičce a patičce (`nav_click`), otevření
@@ -74,6 +75,11 @@ function onClick(event: MouseEvent) {
   }
   if (href.startsWith("tel:")) {
     track("contact_click", { contact_method: "phone", contact_location: loc });
+    return;
+  }
+  // Rezervace termínu vede ven (Google Kalendář), ale je to kontakt, ne odchod z webu.
+  if (a.dataset.contactMethod) {
+    track("contact_click", { contact_method: a.dataset.contactMethod, contact_location: loc });
     return;
   }
 

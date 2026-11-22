@@ -25,6 +25,11 @@ a TikTok Pixelu. Marketingové pixely běží jen se souhlasem z cookie lišty
 | `generate_lead` | formulář úspěšně odeslán | `form_name`, `lead_source`, `lead_topic` |
 | `cookie_consent_update` | volba v cookie liště | `consent_analytics`, `consent_marketing` |
 
+**Konverze od 2026-11-22:**
+- `generate_lead` posílá i formulář katalogu (lákadlo za e‑mail, `/katalog/` a pás na homepage) s `form_name: "katalog"` a `lead_source: "katalog-homepage"` / `"katalog-katalog"`. Poptávky z kontaktu mají `form_name: "kontakt"`. V GA4 je oddělíte podle `form_name`. **Až poběží kampaně** na Lead ve Skliku, Metě nebo TikToku, přidejte do triggeru „Lead – formulář odeslán“ podmínku `form_name` ≠ `katalog`, jinak se budou stažení katalogu počítat jako poptávky.
+- Spodní lišta na mobilu má umístění `sticky_bar` (`cta_click`, `contact_click`).
+- Rezervace v kalendáři na `/kontakt/` (až bude odkaz) = `contact_click` s `contact_method: "booking"` (atribut `data-contact-method`), ne `outbound_click`.
+
 **„Produkty“** jsou služby (`sluzba-erp`, `sluzba-automatizace`,
 `sluzba-asistenti`, `sluzba-data`, `sluzba-weby`; do 2026-11-20 byly
 `sluzba-analytika` a `sluzba-crm`) a reference (`reference-<slug>` z `lib/cases.ts`).
