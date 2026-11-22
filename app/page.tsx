@@ -7,9 +7,11 @@ import { Apps } from "@/components/home/Apps";
 import { LogoMarquee } from "@/components/home/LogoMarquee";
 import { PlayOnView } from "@/components/PlayOnView";
 import { AutoScrollShots } from "@/components/AutoScrollShots";
+import { LeadMagnetForm } from "@/components/LeadMagnetForm";
+import { CatalogCover } from "@/components/CatalogCover";
 import { CASES } from "@/lib/cases";
 import { RUNNING } from "@/lib/running";
-import { contact } from "@/lib/site";
+import { MAIN_CTA, contact, magnet } from "@/lib/site";
 import styles from "./page.module.css";
 
 /*
@@ -158,7 +160,7 @@ export default function HomePage() {
 
       <main>
         {/* ===== HERO ===== */}
-        <section className={styles.hero} data-track-location="hero">
+        <section className={styles.hero} data-track-location="hero" data-hide-cta-bar>
           <div className={styles.heroInner}>
             <div className={styles.heroCopy}>
               <h1 className={styles.h1}>Administrativa, která se dělá sama.</h1>
@@ -170,7 +172,7 @@ export default function HomePage() {
               </p>
               <div className={styles.heroActions}>
                 <Link href="/kontakt/" className="btn btnAccent">
-                  Domluvit 30 minut
+                  {MAIN_CTA}
                 </Link>
                 <Link href="/#sluzby" className="btn btnOnDark">
                   Co stavíme
@@ -271,22 +273,44 @@ export default function HomePage() {
               </p>
             </div>
             <Apps />
+            <div className={`${styles.inlineCta} ${styles.inlineCtaDark}`} data-hide-cta-bar>
+              <Link href="/kontakt/" className="btn btnAccent">
+                {MAIN_CTA}
+              </Link>
+              <Link href="/katalog/" className={styles.inlineCtaLink}>
+                nebo si nejdřív stáhněte katalog 15 automatizací
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* ===== WEBY A ROZPRACOVANÉ SYSTÉMY ===== */}
+        {/* ===== CO DALŠÍHO BĚŽÍ: systémy první, weby menší ===== */}
         <section id="reference" className={`${styles.section} ${styles.sectionWhite}`}>
           <div className={styles.inner}>
             <div className={styles.head}>
-              <h2 className={styles.h2}>Weby, které jsme postavili</h2>
+              <h2 className={styles.h2}>Co dalšího stavíme a provozujeme</h2>
               <p className={styles.lead}>
-                <span className={styles.leadStrong}>Žádné vymyšlené reference.</span> Weby
-                běží naostro a čísla jsou z jejich case studies. Jména klientů u
-                rozpracovaných systémů uvádíme až s jejich souhlasem.
+                <span className={styles.leadStrong}>Žádné vymyšlené reference.</span> Stav
+                píšeme tak, jak je. Jména klientů uvádíme až s jejich souhlasem.
               </p>
             </div>
 
-            <div className={styles.showcase}>
+            <ul className={styles.running}>
+              {SYSTEMS.map((item) => (
+                <li key={item.title} className={styles.runningRow}>
+                  <div>
+                    <h3 className={styles.runningTitle}>{item.title}</h3>
+                    <p className={styles.runningBody}>{item.body}</p>
+                  </div>
+                  <span className={`${styles.status} ${styles[`status_${item.tone}`]}`}>
+                    {item.status}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className={styles.subhead}>A weby, které jsme postavili</h3>
+            <div className={`${styles.showcase} ${styles.showcaseCompact}`}>
               {SHOWCASE.map((c) => (
                 <article key={c.slug} className={styles.shotCard}>
                   <a
@@ -333,20 +357,6 @@ export default function HomePage() {
               ))}
             </div>
 
-            <h3 className={styles.subhead}>Systémy, které právě stavíme</h3>
-            <ul className={styles.running}>
-              {SYSTEMS.map((item) => (
-                <li key={item.title} className={styles.runningRow}>
-                  <div>
-                    <h4 className={styles.runningTitle}>{item.title}</h4>
-                    <p className={styles.runningBody}>{item.body}</p>
-                  </div>
-                  <span className={`${styles.status} ${styles[`status_${item.tone}`]}`}>
-                    {item.status}
-                  </span>
-                </li>
-              ))}
-            </ul>
             <p className={styles.more}>
               <Link href="/reference/">Všechny reference</Link>
               <Link href="/weby/">Všech 6 webů</Link>
@@ -392,6 +402,12 @@ export default function HomePage() {
                 </pre>
               </div>
             </div>
+            <div className={styles.inlineCta} data-hide-cta-bar>
+              <Link href="/kontakt/" className="btn btnPrimary">
+                {MAIN_CTA}
+              </Link>
+              <span className={styles.inlineCtaNote}>30 minut, zdarma a bez závazku</span>
+            </div>
           </div>
         </section>
 
@@ -430,6 +446,21 @@ export default function HomePage() {
             )}
             <div className={SHOW_PRICES ? styles.roi : undefined}>
               <RoiCalculator />
+            </div>
+          </div>
+        </section>
+
+        {/* ===== KATALOG ZA E-MAIL (pro ty, kdo ještě nechtějí volat) ===== */}
+        <section id="katalog" className={styles.magnetSection} data-hide-cta-bar>
+          <div className={styles.inner}>
+            <div className={styles.magnet}>
+              <div className={styles.magnetCopy}>
+                <span className={styles.magnetEyebrow}>Ještě nechcete volat?</span>
+                <h2 className={`${styles.h2} ${styles.h2Light}`}>{magnet.title}</h2>
+                <p className={styles.magnetBody}>{magnet.subtitle}</p>
+                <LeadMagnetForm location="homepage" onDark />
+              </div>
+              <CatalogCover compact />
             </div>
           </div>
         </section>
@@ -484,7 +515,7 @@ export default function HomePage() {
         </section>
 
         {/* ===== CTA ===== */}
-        <section className={styles.ctaSection} data-track-location="final_cta">
+        <section className={styles.ctaSection} data-track-location="final_cta" data-hide-cta-bar>
           <div className={styles.inner}>
             <div className={styles.cta}>
               <div>
@@ -504,7 +535,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Link href="/kontakt/" className={`btn btnDark ${styles.ctaButton}`}>
-                  Domluvit 30 minut
+                  {MAIN_CTA}
                 </Link>
                 <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className={styles.ctaPhone}>
                   nebo volejte {contact.phone}

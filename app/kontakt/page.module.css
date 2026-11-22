@@ -10,10 +10,42 @@
   padding: 80px var(--gutter) 96px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-  gap: 64px;
+  grid-template-areas: "intro form" "details form";
+  column-gap: 64px;
+  row-gap: 0;
   align-items: flex-start;
   flex: 1;
   width: 100%;
+}
+
+.intro { grid-area: intro; }
+.formCol { grid-area: form; display: grid; gap: 12px; }
+.details { grid-area: details; }
+
+.bookingCard {
+  margin-top: 28px;
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  background: var(--teal-50);
+  border: 1px solid var(--teal-100);
+  border-radius: var(--radius-card);
+  padding: 22px 24px;
+}
+.bookingTitle {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+}
+.bookingBody {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+.formAlt {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-slate);
 }
 
 .h1 {
@@ -96,7 +128,10 @@
 @media (max-width: 900px) {
   .main {
     grid-template-columns: minmax(0, 1fr);
-    gap: 40px;
-    padding: 56px var(--gutter) 72px;
+    /* Na mobilu formulář hned pod úvod, časová osa a údaje až pod ním. */
+    grid-template-areas: "intro" "form" "details";
+    row-gap: 32px;
+    padding: 48px var(--gutter) 72px;
   }
+  .timeline { margin-top: 8px; }
 }

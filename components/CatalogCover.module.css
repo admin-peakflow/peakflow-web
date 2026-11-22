@@ -1,0 +1,82 @@
+.cover {
+  position: relative;
+  margin: 0;
+  width: min(100%, 300px);
+  aspect-ratio: 210 / 297;
+  justify-self: center;
+}
+
+.sheetBack {
+  position: absolute;
+  inset: 10px -10px -10px 10px;
+  border-radius: 14px;
+  background: var(--teal-100);
+  transform: rotate(4deg);
+}
+
+.sheet {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(260px 200px at 100% 0%, rgba(18, 181, 163, .28), transparent 70%),
+    linear-gradient(160deg, var(--navy) 0%, var(--navy-grad-end) 100%);
+  color: #fff;
+  box-shadow: 0 30px 60px -20px rgba(14, 27, 46, .45);
+  transform: rotate(-2deg);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+}
+.mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--teal), var(--teal-bright));
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.number {
+  margin-top: auto;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 88px;
+  line-height: .9;
+  letter-spacing: -0.04em;
+  color: var(--teal-bright);
+}
+
+.title {
+  margin-top: 10px;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.tag {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--on-dark-dim);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.compact { width: min(100%, 220px); }
+.compact .number { font-size: 68px; }
+.compact .title { font-size: 17px; }
+.compact .sheet { padding: 20px 18px; }

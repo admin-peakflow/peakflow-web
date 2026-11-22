@@ -7,6 +7,7 @@ import {
 import { Analytics } from "@/components/Analytics";
 import { ConsentModeDefault } from "@/components/ConsentModeDefault";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+import { MobileCtaBar } from "@/components/MobileCtaBar";
 import { site } from "@/lib/site";
 import "./globals.css";
 import "./ui.css";
@@ -58,6 +59,7 @@ export default function RootLayout({
       <body>
         <GoogleTagManagerNoScript />
         {children}
+        <MobileCtaBar />
         <CookieConsentBanner />
         <Analytics />
       </body>

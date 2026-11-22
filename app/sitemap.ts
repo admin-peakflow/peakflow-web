@@ -13,5 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/weby/`, priority: 0.7 },
     ...CASES.map((c) => ({ url: `${site.url}/weby/${c.slug}/`, priority: 0.6 })),
     { url: `${site.url}/kontakt/`, priority: 0.8 },
+    { url: `${site.url}/katalog/`, priority: 0.7 },
   ];
 }

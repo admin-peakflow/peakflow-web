@@ -23,7 +23,7 @@ export default function KontaktPage() {
       <SiteHeader active="kontakt" />
 
       <section className={styles.main}>
-        <div>
+        <div className={styles.intro}>
           <p className="eyebrow">Kontakt</p>
           <h1 className={styles.h1}>Ukažte nám jeden proces.</h1>
           <p className={styles.lead}>
@@ -31,6 +31,34 @@ export default function KontaktPage() {
             to automatizovat a čím začít. Bez prezentace a bez závazku.
           </p>
 
+          {/* Rezervace je hlavní cesta, jakmile je odkaz v lib/site.ts. Formulář zůstává jako záloha. */}
+          {contact.bookingUrl && (
+            <div className={styles.bookingCard}>
+              <strong className={styles.bookingTitle}>Vyberte si termín rovnou</strong>
+              <span className={styles.bookingBody}>
+                30 minut online. Potvrzení i odkaz na hovor vám přijdou e‑mailem.
+              </span>
+              <a
+                href={contact.bookingUrl}
+                className={`btn btnPrimary ${styles.booking}`}
+                target="_blank"
+                rel="noopener"
+                data-contact-method="booking"
+              >
+                Vybrat termín v kalendáři →
+              </a>
+            </div>
+          )}
+        </div>
+
+        <div className={styles.formCol}>
+          {contact.bookingUrl && (
+            <p className={styles.formAlt}>Raději napíšete? Ozveme se do 2 pracovních dnů.</p>
+          )}
+          <ContactForm />
+        </div>
+
+        <div className={styles.details}>
           <ol className={styles.timeline}>
             {TIMELINE.map(([title, body], i) => (
               <li key={title} className={styles.timelineItem}>
@@ -59,20 +87,8 @@ export default function KontaktPage() {
             <a href={`mailto:${contact.email}`}>{contact.email}</a>
             <a href={`tel:${contact.phone.replace(/\s/g, "")}`}>{contact.phone}</a>
             <a href={site.url}>PeakFlow.cz</a>
-            {contact.bookingUrl && (
-              <a
-                href={contact.bookingUrl}
-                className={`btn btnPrimary ${styles.booking}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Rezervovat termín v kalendáři →
-              </a>
-            )}
           </div>
         </div>
-
-        <ContactForm />
       </section>
 
       <SiteFooter />
