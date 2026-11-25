@@ -31,7 +31,11 @@ Wispr Flow nepřepisuje doslova. Podle [dokumentace](https://docs.wisprflow.ai/a
 
 iPad, Linux ani Chromebook podle [systémových požadavků](https://docs.wisprflow.ai/articles/1036674442-supported-devices-and-system-requirements) podporované nejsou. Bez internetu Wispr Flow nediktuje.
 
-Jestli vám diktování sedne, zjistíte nejrychleji tak, že si [Wispr Flow vyzkoušíte zdarma](https://ref.wisprflow.ai/tomas-andrlik "affiliate") (partnerský odkaz).
+:::banner Vyzkoušejte Wispr Flow zdarma
+Jestli vám diktování sedne, zjistíte nejrychleji sami. Verze zdarma dává 2 000 slov týdně na počítači a češtinu zapnete v nastavení.
+
+[Stáhnout Wispr Flow](https://ref.wisprflow.ai/tomas-andrlik "affiliate") Partnerský odkaz
+:::
 
 ## Co je nového: Canto-2
 
@@ -118,7 +122,11 @@ Studenti mají slevu 50 %, pedagogové 40 %.
 Když za týden nadiktujete méně než 2 000 slov, vystačíte si s verzí zdarma.
 :::
 
-Plán Pro si můžete [předplatit přes náš partnerský odkaz](https://ref.wisprflow.ai/tomas-andrlik "affiliate"). Když si přes něj Wispr Flow předplatíte, dostaneme provizi. Vás to nestojí nic navíc a doporučujeme ho proto, že ho sami používáme.
+:::banner Začněte zdarma, na Pro přejděte, až vám limit nebude stačit
+Nejdřív týden diktujte ve verzi zdarma. Když budete pravidelně přes 2 000 slov týdně, Pro stojí 12 USD měsíčně při ročním placení.
+
+[Stáhnout Wispr Flow](https://ref.wisprflow.ai/tomas-andrlik "affiliate") Partnerský odkaz: z předplatného dostaneme provizi, vás to nestojí nic navíc.
+:::
 
 ## Na co se připravit
 
@@ -143,7 +151,13 @@ A jedna věc, kterou žádná aplikace nevyřeší: nadiktovaný text si před o
 5. Na konci týdne se podívejte, kolik slov jste nadiktovali. Pod 2 000 vám stačí Free, nad tím dosaďte svoje čísla do výpočtu výše.
 :::
 
-Wispr Flow si můžete [stáhnout tady](https://ref.wisprflow.ai/tomas-andrlik "affiliate") (partnerský odkaz, z předplatného dostaneme provizi). Diktování je jen jeden kus. Další práci, kterou lidé ve firmě dnes dělají ručně, najdete v [katalogu 15 automatizací](/katalog/) a v přehledu [našich služeb](/sluzby/).
+:::banner Prvních pět kroků zvládnete za týden
+Stáhněte si Wispr Flow, zapněte češtinu, doplňte slovník a diktujte. Za týden víte, jestli vám to šetří čas.
+
+[Stáhnout Wispr Flow](https://ref.wisprflow.ai/tomas-andrlik "affiliate") Partnerský odkaz
+:::
+
+Diktování je jen jeden kus. Další práci, kterou lidé ve firmě dnes dělají ručně, najdete v [katalogu 15 automatizací](/katalog/) a v přehledu [našich služeb](/sluzby/).
 
 ## Časté otázky
 
