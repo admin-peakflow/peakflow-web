@@ -83,6 +83,7 @@ function slugify(text: string): string {
  *   :::pozor             na co si dát pozor
  *   :::kroky             očíslovaný postup (uvnitř seznam 1. 2. 3.)
  *   :::vypocet           výpočet s předpoklady
+ *   :::banner Nadpis     výrazný tmavý banner s výzvou, odkaz uvnitř je tlačítko
  *   :::
  *
  * Text za názvem bloku je vlastní nadpis boxu, jinak se použije výchozí.
@@ -93,6 +94,7 @@ const BLOCKS: Record<string, string> = {
   pozor: "Pozor",
   kroky: "Postup",
   vypocet: "Výpočet",
+  banner: "Doporučujeme",
 };
 
 function render(body: string) {
@@ -140,8 +142,9 @@ function render(body: string) {
         const sponsored = title === "affiliate";
         const t = title && !sponsored ? ` title="${title}"` : "";
         const rel = sponsored ? "sponsored noopener" : "noopener";
+        const cta = sponsored ? " data-cta" : "";
         return external
-          ? `<a href="${href}"${t} target="_blank" rel="${rel}">${text}</a>`
+          ? `<a href="${href}"${t} target="_blank" rel="${rel}"${cta}>${text}</a>`
           : `<a href="${href}"${t}>${text}</a>`;
       },
     },

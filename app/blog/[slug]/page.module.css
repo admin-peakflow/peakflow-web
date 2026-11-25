@@ -221,3 +221,35 @@
   .prose { font-size: 17px; }
   .prose > p:first-child { font-size: 19px; }
 }
+
+/* ---------- :::banner (výzva ke stažení / vyzkoušení) ---------- */
+.prose :global(.box-banner) {
+  padding: 28px 30px 26px;
+  border: 0;
+  border-radius: var(--radius-panel);
+  background: linear-gradient(135deg, var(--navy), var(--navy-grad-end));
+  color: #fff;
+}
+.prose :global(.box-banner .boxTitle) {
+  margin-bottom: 8px;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #fff;
+}
+.prose :global(.box-banner) p { color: rgba(255, 255, 255, .82); margin-bottom: 14px; }
+.prose :global(.box-banner) p:last-child { margin: 18px 0 0; font-size: 13px; color: rgba(255, 255, 255, .6); }
+.prose :global(.box-banner) a {
+  display: inline-block;
+  margin-right: 12px;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  background: var(--teal-bright);
+  color: var(--teal-ink);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.prose :global(.box-banner) a:hover { background: var(--teal-light); color: var(--teal-ink); }
