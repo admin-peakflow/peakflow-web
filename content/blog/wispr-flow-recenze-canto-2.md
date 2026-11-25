@@ -8,8 +8,6 @@ category: Nástroje
 
 Wispr Flow je aplikace, která přepíše, co řeknete, přímo tam, kde máte kurzor: do e-mailu, do CRM, do dokumentu. V PeakFlow ho používáme přes půl roku a 24. listopadu 2026 k němu Wispr vydal nový model pro převod řeči na text Canto-2. Náš verdikt: kdo ve firmě hodně píše, ušetří čas od prvního dne. U češtiny a firemních dat ale musíte vědět, co nastavit.
 
-Odkazy na Wispr Flow v tomhle článku jsou partnerské: když si přes ně Wispr Flow předplatíte, dostaneme provizi. Vás to nestojí nic navíc a doporučujeme ho proto, že ho sami používáme.
-
 :::kostka
 - Podržíte klávesu, mluvíte, pustíte. Text se vloží do aplikace, ve které právě pracujete, i s interpunkcí.
 - Česky diktujeme a funguje to. Češtinu ale musíte zapnout ručně a mezi 14 jazyky, na kterých Wispr Canto-2 testoval, není.
