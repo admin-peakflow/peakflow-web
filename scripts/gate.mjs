@@ -7,6 +7,7 @@
 // 4. každý lokální <img src> / href na /… v out/**/*.html míří na existující soubor
 // 5. každá stránka má <title>, meta description a právě jeden <h1>
 // 6. výchozí Consent Mode v2 je na každé stránce a v <head> před GTM
+// 8. BLOG_DRAFTS=1 (náhled konceptů článků) není nasaditelný build
 // 7. GTM import: každá {{proměnná}} v tazích existuje a každý parametr z lib/analytics.ts má proměnnou
 //
 // Lint zatím není: `next lint` v projektu nemá ESLint konfiguraci.
@@ -26,6 +27,9 @@ const step = (name, fn) => {
 };
 const run = (cmd) => execSync(cmd, { stdio: "inherit" });
 
+step("no blog drafts in a deployable build", () => {
+  if (process.env.BLOG_DRAFTS === "1") throw new Error("BLOG_DRAFTS=1 shows unreviewed articles, preview only");
+});
 step("typecheck", () => run("npx tsc --noEmit"));
 step("build", () => run("npx next build"));
 
