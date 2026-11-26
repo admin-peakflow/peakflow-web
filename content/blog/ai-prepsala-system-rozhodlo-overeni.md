@@ -9,7 +9,7 @@ category: Automatizace
 Anthropic, firma, která vyvíjí AI Claude, nechal Clauda přepsat systém, přes který k Claudovi chodí požadavky zákazníků i jejich vlastních aplikací. Jádro měl Claude v první verzi hotové asi za týden. Ověřování, jestli nový systém dělá to samé co starý, pak na skutečném provozu běželo od dubna do září 2026, tedy zhruba pět měsíců. Pro každou firmu, která plánuje přechod na nový systém, je v tom jednoduchá lekce: psaní softwaru zlevnilo, drahé zůstalo ověření.
 
 :::kostka
-- Anthropic přepsal svůj hlavní systém do jiného programovacího jazyka. První verzi jádra napsal Claude asi za týden.
+- Anthropic přepsal svůj hlavní systém z Pythonu do Rustu, rychlejšího programovacího jazyka. První verzi jádra napsal Claude asi za týden.
 - Automatické testy prošly zhruba z 98 %. Na skutečném provozu se ale se starým systémem shodovala jen asi čtvrtina porovnávaných požadavků.
 - Rozhodlo porovnávání starého a nového systému na skutečném provozu. Starý systém sloužil jako vzor správného chování.
 - Co je správně, musel rozhodnout člověk. AI jednou navrhla „opravu“, která shodu jen obešla.
@@ -20,7 +20,7 @@ Anthropic, firma, která vyvíjí AI Claude, nechal Clauda přepsat systém, př
 
 Systém, o který jde, je vstupní brána ke Claudovi. Projde jím každý požadavek, ať přijde od firmy, která Clauda používá ve svém produktu, nebo z aplikací samotného Anthropicu. Původně vznikl v roce 2023. Podle [článku, který Anthropic zveřejnil 25. 11. 2026](https://www.anthropic.com/research/migrating-api-to-rust), od začátku roku 2024 do podzimu 2026 vzrostl provoz zhruba 1 800krát a provoz starého řešení byl na každý požadavek drahý.
 
-Rozhodli se ho proto přepsat do rychlejšího jazyka. Psaní nechali z velké části na Claudovi a jádro měl v první verzi asi za týden. Ověřování na skutečném provozu pak trvalo od dubna do září 2026, kdy na nový systém přešel veřejný provoz. To je zhruba pět měsíců.
+Rozhodli se ho proto přepsat z Pythonu, ve kterém vznikl, do rychlejšího Rustu. Psaní nechali z velké části na Claudovi a jádro měl v první verzi asi za týden. Ověřování na skutečném provozu pak trvalo od dubna do září 2026, kdy na nový systém přešel veřejný provoz. To je zhruba pět měsíců.
 
 Výsledek podle Anthropicu stojí za to. Nový systém potřebuje asi o 70 % méně výpočetního výkonu na jeden požadavek a o víc než 80 % méně paměti. Medián čekání na první část odpovědi klesl asi o 20 %. Autoři sami upozorňují, že jde o přibližná čísla změřená jen na části provozu.
 
